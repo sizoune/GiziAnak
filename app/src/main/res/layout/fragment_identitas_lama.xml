@@ -4,10 +4,17 @@
     android:layout_height="match_parent"
     tools:context="com.kp.mwi.gizianak.Fragment.IdentitasLamaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/putih">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewIdentitasLama"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+    </RelativeLayout>
 
 </FrameLayout>
