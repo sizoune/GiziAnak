@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kp.mwi.gizianak.MainActivity;
+import com.kp.mwi.gizianak.Model.DataAnak;
 import com.kp.mwi.gizianak.R;
 import com.kp.mwi.gizianak.Utility;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -36,6 +38,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
@@ -47,7 +50,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     private MaterialEditText nama, lahir, tahun, bulan, berat, tinggi;
     private Button foto, simpan;
     private ImageView preview;
-    boolean result;
+    boolean result, adaFoto;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     public IdentitasBaruFragment() {
@@ -60,7 +63,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_identitas_baru, container, false);
-
+        adaFoto = false;
 //        TextView tx = (TextView) v.findViewById(R.id.judul);
 //        Typeface custom_font = Typeface.createFromAsset(IdentitasBaruFragment.this.getActivity().getAssets(), "fonts/roboto.ttf");
 //        tx.setTypeface(custom_font);
@@ -106,17 +109,62 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
             ambilFoto();
         } else if (v == simpan) {
             if (cekValidasiData()) {
-                Toast.makeText(IdentitasBaruFragment.this.getContext(), "Benar", Toast.LENGTH_SHORT).show();
+                if (!tahun.getText().toString().equals("")) {
+                    String namas = nama.getText().toString();
+                    String jk = spinner.getSelectedItem().toString();
+                    String tglLahir = lahir.getText().toString();
+                    int weight = Integer.parseInt(berat.getText().toString());
+                    int height = Integer.parseInt(tinggi.getText().toString());
+                    if (adaFoto) {
+                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "ada Foto", Toast.LENGTH_SHORT).show();
+                        byte[] gambar = imageViewtoByte(preview);
+                        DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
+//                        String uniqid = namas + lahir;
+//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
+//                        if (cekData.size() <= 0) {
+//                            da.save();
+//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
+//                        }
+                    } else {
+                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "tanpa Foto", Toast.LENGTH_SHORT).show();
+                        DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
+                        String uniqid = namas + lahir;
+//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
+//                        if (cekData.size() <= 0) {
+//                            da.save();
+//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
+//                        }
+                    }
+                } else {
+
+                }
             } else {
-                Toast.makeText(IdentitasBaruFragment.this.getContext(), "Belum Lengkap !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data masih ada yang salah / tidak lengkap !", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private byte[] imageViewtoByte(ImageView image) {
+        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 
     private boolean cekValidasiData() {
         if (!nama.getText().toString().equals("") && !spinner.getSelectedItem().toString().equals("Jenis Kelamin")
                 && (!lahir.getText().toString().equals("") || (!tahun.getText().toString().equals("") && !bulan.getText().toString().equals("")))
                 && !berat.getText().toString().equals("") && !tinggi.getText().toString().equals("")) {
+            if (!tahun.getText().toString().equals("") && !bulan.getText().toString().equals("")) {
+                if (Integer.parseInt(bulan.getText().toString()) > 12 || Integer.parseInt(bulan.getText().toString()) < 1) {
+                    return false;
+                }
+            }
             return true;
         } else {
             return false;
@@ -125,33 +173,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String bulan = "";
-        if ((++monthOfYear) == 1) {
-            bulan = "Januari";
-        } else if ((++monthOfYear) == 2) {
-            bulan = "Februari";
-        } else if ((++monthOfYear) == 3) {
-            bulan = "Maret";
-        } else if ((++monthOfYear) == 4) {
-            bulan = "April";
-        } else if ((++monthOfYear) == 5) {
-            bulan = "Mei";
-        } else if ((++monthOfYear) == 6) {
-            bulan = "Juni";
-        } else if ((++monthOfYear) == 7) {
-            bulan = "Juli";
-        } else if ((++monthOfYear) == 8) {
-            bulan = "Agustus";
-        } else if ((++monthOfYear) == 9) {
-            bulan = "September";
-        } else if ((++monthOfYear) == 10) {
-            bulan = "Oktober";
-        } else if ((++monthOfYear) == 11) {
-            bulan = "November";
-        } else if ((++monthOfYear) == 12) {
-            bulan = "Desember";
-        }
-        lahir.setText(dayOfMonth + " " + bulan + " " + year);
+        lahir.setText(dayOfMonth + " " + convertBulan(++monthOfYear) + " " + year);
     }
 
 
@@ -217,7 +239,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        adaFoto = true;
         Picasso.with(IdentitasBaruFragment.this.getContext()).load(Uri.fromFile(destination)).fit().into(preview);
         preview.setVisibility(View.VISIBLE);
     }
@@ -240,9 +262,39 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                 e.printStackTrace();
             }
         }
-
+        adaFoto = true;
         Picasso.with(IdentitasBaruFragment.this.getContext()).load(data.getData()).fit().into(preview);
         preview.setVisibility(View.VISIBLE);
+    }
+
+    public String convertBulan(int angka) {
+        String bulan = "";
+        if (angka == 1) {
+            bulan = "Januari";
+        } else if (angka == 2) {
+            bulan = "Februari";
+        } else if (angka == 3) {
+            bulan = "Maret";
+        } else if (angka == 4) {
+            bulan = "April";
+        } else if (angka == 5) {
+            bulan = "Mei";
+        } else if (angka == 6) {
+            bulan = "Juni";
+        } else if (angka == 7) {
+            bulan = "Juli";
+        } else if (angka == 8) {
+            bulan = "Agustus";
+        } else if (angka == 9) {
+            bulan = "September";
+        } else if (angka == 10) {
+            bulan = "Oktober";
+        } else if (angka == 11) {
+            bulan = "November";
+        } else if (angka == 12) {
+            bulan = "Desember";
+        }
+        return bulan;
     }
 
 }
