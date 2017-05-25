@@ -1,0 +1,174 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kp.mwi.gizianak.Fragment.IdentitasBaruFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/judul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:text="Silahkan masukkan identitas anak anda !"
+                android:textAlignment="center"
+                android:textColor="@color/hijauaplikasi"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/judul"
+                android:hint="Nama"
+                android:inputType="textPersonName"
+                android:maxLength="32"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                app:met_baseColor="@android:color/black"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextColor="@color/hijauaplikasi" />
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spinner1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edNama"
+                android:paddingTop="5dp"
+                app:ms_arrowColor="@color/hijauaplikasi"
+                app:ms_arrowSize="16dp"
+                app:ms_floatingLabelColor="@color/hijauaplikasi"
+                app:ms_floatingLabelText="Jenis Kelamin"
+                app:ms_hint="Jenis Kelamin" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edTgllahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner1"
+                android:focusable="false"
+                android:hint="Tanggal Lahir"
+                android:maxLength="32"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                app:met_baseColor="@android:color/black"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextColor="@color/hijauaplikasi" />
+
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edTgllahir"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/judulUsia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edTgllahir"
+                    android:paddingTop="5dp"
+                    android:text="Usia :"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edTahun"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="Tahun"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp"
+                    app:met_baseColor="@android:color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/hijauaplikasi" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edBulan"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="Bulan"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp"
+                    app:met_baseColor="@android:color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/hijauaplikasi" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edBerat"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Berat Badan"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp"
+                    app:met_baseColor="@android:color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/hijauaplikasi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kg"
+                    android:textColor="@android:color/black" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edTinggi"
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:hint="Tinggi Badan"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp"
+                    app:met_baseColor="@android:color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@color/hijauaplikasi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cm"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>
