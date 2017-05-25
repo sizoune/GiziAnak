@@ -116,28 +116,28 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                     int weight = Integer.parseInt(berat.getText().toString());
                     int height = Integer.parseInt(tinggi.getText().toString());
                     if (adaFoto) {
-                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "ada Foto", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "ada Foto", Toast.LENGTH_SHORT).show();
                         byte[] gambar = imageViewtoByte(preview);
                         DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
-//                        String uniqid = namas + lahir;
-//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-//                        if (cekData.size() <= 0) {
-//                            da.save();
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-//                        }
+                        String uniqid = namas + lahir;
+                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
+                        if (cekData.size() <= 0) {
+                            da.save();
+                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "tanpa Foto", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "tanpa Foto", Toast.LENGTH_SHORT).show();
                         DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
                         String uniqid = namas + lahir;
-//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-//                        if (cekData.size() <= 0) {
-//                            da.save();
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-//                        }
+                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
+                        if (cekData.size() <= 0) {
+                            da.save();
+                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } else {
 
@@ -160,11 +160,6 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         if (!nama.getText().toString().equals("") && !spinner.getSelectedItem().toString().equals("Jenis Kelamin")
                 && (!lahir.getText().toString().equals("") || (!tahun.getText().toString().equals("") && !bulan.getText().toString().equals("")))
                 && !berat.getText().toString().equals("") && !tinggi.getText().toString().equals("")) {
-            if (!tahun.getText().toString().equals("") && !bulan.getText().toString().equals("")) {
-                if (Integer.parseInt(bulan.getText().toString()) > 12 || Integer.parseInt(bulan.getText().toString()) < 1) {
-                    return false;
-                }
-            }
             return true;
         } else {
             return false;

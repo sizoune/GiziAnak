@@ -1,6 +1,8 @@
 package com.kp.mwi.gizianak.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -53,10 +55,19 @@ public class AdapterIdentitasLama extends RecyclerView.Adapter<AdapterIdentitasL
             holder.status.setText("IDEAL");
             holder.status.setTextColor(Color.GREEN);
         }
-        if (dataAnak.get(position).getJenisKelamin().equals("Perempuan"))
-            Picasso.with(context).load(R.drawable.ic_girl).fit().into(holder.gambar);
-        else
-            Picasso.with(context).load(R.drawable.ic_boy).fit().into(holder.gambar);
+        if (!dataAnak.get(position).isAdaFoto()) {
+            if (dataAnak.get(position).getJenisKelamin().equals("Perempuan"))
+                Picasso.with(context).load(R.drawable.girl).fit().into(holder.gambar);
+//                holder.gambar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_girl));
+            else
+                Picasso.with(context).load(R.drawable.boybig).fit().into(holder.gambar);
+//                holder.gambar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_boy));
+        } else {
+            byte[] image = dataAnak.get(position).getFoto();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            holder.gambar.setImageBitmap(bitmap);
+        }
+
 
     }
 
@@ -80,6 +91,7 @@ public class AdapterIdentitasLama extends RecyclerView.Adapter<AdapterIdentitasL
             beratBadan = (TextView) view.findViewById(R.id.txtBeratBadan);
             tinggiBadan = (TextView) view.findViewById(R.id.txtTinggiBadan);
             status = (TextView) view.findViewById(R.id.txtStatus);
+            status.setTextSize(14);
             view.setOnClickListener(this);
         }
 
