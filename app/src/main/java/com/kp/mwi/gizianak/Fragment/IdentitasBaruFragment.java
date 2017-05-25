@@ -161,6 +161,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         berat.setText("");
         tinggi.setText("");
         preview.setVisibility(View.GONE);
+        adaFoto = false;
     }
 
     private byte[] imageViewtoByte(ImageView image) {
