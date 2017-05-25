@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kp.mwi.gizianak.Adapter.AdapterIdentitasLama;
 import com.kp.mwi.gizianak.Model.DataAnak;
@@ -76,6 +77,12 @@ public class IdentitasLamaFragment extends Fragment implements SwipeRefreshLayou
                                list.setAdapter(adapter);
                                list.setLayoutManager(gridLayoutManager);
                                adapter.notifyDataSetChanged();
+                               adapter.SetOnItemClickListener(new AdapterIdentitasLama.OnItemClickListener() {
+                                   @Override
+                                   public void onItemClick(View view, int position) {
+                                       Toast.makeText(IdentitasLamaFragment.this.getContext(), "not yet !", Toast.LENGTH_SHORT).show();
+                                   }
+                               });
                            }
                            swipe.setRefreshing(false);
                        }
@@ -108,6 +115,12 @@ public class IdentitasLamaFragment extends Fragment implements SwipeRefreshLayou
             list.setAdapter(adapter);
             list.setLayoutManager(gridLayoutManager);
             adapter.notifyDataSetChanged();
+            adapter.SetOnItemClickListener(new AdapterIdentitasLama.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Toast.makeText(IdentitasLamaFragment.this.getContext(), "not yet !", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         swipe.setRefreshing(false);
     }

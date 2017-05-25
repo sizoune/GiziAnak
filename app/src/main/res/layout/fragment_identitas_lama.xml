@@ -11,8 +11,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/putih">
+            android:layout_height="match_parent">
 
 
             <TextView
@@ -26,6 +25,7 @@
                 android:textSize="24sp" />
 
             <android.support.v7.widget.RecyclerView
+                android:paddingTop="10dp"
                 android:id="@+id/recyclerViewIdentitasLama"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

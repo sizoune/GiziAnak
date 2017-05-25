@@ -52,6 +52,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     private ImageView preview;
     boolean result, adaFoto;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    private String userChoosenTask;
 
     public IdentitasBaruFragment() {
         // Required empty public constructor
@@ -64,6 +65,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_identitas_baru, container, false);
         adaFoto = false;
+        result = false;
 //        TextView tx = (TextView) v.findViewById(R.id.judul);
 //        Typeface custom_font = Typeface.createFromAsset(IdentitasBaruFragment.this.getActivity().getAssets(), "fonts/roboto.ttf");
 //        tx.setTypeface(custom_font);
@@ -127,6 +129,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         } else {
                             Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
                         }
+                        clearAll();
                     } else {
 //                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "tanpa Foto", Toast.LENGTH_SHORT).show();
                         DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
@@ -138,6 +141,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         } else {
                             Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
                         }
+                        clearAll();
                     }
                 } else {
 
@@ -146,6 +150,17 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                 Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data masih ada yang salah / tidak lengkap !", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void clearAll() {
+        nama.setText("");
+        spinner.setSelection(0);
+        lahir.setText("");
+        tahun.setText("");
+        bulan.setText("");
+        berat.setText("");
+        tinggi.setText("");
+        preview.setVisibility(View.GONE);
     }
 
     private byte[] imageViewtoByte(ImageView image) {
@@ -171,6 +186,21 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         lahir.setText(dayOfMonth + " " + convertBulan(++monthOfYear) + " " + year);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (userChoosenTask.equals("Ambil Foto"))
+                        cameraIntent();
+                    else if (userChoosenTask.equals("Pilih dari Galeri"))
+                        galleryIntent();
+                } else {
+                    //code for deny
+                }
+                break;
+        }
+    }
 
     private void ambilFoto() {
         final CharSequence[] options = {"Ambil Foto", "Pilih dari Galeri", "Batal"};
@@ -182,11 +212,13 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                 if (options[which].equals("Batal")) {
                     dialog.dismiss();
                 } else if (options[which].equals("Ambil Foto")) {
+                    userChoosenTask = "Ambil Foto";
                     result = Utility.checkPermission(IdentitasBaruFragment.this.getContext());
                     if (result) {
                         cameraIntent();
                     }
                 } else if (options[which].equals("Pilih dari Galeri")) {
+                    userChoosenTask = "Pilih dari Galeri";
                     result = Utility.checkPermission(IdentitasBaruFragment.this.getContext());
                     if (result) {
                         galleryIntent();
