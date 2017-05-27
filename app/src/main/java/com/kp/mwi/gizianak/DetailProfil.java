@@ -1,6 +1,7 @@
 package com.kp.mwi.gizianak;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -94,7 +95,10 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == edit) {
-
+            Intent edi = new Intent(DetailProfil.this, EditProfile.class);
+            edi.putExtra("data", da);
+            startActivity(edi);
+            finish();
         } else if (v == hapus) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("Hapus Data");
