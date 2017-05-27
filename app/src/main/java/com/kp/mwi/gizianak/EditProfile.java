@@ -3,6 +3,7 @@ package com.kp.mwi.gizianak;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -78,6 +79,22 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 photo.setImageBitmap(bitmap);
             }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Utility.MY_PERMISSIONS_REQUEST_CAMERA:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (userChoosenTask.equals("Ambil Foto"))
+                        cameraIntent();
+                    else if (userChoosenTask.equals("Pilih dari Galeri"))
+                        galleryIntent();
+                } else {
+                    //code for deny
+                }
+                break;
         }
     }
 
