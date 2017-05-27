@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/judul"
-                android:hint="Nama"
+                android:hint="Nama lengkap"
                 android:inputType="textPersonName"
                 android:maxLength="32"
                 android:paddingLeft="10dp"

@@ -1,9 +1,13 @@
 package com.kp.mwi.gizianak.Fragment;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,22 +17,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kp.mwi.gizianak.Adapter.AdapterIdentitasLama;
+import com.kp.mwi.gizianak.DetailProfil;
 import com.kp.mwi.gizianak.Model.DataAnak;
 import com.kp.mwi.gizianak.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.codefalling.recyclerviewswipedismiss.SwipeDismissRecyclerViewTouchListener;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IdentitasLamaFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class IdentitasLamaFragment extends Fragment {
     private ArrayList<DataAnak> dataAnak = new ArrayList<>();
     private AdapterIdentitasLama adapter;
     private RecyclerView list;
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout swipe;
     private TextView kosong;
+    public int posisi;
 
     public IdentitasLamaFragment() {
         // Required empty public constructor
@@ -46,68 +54,75 @@ public class IdentitasLamaFragment extends Fragment implements SwipeRefreshLayou
         list = (RecyclerView) view.findViewById(R.id.recyclerViewIdentitasLama);
         gridLayoutManager = new GridLayoutManager(IdentitasLamaFragment.this.getContext(), 1, GridLayoutManager.VERTICAL, false);
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
-        swipe.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) IdentitasLamaFragment.this);
 //        dataDummy();
+
         List<DataAnak> datas = DataAnak.listAll(DataAnak.class);
         if (datas.size() <= 0) {
             kosong.setVisibility(View.VISIBLE);
+            list.setVisibility(View.GONE);
         } else {
             kosong.setVisibility(View.GONE);
+            list.setVisibility(View.VISIBLE);
             for (DataAnak anak : datas) {
                 dataAnak.add(anak);
             }
             adapter = new AdapterIdentitasLama(this.getContext(), dataAnak);
             list.setAdapter(adapter);
             list.setLayoutManager(gridLayoutManager);
+            adapter.notifyDataSetChanged();
         }
-        swipe.setRefreshing(true);
-        swipe.post(new Runnable() {
-                       @Override
-                       public void run() {
-                           dataAnak = new ArrayList<DataAnak>();
-                           List<DataAnak> datas = DataAnak.listAll(DataAnak.class);
-                           if (datas.size() <= 0) {
-                               kosong.setVisibility(View.VISIBLE);
-                           } else {
-                               kosong.setVisibility(View.GONE);
-                               for (DataAnak anak : datas) {
-                                   dataAnak.add(anak);
-                               }
-                               adapter = new AdapterIdentitasLama(IdentitasLamaFragment.this.getContext(), dataAnak);
-                               list.setAdapter(adapter);
-                               list.setLayoutManager(gridLayoutManager);
-                               adapter.notifyDataSetChanged();
-                               adapter.SetOnItemClickListener(new AdapterIdentitasLama.OnItemClickListener() {
-                                   @Override
-                                   public void onItemClick(View view, int position) {
-                                       Toast.makeText(IdentitasLamaFragment.this.getContext(), "not yet !", Toast.LENGTH_SHORT).show();
-                                   }
-                               });
-                           }
-                           swipe.setRefreshing(false);
-                       }
-                   }
-        );
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipe.setRefreshing(true);
+                dataAnak = new ArrayList<DataAnak>();
+                List<DataAnak> datas = DataAnak.listAll(DataAnak.class);
+                if (datas.size() <= 0) {
+                    kosong.setVisibility(View.VISIBLE);
+                    list.setVisibility(View.GONE);
+                } else {
+                    kosong.setVisibility(View.GONE);
+                    list.setVisibility(View.VISIBLE);
+                    for (DataAnak anak : datas) {
+                        dataAnak.add(anak);
+                    }
+                    adapter = new AdapterIdentitasLama(IdentitasLamaFragment.this.getContext(), dataAnak);
+                    list.setAdapter(adapter);
+                    list.setLayoutManager(gridLayoutManager);
+                    adapter.notifyDataSetChanged();
+                    adapter.SetOnItemClickListener(new AdapterIdentitasLama.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Intent intent = new Intent(IdentitasLamaFragment.this.getActivity(), DetailProfil.class);
+                            intent.putExtra("data", dataAnak.get(position));
+                            startActivity(intent);
+                        }
+                    });
+                }
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipe.setRefreshing(false);
+                    }
+                }, 1000);
+            }
+        });
+
         return view;
     }
 
-    public void dataDummy() {
-        dataAnak.add(new DataAnak("Songko Mangkono", "Laki-laki", "1 Januari 2016", 20, 11));
-        dataAnak.add(new DataAnak("Naruto Pokono", "Laki-laki", "1 Februari 2016", 19, 20));
-        dataAnak.add(new DataAnak("Boruto Surono", "Laki-laki", "1 Maret 2016", 21, 20));
-        dataAnak.add(new DataAnak("Gigi Sampini", "Perempuan", "1 April 2016", 30, 20));
-        dataAnak.add(new DataAnak("Yugi Oh", "Perempuan", "1 Februari 2016", 19, 20));
-    }
 
     @Override
-    public void onRefresh() {
-        swipe.setRefreshing(true);
+    public void onStart() {
+        super.onStart();
         dataAnak = new ArrayList<DataAnak>();
         List<DataAnak> datas = DataAnak.listAll(DataAnak.class);
         if (datas.size() <= 0) {
             kosong.setVisibility(View.VISIBLE);
+            list.setVisibility(View.GONE);
         } else {
             kosong.setVisibility(View.GONE);
+            list.setVisibility(View.VISIBLE);
             for (DataAnak anak : datas) {
                 dataAnak.add(anak);
             }
@@ -118,10 +133,13 @@ public class IdentitasLamaFragment extends Fragment implements SwipeRefreshLayou
             adapter.SetOnItemClickListener(new AdapterIdentitasLama.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Toast.makeText(IdentitasLamaFragment.this.getContext(), "not yet !", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(IdentitasLamaFragment.this.getActivity(), DetailProfil.class);
+                    intent.putExtra("data", dataAnak.get(position));
+                    startActivity(intent);
                 }
             });
         }
-        swipe.setRefreshing(false);
     }
+
+
 }

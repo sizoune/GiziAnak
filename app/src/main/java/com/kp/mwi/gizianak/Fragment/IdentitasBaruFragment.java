@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -121,26 +122,26 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
 //                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "ada Foto", Toast.LENGTH_SHORT).show();
                         byte[] gambar = imageViewtoByte(preview);
                         DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
-                        String uniqid = namas + lahir;
-                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-                        if (cekData.size() <= 0) {
-                            da.save();
-                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-                        }
+//                        String uniqid = namas.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
+//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
+//                        if (cekData.size() <= 0) {
+                        da.save();
+                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
+//                        }
                         clearAll();
                     } else {
 //                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "tanpa Foto", Toast.LENGTH_SHORT).show();
                         DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
-                        String uniqid = namas + lahir;
-                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-                        if (cekData.size() <= 0) {
-                            da.save();
-                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-                        }
+//                        String uniqid = namas.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
+//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
+//                        if (cekData.size() <= 0) {
+                        da.save();
+                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
+//                        }
                         clearAll();
                     }
                 } else {

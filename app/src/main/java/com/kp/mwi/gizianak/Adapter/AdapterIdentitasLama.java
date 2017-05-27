@@ -44,17 +44,6 @@ public class AdapterIdentitasLama extends RecyclerView.Adapter<AdapterIdentitasL
     @Override
     public void onBindViewHolder(AdapterIdentitasLama.ViewHolder holder, int position) {
         holder.nama.setText(dataAnak.get(position).getNama());
-        holder.jenisKelamin.setText(dataAnak.get(position).getJenisKelamin());
-        holder.tanggalLahir.setText(dataAnak.get(position).getTglLahir());
-        holder.beratBadan.setText(Integer.toString(dataAnak.get(position).getBerat()));
-        holder.tinggiBadan.setText(Integer.toString(dataAnak.get(position).getTinggi()));
-        if (dataAnak.get(position).getBerat() < 20 || dataAnak.get(position).getTinggi() < 10) {
-            holder.status.setText("TIDAK IDEAL");
-            holder.status.setTextColor(Color.RED);
-        } else {
-            holder.status.setText("IDEAL");
-            holder.status.setTextColor(Color.GREEN);
-        }
         if (!dataAnak.get(position).isAdaFoto()) {
             if (dataAnak.get(position).getJenisKelamin().equals("Perempuan"))
                 Picasso.with(context).load(R.drawable.girl).fit().into(holder.gambar);
@@ -77,7 +66,7 @@ public class AdapterIdentitasLama extends RecyclerView.Adapter<AdapterIdentitasL
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView nama, jenisKelamin, tanggalLahir, beratBadan, tinggiBadan, status;
+        public TextView nama;
         public ImageView gambar;
         public CardView cv;
 
@@ -86,12 +75,6 @@ public class AdapterIdentitasLama extends RecyclerView.Adapter<AdapterIdentitasL
             cv = (CardView) view.findViewById(R.id.cardView);
             gambar = (ImageView) view.findViewById(R.id.gambar_anak);
             nama = (TextView) view.findViewById(R.id.txtNama);
-            jenisKelamin = (TextView) view.findViewById(R.id.txtJenisKelamin);
-            tanggalLahir = (TextView) view.findViewById(R.id.txtTanggalLahir);
-            beratBadan = (TextView) view.findViewById(R.id.txtBeratBadan);
-            tinggiBadan = (TextView) view.findViewById(R.id.txtTinggiBadan);
-            status = (TextView) view.findViewById(R.id.txtStatus);
-            status.setTextSize(14);
             view.setOnClickListener(this);
         }
 

@@ -19,7 +19,7 @@ public class DataAnak extends SugarRecord implements Parcelable {
     }
 
     public DataAnak(String nama, String jenisKelamin, String tglLahir, int berat, int tinggi) {
-        this.uniqid = nama + tglLahir;
+        this.uniqid = nama.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
         this.nama = nama;
         this.jenisKelamin = jenisKelamin;
         this.tglLahir = tglLahir;
@@ -29,7 +29,7 @@ public class DataAnak extends SugarRecord implements Parcelable {
     }
 
     public DataAnak(String nama, String jenisKelamin, String tglLahir, int berat, int tinggi, byte[] foto) {
-        this.uniqid = nama + tglLahir;
+        this.uniqid = nama.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
         this.nama = nama;
         this.jenisKelamin = jenisKelamin;
         this.tglLahir = tglLahir;

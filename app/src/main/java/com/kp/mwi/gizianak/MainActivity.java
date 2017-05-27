@@ -3,6 +3,7 @@ package com.kp.mwi.gizianak;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +31,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 tabLayout.setupWithViewPager(viewPager);
+                if (viewPager.getAdapter().getCount() == 1) {
+                    viewPager.getAdapter().notifyDataSetChanged();
+                }
             }
         });
 
+
     }
 
-    class MyAdapter extends FragmentPagerAdapter {
+
+    class MyAdapter extends FragmentStatePagerAdapter {
 
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -51,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     return new IdentitasBaruFragment();
                 case 1:
                     return new IdentitasLamaFragment();
+
             }
             return null;
         }
@@ -76,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                     return "Identitas Lama";
             }
             return null;
+        }
+
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
     }
 }
