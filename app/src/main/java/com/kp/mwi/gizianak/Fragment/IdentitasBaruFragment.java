@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.kp.mwi.gizianak.MainActivity;
 import com.kp.mwi.gizianak.Model.BeratUmur;
 import com.kp.mwi.gizianak.Model.DataAnak;
+import com.kp.mwi.gizianak.Model.TBUmur;
 import com.kp.mwi.gizianak.R;
 import com.kp.mwi.gizianak.Utility;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -235,12 +236,112 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                     int thn = Integer.parseInt(sp[2]);
                     LocalDate birth = new LocalDate(thn, convertBulan1(bulan), tanggal);
                     Period period = new Period(birth, now, PeriodType.yearMonthDay());
-                    int umur = (period.getYears() * 12) + period.getMonths();
+                    int umur = -1;
+                    int thnhasconv = -1;
+                    if (period.getYears() < 5) {
+                        umur = (period.getYears() * 12) + (period.getMonths());
+                    } else if (period.getYears() == 5) {
+                        if (period.getMonths() == 0) {
+                            umur = (period.getYears() * 12) + (period.getMonths());
+                        } else {
+                            int bulhasconv = -1;
+                            if (period.getMonths() <= 5) {
+                                if (period.getMonths() < 3) {
+                                    bulhasconv = 0;
+                                } else {
+                                    bulhasconv = 5;
+                                }
+                                thnhasconv = period.getYears();
+                            } else {
+                                if (period.getMonths() < 8) {
+                                    bulhasconv = 5;
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    bulhasconv = 0;
+                                    thnhasconv = period.getYears() + 1;
+                                }
+                            }
+                            umur = (thnhasconv * 12) + bulhasconv;
+                        }
+                    } else {
+                        int bulhasconv = -1;
+                        if (period.getMonths() <= 5) {
+                            if (period.getMonths() < 3) {
+                                bulhasconv = 0;
+                            } else {
+                                bulhasconv = 5;
+                            }
+                            thnhasconv = period.getYears();
+                        } else {
+                            if (period.getMonths() < 8) {
+                                bulhasconv = 5;
+                                thnhasconv = period.getYears();
+                            } else {
+                                bulhasconv = 0;
+                                thnhasconv = period.getYears() + 1;
+                            }
+                        }
+                        umur = (thnhasconv * 12) + bulhasconv;
+                    }
                     lihatKesimpulanBBUmur(anakUniv.getBerat(), umur);
                 } else if (options[which].equals("Kurva tinggi badan menurut umur")) {
-
+                    LocalDate now = new LocalDate();
+                    String[] sp = anakUniv.getTglLahir().split(" ");
+                    int tanggal = Integer.parseInt(sp[0]);
+                    String bulan = sp[1];
+                    int thn = Integer.parseInt(sp[2]);
+                    LocalDate birth = new LocalDate(thn, convertBulan1(bulan), tanggal);
+                    Period period = new Period(birth, now, PeriodType.yearMonthDay());
+                    int umur = -1;
+                    int thnhasconv = -1;
+                    if (period.getYears() < 5) {
+                        umur = (period.getYears() * 12) + (period.getMonths());
+                    } else if (period.getYears() == 5) {
+                        if (period.getMonths() == 0) {
+                            umur = (period.getYears() * 12) + (period.getMonths());
+                        } else {
+                            int bulhasconv = -1;
+                            if (period.getMonths() <= 5) {
+                                if (period.getMonths() < 3) {
+                                    bulhasconv = 0;
+                                } else {
+                                    bulhasconv = 5;
+                                }
+                                thnhasconv = period.getYears();
+                            } else {
+                                if (period.getMonths() < 8) {
+                                    bulhasconv = 5;
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    bulhasconv = 0;
+                                    thnhasconv = period.getYears() + 1;
+                                }
+                            }
+                            umur = (thnhasconv * 12) + bulhasconv;
+                        }
+                    } else {
+                        int bulhasconv = -1;
+                        if (period.getMonths() <= 5) {
+                            if (period.getMonths() < 3) {
+                                bulhasconv = 0;
+                            } else {
+                                bulhasconv = 5;
+                            }
+                            thnhasconv = period.getYears();
+                        } else {
+                            if (period.getMonths() < 8) {
+                                bulhasconv = 5;
+                                thnhasconv = period.getYears();
+                            } else {
+                                bulhasconv = 0;
+                                thnhasconv = period.getYears() + 1;
+                            }
+                        }
+                        umur = (thnhasconv * 12) + bulhasconv;
+                    }
+                    lihatKesimpulanTinggiUmur(anakUniv.getTinggi(), umur);
                 } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
-
+                    Toast.makeText(IdentitasBaruFragment.this.getContext(), "Coming soon !", Toast.LENGTH_SHORT).show();
                 } else if (options[which].equals("Lihat nanti")) {
                     dialog.dismiss();
                 }
@@ -248,6 +349,38 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void lihatKesimpulanTinggiUmur(int tinggi, int umur) {
+        TBUmur tb = new TBUmur(umur, tinggi);
+        tb.TBUmur();
+        View view = View.inflate(getContext(), R.layout.layout_status, null);
+        TextView nm = (TextView) view.findViewById(R.id.txtNama);
+        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
+        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
+        Button done = (Button) view.findViewById(R.id.btnSelesai);
+        nm.setText(anakUniv.getNama());
+        if (!adaFoto) {
+            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
+                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
+            } else {
+                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
+            }
+        } else {
+            byte[] image = anakUniv.getFoto();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            gambar.setImageBitmap(bitmap);
+        }
+        stat.setText(tb.getKeterangan());
+        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
+                .setView(view);
+        mMaterialDialog.show();
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
     }
 
     private void lihatKesimpulanBBUmur(int berat, int umur) {
@@ -362,7 +495,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     }
 
     private boolean cekBulan(int num) {
-        if (num < 1 || num > 12) {
+        if (num < 0 || num > 12) {
             return false;
         } else {
             return true;

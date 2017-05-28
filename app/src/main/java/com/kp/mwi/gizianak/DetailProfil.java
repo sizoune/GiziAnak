@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kp.mwi.gizianak.Model.BeratUmur;
 import com.kp.mwi.gizianak.Model.DataAnak;
+import com.kp.mwi.gizianak.Model.TBUmur;
 import com.squareup.picasso.Picasso;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -28,12 +30,14 @@ import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.drakeet.materialdialog.MaterialDialog;
 
 public class DetailProfil extends AppCompatActivity implements View.OnClickListener {
     private TextView txNama, txJk, txUsia, txBerat, txTinggi;
     private Button edit, hapus, status;
     private DataAnak da;
     private CircleImageView gambar;
+    private MaterialDialog mMaterialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +77,7 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
             int thn = Integer.parseInt(sp[2]);
             LocalDate birth = new LocalDate(thn, convertBulan(bulan), tanggal);
             Period period = new Period(birth, now, PeriodType.yearMonthDay());
-            txUsia.setText(da.getTglLahir() + ", " + period.getYears() + " tahun " + (period.getMonths() + 1) + " bulan");
+            txUsia.setText(da.getTglLahir() + ", " + period.getYears() + " tahun " + (period.getMonths()) + " bulan");
             txBerat.setText(da.getBerat() + " Kg");
             txTinggi.setText(da.getTinggi() + " cm");
             if (!da.isAdaFoto()) {
@@ -165,7 +169,198 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
             builder.create();
             builder.show();
         } else if (v == status) {
-
+            final CharSequence[] options = {"Kurva berat badan menurut umur", "Kurva tinggi badan menurut umur", "Kurva berat badan menurut tinggi badan", "Lihat nanti"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
+            builder.setTitle("Lihat Status Anak");
+            builder.setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (options[which].equals("Kurva berat badan menurut umur")) {
+                        LocalDate now = new LocalDate();
+                        String[] sp = da.getTglLahir().split(" ");
+                        int tanggal = Integer.parseInt(sp[0]);
+                        String bulan = sp[1];
+                        int thn = Integer.parseInt(sp[2]);
+                        int umur = -1;
+                        int thnhasconv = -1;
+                        LocalDate birth = new LocalDate(thn, convertBulan(bulan), tanggal);
+                        Period period = new Period(birth, now, PeriodType.yearMonthDay());
+                        if (period.getYears() < 5) {
+                            umur = (period.getYears() * 12) + (period.getMonths());
+                        } else if (period.getYears() == 5) {
+                            if (period.getMonths() == 0) {
+                                umur = (period.getYears() * 12) + (period.getMonths());
+                            } else {
+                                int bulhasconv = -1;
+                                if (period.getMonths() <= 5) {
+                                    if (period.getMonths() < 3) {
+                                        bulhasconv = 0;
+                                    } else {
+                                        bulhasconv = 5;
+                                    }
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    if (period.getMonths() < 8) {
+                                        bulhasconv = 5;
+                                        thnhasconv = period.getYears();
+                                    } else {
+                                        bulhasconv = 0;
+                                        thnhasconv = period.getYears() + 1;
+                                    }
+                                }
+                                umur = (thnhasconv * 12) + bulhasconv;
+                            }
+                        } else {
+                            int bulhasconv = -1;
+                            if (period.getMonths() <= 5) {
+                                if (period.getMonths() < 3) {
+                                    bulhasconv = 0;
+                                } else {
+                                    bulhasconv = 5;
+                                }
+                                thnhasconv = period.getYears();
+                            } else {
+                                if (period.getMonths() < 8) {
+                                    bulhasconv = 5;
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    bulhasconv = 0;
+                                    thnhasconv = period.getYears() + 1;
+                                }
+                            }
+                            umur = (thnhasconv * 12) + bulhasconv;
+                        }
+                        lihatKesimpulanBBUmur(da.getBerat(), umur);
+                    } else if (options[which].equals("Kurva tinggi badan menurut umur")) {
+                        LocalDate now = new LocalDate();
+                        String[] sp = da.getTglLahir().split(" ");
+                        int tanggal = Integer.parseInt(sp[0]);
+                        String bulan = sp[1];
+                        int thn = Integer.parseInt(sp[2]);
+                        LocalDate birth = new LocalDate(thn, convertBulan(bulan), tanggal);
+                        Period period = new Period(birth, now, PeriodType.yearMonthDay());
+                        int umur = -1;
+                        int thnhasconv = -1;
+                        if (period.getYears() < 5) {
+                            umur = (period.getYears() * 12) + (period.getMonths());
+                        } else if (period.getYears() == 5) {
+                            if (period.getMonths() == 0) {
+                                umur = (period.getYears() * 12) + (period.getMonths());
+                            } else {
+                                int bulhasconv = -1;
+                                if (period.getMonths() <= 5) {
+                                    if (period.getMonths() < 3) {
+                                        bulhasconv = 0;
+                                    } else {
+                                        bulhasconv = 5;
+                                    }
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    if (period.getMonths() < 8) {
+                                        bulhasconv = 5;
+                                        thnhasconv = period.getYears();
+                                    } else {
+                                        bulhasconv = 0;
+                                        thnhasconv = period.getYears() + 1;
+                                    }
+                                }
+                                umur = (thnhasconv * 12) + bulhasconv;
+                            }
+                        } else {
+                            int bulhasconv = -1;
+                            if (period.getMonths() <= 5) {
+                                if (period.getMonths() < 3) {
+                                    bulhasconv = 0;
+                                } else {
+                                    bulhasconv = 5;
+                                }
+                                thnhasconv = period.getYears();
+                            } else {
+                                if (period.getMonths() < 8) {
+                                    bulhasconv = 5;
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    bulhasconv = 0;
+                                    thnhasconv = period.getYears() + 1;
+                                }
+                            }
+                            umur = (thnhasconv * 12) + bulhasconv;
+                        }
+//                        Toast.makeText(DetailProfil.this, Integer.toString(umur), Toast.LENGTH_SHORT).show();
+                        lihatKesimpulanTinggiUmur(da.getTinggi(), umur);
+                    } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
+                        Toast.makeText(DetailProfil.this, "Coming soon !", Toast.LENGTH_SHORT).show();
+                    } else if (options[which].equals("Lihat nanti")) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
+    }
+
+    private void lihatKesimpulanTinggiUmur(int tinggi, int umur) {
+        TBUmur tb = new TBUmur(umur, tinggi);
+        tb.TBUmur();
+        View view = View.inflate(getApplicationContext(), R.layout.layout_status, null);
+        TextView nm = (TextView) view.findViewById(R.id.txtNama);
+        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
+        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
+        Button done = (Button) view.findViewById(R.id.btnSelesai);
+        nm.setText(da.getNama());
+        if (!da.isAdaFoto()) {
+            if (da.getJenisKelamin().equals("Perempuan")) {
+                Picasso.with(getApplicationContext()).load(R.drawable.girl).fit().into(gambar);
+            } else {
+                Picasso.with(getApplicationContext()).load(R.drawable.boybig).fit().into(gambar);
+            }
+        } else {
+            byte[] image = da.getFoto();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            gambar.setImageBitmap(bitmap);
+        }
+        stat.setText(tb.getKeterangan());
+        mMaterialDialog = new MaterialDialog(DetailProfil.this)
+                .setView(view);
+        mMaterialDialog.show();
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
+    }
+
+    private void lihatKesimpulanBBUmur(int berat, int umur) {
+        BeratUmur bu = new BeratUmur(berat, umur);
+        bu.BBumur();
+        View view = View.inflate(getApplicationContext(), R.layout.layout_status, null);
+        TextView nm = (TextView) view.findViewById(R.id.txtNama);
+        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
+        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
+        Button done = (Button) view.findViewById(R.id.btnSelesai);
+        nm.setText(da.getNama());
+        if (!da.isAdaFoto()) {
+            if (da.getJenisKelamin().equals("Perempuan")) {
+                Picasso.with(getApplicationContext()).load(R.drawable.girl).fit().into(gambar);
+            } else {
+                Picasso.with(getApplicationContext()).load(R.drawable.boybig).fit().into(gambar);
+            }
+        } else {
+            byte[] image = da.getFoto();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            gambar.setImageBitmap(bitmap);
+        }
+        stat.setText(bu.getKeterangan());
+        mMaterialDialog = new MaterialDialog(DetailProfil.this)
+                .setView(view);
+        mMaterialDialog.show();
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
     }
 }
