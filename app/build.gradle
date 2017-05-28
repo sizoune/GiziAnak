@@ -37,5 +37,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.satyan:sugar:1.5'
     compile 'com.github.CodeFalling:RecyclerViewSwipeDismiss:v1.1.3'
+    compile 'net.danlew:android.joda:2.9.9'
+    compile 'me.drakeet.materialdialog:library:1.3.1'
     testCompile 'junit:junit:4.12'
 }

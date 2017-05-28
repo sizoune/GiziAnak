@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@color/hijauaplikasi">
+
+        <TextView
+            android:id="@+id/txtNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="16dp"
+            android:text="Nama"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/gambar_anak"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/txtNama"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="5dp"
+            android:src="@drawable/ic_boy"
+            app:civ_border_color="@color/putih"
+            app:civ_border_width="1dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cover"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:text="Status"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSelesai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/hijauaplikasi"
+            android:text="Selesai"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+</RelativeLayout>

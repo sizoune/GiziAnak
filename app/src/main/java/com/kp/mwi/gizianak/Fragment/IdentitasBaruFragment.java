@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -26,12 +27,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kp.mwi.gizianak.MainActivity;
+import com.kp.mwi.gizianak.Model.BeratUmur;
 import com.kp.mwi.gizianak.Model.DataAnak;
 import com.kp.mwi.gizianak.R;
 import com.kp.mwi.gizianak.Utility;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,7 +50,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import fr.ganfra.materialspinner.MaterialSpinner;
+import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,8 +63,11 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     private Button foto, simpan;
     private ImageView preview;
     boolean result, adaFoto;
-    private int REQUEST_CAMERA = 0, SELECT_FILE = 1, bul;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
+    private MaterialDialog mMaterialDialog;
+    private DataAnak anakUniv;
+
 
     public IdentitasBaruFragment() {
         // Required empty public constructor
@@ -65,6 +78,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        JodaTimeAndroid.init(IdentitasBaruFragment.this.getContext());
         View v = inflater.inflate(R.layout.fragment_identitas_baru, container, false);
         adaFoto = false;
         result = false;
@@ -116,74 +130,83 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                 if (!lahir.getText().toString().equals("")) {
                     String namas = nama.getText().toString();
                     String jk = spinner.getSelectedItem().toString();
-                    String tglLahir = lahir.getText().toString();
                     int weight = Integer.parseInt(berat.getText().toString());
                     int height = Integer.parseInt(tinggi.getText().toString());
                     if (adaFoto) {
-//                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "ada Foto", Toast.LENGTH_SHORT).show();
                         byte[] gambar = imageViewtoByte(preview);
-                        DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
-//                        String uniqid = namas.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
-//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-//                        if (cekData.size() <= 0) {
+                        DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height, gambar);
+                        anakUniv = da;
                         da.save();
-                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-//                        }
+                        cekStatus();
                         clearAll();
                     } else {
-//                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "tanpa Foto", Toast.LENGTH_SHORT).show();
-                        DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
-//                        String uniqid = namas.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
-//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-//                        if (cekData.size() <= 0) {
+                        DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height);
+                        anakUniv = da;
                         da.save();
-                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-//                        }
+                        cekStatus();
                         clearAll();
                     }
                 } else {
                     if (cekBulan(Integer.parseInt(bulan.getText().toString()))) {
                         String tglLahir = "";
+                        int monthNow = Calendar.getInstance().get(Calendar.MONTH);
                         int year = Calendar.getInstance().get(Calendar.YEAR);
-                        int tahunlahir = year - Integer.parseInt(tahun.getText().toString());
-                        int bulanLahir = getmonthCal(Integer.parseInt(bulan.getText().toString()));
+                        int month = Integer.parseInt(bulan.getText().toString());
+                        int tahunlahir = 0;
+                        int selesihbulanLahir = 0;
+                        if (month > monthNow) {
+                            tahunlahir = year - (Integer.parseInt(tahun.getText().toString())) - 1;
+                            int temp = monthNow - month;
+                            if (temp == -1) {
+                                selesihbulanLahir = 12;
+                            } else if (temp == -2) {
+                                selesihbulanLahir = 11;
+                            } else if (temp == -3) {
+                                selesihbulanLahir = 10;
+                            } else if (temp == -4) {
+                                selesihbulanLahir = 9;
+                            } else if (temp == -5) {
+                                selesihbulanLahir = 8;
+                            } else if (temp == -6) {
+                                selesihbulanLahir = 7;
+                            } else if (temp == -7) {
+                                selesihbulanLahir = 6;
+                            } else if (temp == -8) {
+                                selesihbulanLahir = 5;
+                            } else if (temp == -9) {
+                                selesihbulanLahir = 4;
+                            } else if (temp == -10) {
+                                selesihbulanLahir = 3;
+                            } else if (temp == -11) {
+                                selesihbulanLahir = 2;
+                            } else if (temp == -12) {
+                                selesihbulanLahir = 1;
+                            }
+                        } else {
+                            tahunlahir = year - Integer.parseInt(tahun.getText().toString());
+                            selesihbulanLahir = (monthNow + 1) - month;
+                        }
+                        int bulanLahir = getmonthCal(selesihbulanLahir);
                         int iDay = 1;
                         Calendar mycal = new GregorianCalendar(tahunlahir, bulanLahir, iDay);
                         int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
                         tglLahir = Integer.toString(daysInMonth) + " " + convertBulan(bulanLahir + 1) + " " + Integer.toString(tahunlahir);
-//                        Toast.makeText(IdentitasBaruFragment.this.getContext(), tglLahir, Toast.LENGTH_SHORT).show();
                         String namas = nama.getText().toString();
                         String jk = spinner.getSelectedItem().toString();
                         int weight = Integer.parseInt(berat.getText().toString());
                         int height = Integer.parseInt(tinggi.getText().toString());
                         if (adaFoto) {
-//                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "ada Foto", Toast.LENGTH_SHORT).show();
                             byte[] gambar = imageViewtoByte(preview);
                             DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
-//                        String uniqid = namas.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
-//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-//                        if (cekData.size() <= 0) {
+                            anakUniv = da;
                             da.save();
-                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-//                        }
+                            cekStatus();
                             clearAll();
                         } else {
-//                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "tanpa Foto", Toast.LENGTH_SHORT).show();
                             DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
-//                        String uniqid = namas.replaceAll("\\s", "") + tglLahir.replaceAll("\\s", "");
-//                        List<DataAnak> cekData = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(uniqid));
-//                        if (cekData.size() <= 0) {
+                            anakUniv = da;
                             da.save();
-                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data berhasil disimpan !", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data anak anda sudah terdaftar !", Toast.LENGTH_SHORT).show();
-//                        }
+                            cekStatus();
                             clearAll();
                         }
                     } else {
@@ -195,6 +218,97 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                 Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data masih ada yang salah / tidak lengkap !", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void cekStatus() {
+        final CharSequence[] options = {"Kurva berat badan menurut umur", "Kurva tinggi badan menurut umur", "Kurva berat badan menurut tinggi badan", "Lihat nanti"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(IdentitasBaruFragment.this.getContext());
+        builder.setTitle("Lihat Status Anak");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (options[which].equals("Kurva berat badan menurut umur")) {
+                    LocalDate now = new LocalDate();
+                    String[] sp = anakUniv.getTglLahir().split(" ");
+                    int tanggal = Integer.parseInt(sp[0]);
+                    String bulan = sp[1];
+                    int thn = Integer.parseInt(sp[2]);
+                    LocalDate birth = new LocalDate(thn, convertBulan1(bulan), tanggal);
+                    Period period = new Period(birth, now, PeriodType.yearMonthDay());
+                    int umur = (period.getYears() * 12) + period.getMonths();
+                    lihatKesimpulanBBUmur(anakUniv.getBerat(), umur);
+                } else if (options[which].equals("Kurva tinggi badan menurut umur")) {
+
+                } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
+
+                } else if (options[which].equals("Lihat nanti")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void lihatKesimpulanBBUmur(int berat, int umur) {
+        BeratUmur bu = new BeratUmur(berat, umur);
+        bu.BBumur();
+        View view = View.inflate(getContext(), R.layout.layout_status, null);
+        TextView nm = (TextView) view.findViewById(R.id.txtNama);
+        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
+        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
+        Button done = (Button) view.findViewById(R.id.btnSelesai);
+        nm.setText(anakUniv.getNama());
+        if (!adaFoto) {
+            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
+                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
+            } else {
+                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
+            }
+        } else {
+            byte[] image = anakUniv.getFoto();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            gambar.setImageBitmap(bitmap);
+        }
+        stat.setText(bu.getKeterangan());
+        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
+                .setView(view);
+        mMaterialDialog.show();
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
+    }
+
+    public int convertBulan1(String angka) {
+        if (angka.equals("Januari")) {
+            return 1;
+        } else if (angka.equals("Februari")) {
+            return 2;
+        } else if (angka.equals("Maret")) {
+            return 3;
+        } else if (angka.equals("April")) {
+            return 4;
+        } else if (angka.equals("Mei")) {
+            return 5;
+        } else if (angka.equals("Juni")) {
+            return 6;
+        } else if (angka.equals("Juli")) {
+            return 7;
+        } else if (angka.equals("Agustus")) {
+            return 8;
+        } else if (angka.equals("September")) {
+            return 9;
+        } else if (angka.equals("Oktober")) {
+            return 10;
+        } else if (angka.equals("November")) {
+            return 11;
+        } else if (angka.equals("Desember")) {
+            return 12;
+        }
+        return -1;
     }
 
     private int getmonthCal(int angka) {
@@ -279,7 +393,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         if (birthday.after(today)) {
             Toast.makeText(IdentitasBaruFragment.this.getContext(), "Maaf Tanggal Lahir anda tidak valid !", Toast.LENGTH_SHORT).show();
         } else {
-            lahir.setText(dayOfMonth + " " + convertBulan(++monthOfYear) + " " + year);
+            lahir.setText(dayOfMonth + " " + convertBulan(monthOfYear) + " " + year);
         }
     }
 

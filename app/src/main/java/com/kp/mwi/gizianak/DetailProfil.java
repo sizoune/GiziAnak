@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +18,14 @@ import android.widget.Toast;
 import com.kp.mwi.gizianak.Model.DataAnak;
 import com.squareup.picasso.Picasso;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
+
 import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,6 +38,7 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        JodaTimeAndroid.init(this);
         setContentView(R.layout.activity_detail_profil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,7 +66,14 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
             da = b.getParcelable("data");
             txNama.setText(da.getNama());
             txJk.setText(da.getJenisKelamin());
-//            txUsia.setText(da.get);
+            LocalDate now = new LocalDate();
+            String[] sp = da.getTglLahir().split(" ");
+            int tanggal = Integer.parseInt(sp[0]);
+            String bulan = sp[1];
+            int thn = Integer.parseInt(sp[2]);
+            LocalDate birth = new LocalDate(thn, convertBulan(bulan), tanggal);
+            Period period = new Period(birth, now, PeriodType.yearMonthDay());
+            txUsia.setText(da.getTglLahir() + ", " + period.getYears() + " tahun " + (period.getMonths() + 1) + " bulan");
             txBerat.setText(da.getBerat() + " Kg");
             txTinggi.setText(da.getTinggi() + " cm");
             if (!da.isAdaFoto()) {
@@ -75,6 +88,35 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                 gambar.setImageBitmap(bitmap);
             }
         }
+    }
+
+    public int convertBulan(String angka) {
+        if (angka.equals("Januari")) {
+            return 1;
+        } else if (angka.equals("Februari")) {
+            return 2;
+        } else if (angka.equals("Maret")) {
+            return 3;
+        } else if (angka.equals("April")) {
+            return 4;
+        } else if (angka.equals("Mei")) {
+            return 5;
+        } else if (angka.equals("Juni")) {
+            return 6;
+        } else if (angka.equals("Juli")) {
+            return 7;
+        } else if (angka.equals("Agustus")) {
+            return 8;
+        } else if (angka.equals("September")) {
+            return 9;
+        } else if (angka.equals("Oktober")) {
+            return 10;
+        } else if (angka.equals("November")) {
+            return 11;
+        } else if (angka.equals("Desember")) {
+            return 12;
+        }
+        return -1;
     }
 
     @Override
