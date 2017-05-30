@@ -299,7 +299,13 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         }
                         umur = (thnhasconv * 12) + bulhasconv;
                     }
-                    lihatKesimpulanBBUmur(anakUniv.getBerat(), umur);
+                    String jk = "";
+                    if (anakUniv.getJenisKelamin().equals("Perempuan")) {
+                        jk = "P";
+                    } else {
+                        jk = "L";
+                    }
+                    lihatKesimpulanBBUmur(anakUniv.getBerat(), umur, jk);
                 } else if (options[which].equals("Kurva tinggi badan menurut umur")) {
                     LocalDate now = new LocalDate();
                     String[] sp = anakUniv.getTglLahir().split(" ");
@@ -399,8 +405,8 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         });
     }
 
-    private void lihatKesimpulanBBUmur(int berat, int umur) {
-        BeratUmur bu = new BeratUmur(berat, umur);
+    private void lihatKesimpulanBBUmur(int berat, int umur, String jk) {
+        BeratUmur bu = new BeratUmur(berat, umur, jk);
         bu.BBumur();
         View view = View.inflate(getContext(), R.layout.layout_status, null);
         TextView nm = (TextView) view.findViewById(R.id.txtNama);
