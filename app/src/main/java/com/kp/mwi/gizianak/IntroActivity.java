@@ -12,6 +12,8 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
  */
 
 public class IntroActivity extends AppIntro {
+    private static boolean introLoaded = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,11 @@ public class IntroActivity extends AppIntro {
 //        setColorSkipButton(getResources().getColor(R.color.hitam));
 //        setColorDoneText(getResources().getColor(R.color.hitam));
 //        setIndicatorColor(R.color.putih, R.color.hitam);
+
+        if (introLoaded) {
+            startActivity(new Intent(IntroActivity.this, MainActivity.class));
+            finish();
+        }
 
         setDoneText("Lanjut");
         addSlide(AppIntroFragment.newInstance("Kurva Pertumbuhan Anak", "Cara mudah untuk memantau " +
@@ -30,6 +37,7 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
+        introLoaded = true;
         startActivity(new Intent(IntroActivity.this, MainActivity.class));
         finish();
     }
@@ -37,6 +45,7 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
+        introLoaded = true;
         startActivity(new Intent(IntroActivity.this, MainActivity.class));
         finish();
     }

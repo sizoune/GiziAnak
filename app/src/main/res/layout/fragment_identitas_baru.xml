@@ -19,12 +19,23 @@
             android:layout_marginTop="16dp"
             android:orientation="vertical">
 
+            <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+            to prevent the dummy from receiving focus again -->
             <TextView
                 android:id="@+id/judul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="5dp"
+                android:nextFocusLeft="@+id/judul"
+                android:nextFocusUp="@+id/judul"
                 android:text="Silahkan masukkan identitas anak anda !"
                 android:textAlignment="center"
                 android:textColor="@color/hijauaplikasi"
