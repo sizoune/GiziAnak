@@ -147,6 +147,22 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                     intent.putExtra("data", baru);
                     startActivity(intent);
                     finish();
+                } else if (!edBerat.getText().toString().equals("") && !edTinggi.getText().toString().equals("")) {
+                    byte[] gambar = imageViewtoByte(photo);
+                    String nama = dataAnak.getNama();
+                    String jk = dataAnak.getJenisKelamin();
+                    String lahir = dataAnak.getTglLahir();
+                    int weight = Integer.parseInt(edBerat.getText().toString());
+                    int height = Integer.parseInt(edTinggi.getText().toString());
+                    DataAnak baru = new DataAnak(nama, jk, lahir, weight, height, gambar);
+                    List<DataAnak> as = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(dataAnak.getUniqid()));
+                    DataAnak lama = as.get(0);
+                    lama.delete();
+                    baru.save();
+                    Intent intent = new Intent(EditProfile.this, DetailProfil.class);
+                    intent.putExtra("data", baru);
+                    startActivity(intent);
+                    finish();
                 } else {
                     byte[] gambar = imageViewtoByte(photo);
                     String nama = dataAnak.getNama();
@@ -186,6 +202,21 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                     String lahir = dataAnak.getTglLahir();
                     int weight = Integer.parseInt(edBerat.getText().toString());
                     int height = dataAnak.getTinggi();
+                    DataAnak baru = new DataAnak(nama, jk, lahir, weight, height);
+                    List<DataAnak> as = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(dataAnak.getUniqid()));
+                    DataAnak lama = as.get(0);
+                    lama.delete();
+                    baru.save();
+                    Intent intent = new Intent(EditProfile.this, DetailProfil.class);
+                    intent.putExtra("data", baru);
+                    startActivity(intent);
+                    finish();
+                } else if (!edBerat.getText().toString().equals("") && !edTinggi.getText().toString().equals("")) {
+                    String nama = dataAnak.getNama();
+                    String jk = dataAnak.getJenisKelamin();
+                    String lahir = dataAnak.getTglLahir();
+                    int weight = Integer.parseInt(edBerat.getText().toString());
+                    int height = Integer.parseInt(edTinggi.getText().toString());
                     DataAnak baru = new DataAnak(nama, jk, lahir, weight, height);
                     List<DataAnak> as = DataAnak.find(DataAnak.class, "uniqid = ?", String.valueOf(dataAnak.getUniqid()));
                     DataAnak lama = as.get(0);

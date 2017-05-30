@@ -360,7 +360,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         TextView stat = (TextView) view.findViewById(R.id.txtStatus);
         Button done = (Button) view.findViewById(R.id.btnSelesai);
         nm.setText(anakUniv.getNama());
-        if (!adaFoto) {
+        if (!anakUniv.isAdaFoto()) {
             if (anakUniv.getJenisKelamin().equals("Perempuan")) {
                 Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
             } else {
@@ -392,7 +392,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         TextView stat = (TextView) view.findViewById(R.id.txtStatus);
         Button done = (Button) view.findViewById(R.id.btnSelesai);
         nm.setText(anakUniv.getNama());
-        if (!adaFoto) {
+        if (!anakUniv.isAdaFoto()) {
             if (anakUniv.getJenisKelamin().equals("Perempuan")) {
                 Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
             } else {
