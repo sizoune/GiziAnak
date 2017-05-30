@@ -128,93 +128,109 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
             ambilFoto();
         } else if (v == simpan) {
             if (cekValidasiData()) {
-                if (!lahir.getText().toString().equals("")) {
-                    String namas = nama.getText().toString();
-                    String jk = spinner.getSelectedItem().toString();
-                    int weight = Integer.parseInt(berat.getText().toString());
-                    int height = Integer.parseInt(tinggi.getText().toString());
-                    if (adaFoto) {
-                        byte[] gambar = imageViewtoByte(preview);
-                        DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height, gambar);
-                        anakUniv = da;
-                        da.save();
-                        cekStatus();
-                        clearAll();
-                    } else {
-                        DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height);
-                        anakUniv = da;
-                        da.save();
-                        cekStatus();
-                        clearAll();
-                    }
-                } else {
-                    if (cekBulan(Integer.parseInt(bulan.getText().toString()))) {
-                        String tglLahir = "";
-                        int monthNow = Calendar.getInstance().get(Calendar.MONTH);
-                        int year = Calendar.getInstance().get(Calendar.YEAR);
-                        int month = Integer.parseInt(bulan.getText().toString());
-                        int tahunlahir = 0;
-                        int selesihbulanLahir = 0;
-                        if (month > monthNow) {
-                            tahunlahir = year - (Integer.parseInt(tahun.getText().toString())) - 1;
-                            int temp = monthNow - month;
-                            if (temp == -1) {
-                                selesihbulanLahir = 12;
-                            } else if (temp == -2) {
-                                selesihbulanLahir = 11;
-                            } else if (temp == -3) {
-                                selesihbulanLahir = 10;
-                            } else if (temp == -4) {
-                                selesihbulanLahir = 9;
-                            } else if (temp == -5) {
-                                selesihbulanLahir = 8;
-                            } else if (temp == -6) {
-                                selesihbulanLahir = 7;
-                            } else if (temp == -7) {
-                                selesihbulanLahir = 6;
-                            } else if (temp == -8) {
-                                selesihbulanLahir = 5;
-                            } else if (temp == -9) {
-                                selesihbulanLahir = 4;
-                            } else if (temp == -10) {
-                                selesihbulanLahir = 3;
-                            } else if (temp == -11) {
-                                selesihbulanLahir = 2;
-                            } else if (temp == -12) {
-                                selesihbulanLahir = 1;
+                final AlertDialog.Builder builder = new AlertDialog.Builder(IdentitasBaruFragment.this.getContext());
+                builder.setTitle("Konfirmasi Data");
+                builder.setMessage("Apakah anda yakin data yang sudah diisi benar ?");
+                builder.setPositiveButton("YAKIN", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!lahir.getText().toString().equals("")) {
+                            String namas = nama.getText().toString();
+                            String jk = spinner.getSelectedItem().toString();
+                            int weight = Integer.parseInt(berat.getText().toString());
+                            int height = Integer.parseInt(tinggi.getText().toString());
+                            if (adaFoto) {
+                                byte[] gambar = imageViewtoByte(preview);
+                                DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height, gambar);
+                                anakUniv = da;
+                                da.save();
+                                cekStatus();
+                                clearAll();
+                            } else {
+                                DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height);
+                                anakUniv = da;
+                                da.save();
+                                cekStatus();
+                                clearAll();
                             }
                         } else {
-                            tahunlahir = year - Integer.parseInt(tahun.getText().toString());
-                            selesihbulanLahir = (monthNow + 1) - month;
+                            if (cekBulan(Integer.parseInt(bulan.getText().toString()))) {
+                                String tglLahir = "";
+                                int monthNow = Calendar.getInstance().get(Calendar.MONTH);
+                                int year = Calendar.getInstance().get(Calendar.YEAR);
+                                int month = Integer.parseInt(bulan.getText().toString());
+                                int tahunlahir = 0;
+                                int selesihbulanLahir = 0;
+                                if (month > monthNow) {
+                                    tahunlahir = year - (Integer.parseInt(tahun.getText().toString())) - 1;
+                                    int temp = monthNow - month;
+                                    if (temp == -1) {
+                                        selesihbulanLahir = 12;
+                                    } else if (temp == -2) {
+                                        selesihbulanLahir = 11;
+                                    } else if (temp == -3) {
+                                        selesihbulanLahir = 10;
+                                    } else if (temp == -4) {
+                                        selesihbulanLahir = 9;
+                                    } else if (temp == -5) {
+                                        selesihbulanLahir = 8;
+                                    } else if (temp == -6) {
+                                        selesihbulanLahir = 7;
+                                    } else if (temp == -7) {
+                                        selesihbulanLahir = 6;
+                                    } else if (temp == -8) {
+                                        selesihbulanLahir = 5;
+                                    } else if (temp == -9) {
+                                        selesihbulanLahir = 4;
+                                    } else if (temp == -10) {
+                                        selesihbulanLahir = 3;
+                                    } else if (temp == -11) {
+                                        selesihbulanLahir = 2;
+                                    } else if (temp == -12) {
+                                        selesihbulanLahir = 1;
+                                    }
+                                } else {
+                                    tahunlahir = year - Integer.parseInt(tahun.getText().toString());
+                                    selesihbulanLahir = (monthNow + 1) - month;
+                                }
+                                int bulanLahir = getmonthCal(selesihbulanLahir);
+                                int iDay = 1;
+                                Calendar mycal = new GregorianCalendar(tahunlahir, bulanLahir, iDay);
+                                int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                tglLahir = Integer.toString(daysInMonth) + " " + convertBulan(bulanLahir + 1) + " " + Integer.toString(tahunlahir);
+                                String namas = nama.getText().toString();
+                                String jk = spinner.getSelectedItem().toString();
+                                int weight = Integer.parseInt(berat.getText().toString());
+                                int height = Integer.parseInt(tinggi.getText().toString());
+                                if (adaFoto) {
+                                    byte[] gambar = imageViewtoByte(preview);
+                                    DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
+                                    anakUniv = da;
+                                    da.save();
+                                    cekStatus();
+                                    clearAll();
+                                } else {
+                                    DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
+                                    anakUniv = da;
+                                    da.save();
+                                    cekStatus();
+                                    clearAll();
+                                }
+                            } else {
+                                Toast.makeText(IdentitasBaruFragment.this.getContext(), "Usia bulan anda tidak valid !", Toast.LENGTH_SHORT).show();
+                                bulan.setText("");
+                            }
                         }
-                        int bulanLahir = getmonthCal(selesihbulanLahir);
-                        int iDay = 1;
-                        Calendar mycal = new GregorianCalendar(tahunlahir, bulanLahir, iDay);
-                        int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
-                        tglLahir = Integer.toString(daysInMonth) + " " + convertBulan(bulanLahir + 1) + " " + Integer.toString(tahunlahir);
-                        String namas = nama.getText().toString();
-                        String jk = spinner.getSelectedItem().toString();
-                        int weight = Integer.parseInt(berat.getText().toString());
-                        int height = Integer.parseInt(tinggi.getText().toString());
-                        if (adaFoto) {
-                            byte[] gambar = imageViewtoByte(preview);
-                            DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
-                            anakUniv = da;
-                            da.save();
-                            cekStatus();
-                            clearAll();
-                        } else {
-                            DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
-                            anakUniv = da;
-                            da.save();
-                            cekStatus();
-                            clearAll();
-                        }
-                    } else {
-                        Toast.makeText(IdentitasBaruFragment.this.getContext(), "Usia bulan anda tidak valid !", Toast.LENGTH_SHORT).show();
-                        bulan.setText("");
                     }
-                }
+                });
+                builder.setNegativeButton("PERIKSA LAGI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create();
+                builder.show();
             } else {
                 Toast.makeText(IdentitasBaruFragment.this.getContext(), "Data masih ada yang salah / tidak lengkap !", Toast.LENGTH_SHORT).show();
             }
