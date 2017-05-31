@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class IdentitasLamaFragment extends Fragment {
     private SwipeRefreshLayout swipe;
     private TextView kosong;
     public int posisi;
+    private Button muatUlang;
 
     public IdentitasLamaFragment() {
         // Required empty public constructor
@@ -50,7 +52,7 @@ public class IdentitasLamaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_identitas_lama, container, false);
         kosong = (TextView) view.findViewById(R.id.txtEmpty);
 
-
+        muatUlang = (Button) view.findViewById(R.id.btnRefresh);
         list = (RecyclerView) view.findViewById(R.id.recyclerViewIdentitasLama);
         gridLayoutManager = new GridLayoutManager(IdentitasLamaFragment.this.getContext(), 1, GridLayoutManager.VERTICAL, false);
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
@@ -74,6 +76,43 @@ public class IdentitasLamaFragment extends Fragment {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                swipe.setRefreshing(true);
+                dataAnak = new ArrayList<DataAnak>();
+                List<DataAnak> datas = DataAnak.listAll(DataAnak.class);
+                if (datas.size() <= 0) {
+                    kosong.setVisibility(View.VISIBLE);
+                    list.setVisibility(View.GONE);
+                } else {
+                    kosong.setVisibility(View.GONE);
+                    list.setVisibility(View.VISIBLE);
+                    for (DataAnak anak : datas) {
+                        dataAnak.add(anak);
+                    }
+                    adapter = new AdapterIdentitasLama(IdentitasLamaFragment.this.getContext(), dataAnak);
+                    list.setAdapter(adapter);
+                    list.setLayoutManager(gridLayoutManager);
+                    adapter.notifyDataSetChanged();
+                    adapter.SetOnItemClickListener(new AdapterIdentitasLama.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Intent intent = new Intent(IdentitasLamaFragment.this.getActivity(), DetailProfil.class);
+                            intent.putExtra("data", dataAnak.get(position));
+                            startActivity(intent);
+                        }
+                    });
+                }
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipe.setRefreshing(false);
+                    }
+                }, 1000);
+            }
+        });
+
+        muatUlang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 swipe.setRefreshing(true);
                 dataAnak = new ArrayList<DataAnak>();
                 List<DataAnak> datas = DataAnak.listAll(DataAnak.class);

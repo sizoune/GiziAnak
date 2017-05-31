@@ -25,11 +25,29 @@
                 android:textSize="24sp" />
 
             <android.support.v7.widget.RecyclerView
-                android:paddingTop="10dp"
                 android:id="@+id/recyclerViewIdentitasLama"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="10dp"
                 android:scrollbars="vertical" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnRefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button"
+                    android:text="Refresh Data"
+                    android:textAllCaps="false" />
+            </LinearLayout>
 
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>

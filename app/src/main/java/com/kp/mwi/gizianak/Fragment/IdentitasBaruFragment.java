@@ -552,7 +552,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         birthday.set(year, (++monthOfYear), dayOfMonth);
         Calendar today = Calendar.getInstance();
         if (birthday.after(today)) {
-            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Maaf Tanggal Lahir anda tidak valid !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(IdentitasBaruFragment.this.getContext(), "Maaf Tanggal Lahir tidak boleh sama atau lebih dari tanggal sekarang !", Toast.LENGTH_SHORT).show();
         } else {
             lahir.setText(dayOfMonth + " " + convertBulan(monthOfYear) + " " + year);
             LocalDate now = new LocalDate();
