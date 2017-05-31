@@ -361,7 +361,13 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         }
                         umur = (thnhasconv * 12) + bulhasconv;
                     }
-                    lihatKesimpulanTinggiUmur(anakUniv.getTinggi(), umur);
+                    String jk = "";
+                    if (anakUniv.getJenisKelamin().equals("Perempuan")) {
+                        jk = "P";
+                    } else {
+                        jk = "L";
+                    }
+                    lihatKesimpulanTinggiUmur(anakUniv.getTinggi(), umur, jk);
                 } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
                     Toast.makeText(IdentitasBaruFragment.this.getContext(), "Coming soon !", Toast.LENGTH_SHORT).show();
                 } else if (options[which].equals("Lihat nanti")) {
@@ -373,8 +379,8 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         alert.show();
     }
 
-    private void lihatKesimpulanTinggiUmur(int tinggi, int umur) {
-        TBUmur tb = new TBUmur(umur, tinggi);
+    private void lihatKesimpulanTinggiUmur(int tinggi, int umur, String jk) {
+        TBUmur tb = new TBUmur(umur, tinggi, jk);
         tb.TBUmur();
         View view = View.inflate(getContext(), R.layout.layout_status, null);
         TextView nm = (TextView) view.findViewById(R.id.txtNama);
@@ -549,6 +555,11 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
             Toast.makeText(IdentitasBaruFragment.this.getContext(), "Maaf Tanggal Lahir anda tidak valid !", Toast.LENGTH_SHORT).show();
         } else {
             lahir.setText(dayOfMonth + " " + convertBulan(monthOfYear) + " " + year);
+            LocalDate now = new LocalDate();
+            LocalDate birth = new LocalDate(year, monthOfYear, dayOfMonth);
+            Period period = new Period(birth, now, PeriodType.yearMonthDay());
+            tahun.setText(Integer.toString(period.getYears()));
+            bulan.setText(Integer.toString(period.getMonths()));
         }
     }
 

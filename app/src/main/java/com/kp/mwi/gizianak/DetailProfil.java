@@ -292,8 +292,13 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                             }
                             umur = (thnhasconv * 12) + bulhasconv;
                         }
-//                        Toast.makeText(DetailProfil.this, Integer.toString(umur), Toast.LENGTH_SHORT).show();
-                        lihatKesimpulanTinggiUmur(da.getTinggi(), umur);
+                        String jk = "";
+                        if (da.getJenisKelamin().equals("Perempuan")) {
+                            jk = "P";
+                        } else {
+                            jk = "L";
+                        }
+                        lihatKesimpulanTinggiUmur(da.getTinggi(), umur, jk);
                     } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
                         Toast.makeText(DetailProfil.this, "Coming soon !", Toast.LENGTH_SHORT).show();
                     } else if (options[which].equals("Lihat nanti")) {
@@ -306,8 +311,8 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void lihatKesimpulanTinggiUmur(int tinggi, int umur) {
-        TBUmur tb = new TBUmur(umur, tinggi);
+    private void lihatKesimpulanTinggiUmur(int tinggi, int umur, String jk) {
+        TBUmur tb = new TBUmur(umur, tinggi, jk);
         tb.TBUmur();
         View view = View.inflate(getApplicationContext(), R.layout.layout_status, null);
         TextView nm = (TextView) view.findViewById(R.id.txtNama);

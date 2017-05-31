@@ -39,5 +39,6 @@ dependencies {
     compile 'com.github.CodeFalling:RecyclerViewSwipeDismiss:v1.1.3'
     compile 'net.danlew:android.joda:2.9.9'
     compile 'me.drakeet.materialdialog:library:1.3.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     testCompile 'junit:junit:4.12'
 }
