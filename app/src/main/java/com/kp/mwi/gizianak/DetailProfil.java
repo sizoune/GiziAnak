@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.kp.mwi.gizianak.Model.BeratUmur;
 import com.kp.mwi.gizianak.Model.DataAnak;
+import com.kp.mwi.gizianak.Model.DataKesimpulan;
 import com.kp.mwi.gizianak.Model.TBUmur;
 import com.squareup.picasso.Picasso;
 
@@ -230,13 +231,15 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                             }
                             umur = (thnhasconv * 12) + bulhasconv;
                         }
-                        String jk = "";
-                        if (da.getJenisKelamin().equals("Perempuan")) {
-                            jk = "P";
+                        DataKesimpulan dk;
+                        if (da.isAdaFoto()) {
+                            dk = new DataKesimpulan(da.getNama(), da.getJenisKelamin(), "BeratUmur", umur, da.getBerat(), umur, da.getFoto());
                         } else {
-                            jk = "L";
+                            dk = new DataKesimpulan(da.getNama(), da.getJenisKelamin(), "BeratUmur", umur, da.getBerat(), umur);
                         }
-                        lihatKesimpulanBBUmur(da.getBerat(), umur, jk);
+                        Intent intent = new Intent(getApplicationContext(), Kesimpulan.class);
+                        intent.putExtra("dataKesimpulan", dk);
+                        startActivity(intent);
                     } else if (options[which].equals("Kurva tinggi badan menurut umur")) {
                         LocalDate now = new LocalDate();
                         String[] sp = da.getTglLahir().split(" ");
@@ -298,7 +301,15 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                         } else {
                             jk = "L";
                         }
-                        lihatKesimpulanTinggiUmur(da.getTinggi(), umur, jk);
+                        DataKesimpulan dk;
+                        if (da.isAdaFoto()) {
+                            dk = new DataKesimpulan(da.getNama(), da.getJenisKelamin(), "TinggiUmur", umur, da.getTinggi(), umur, da.getFoto());
+                        } else {
+                            dk = new DataKesimpulan(da.getNama(), da.getJenisKelamin(), "TinggiUmur", umur, da.getTinggi(), umur);
+                        }
+                        Intent intent = new Intent(getApplicationContext(), Kesimpulan.class);
+                        intent.putExtra("dataKesimpulan", dk);
+                        startActivity(intent);
                     } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
                         Toast.makeText(DetailProfil.this, "Coming soon !", Toast.LENGTH_SHORT).show();
                     } else if (options[which].equals("Lihat nanti")) {
@@ -331,7 +342,7 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
             gambar.setImageBitmap(bitmap);
         }
-        stat.setText(tb.getKeterangan());
+        stat.setText(tb.getKeterangan() + tb.getKeterangan() + tb.getKeterangan());
         mMaterialDialog = new MaterialDialog(DetailProfil.this)
                 .setView(view);
         mMaterialDialog.show();

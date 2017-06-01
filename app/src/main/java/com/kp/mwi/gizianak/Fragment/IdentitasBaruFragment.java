@@ -26,9 +26,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kp.mwi.gizianak.Kesimpulan;
 import com.kp.mwi.gizianak.MainActivity;
 import com.kp.mwi.gizianak.Model.BeratUmur;
 import com.kp.mwi.gizianak.Model.DataAnak;
+import com.kp.mwi.gizianak.Model.DataKesimpulan;
 import com.kp.mwi.gizianak.Model.TBUmur;
 import com.kp.mwi.gizianak.R;
 import com.kp.mwi.gizianak.Utility;
@@ -299,13 +301,15 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         }
                         umur = (thnhasconv * 12) + bulhasconv;
                     }
-                    String jk = "";
-                    if (anakUniv.getJenisKelamin().equals("Perempuan")) {
-                        jk = "P";
+                    DataKesimpulan dk;
+                    if (anakUniv.isAdaFoto()) {
+                        dk = new DataKesimpulan(anakUniv.getNama(), anakUniv.getJenisKelamin(), "BeratUmur", umur, anakUniv.getBerat(), umur, anakUniv.getFoto());
                     } else {
-                        jk = "L";
+                        dk = new DataKesimpulan(anakUniv.getNama(), anakUniv.getJenisKelamin(), "BeratUmur", umur, anakUniv.getBerat(), umur);
                     }
-                    lihatKesimpulanBBUmur(anakUniv.getBerat(), umur, jk);
+                    Intent intent = new Intent(IdentitasBaruFragment.this.getContext(), Kesimpulan.class);
+                    intent.putExtra("dataKesimpulan", dk);
+                    startActivity(intent);
                 } else if (options[which].equals("Kurva tinggi badan menurut umur")) {
                     LocalDate now = new LocalDate();
                     String[] sp = anakUniv.getTglLahir().split(" ");
@@ -361,13 +365,15 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         }
                         umur = (thnhasconv * 12) + bulhasconv;
                     }
-                    String jk = "";
-                    if (anakUniv.getJenisKelamin().equals("Perempuan")) {
-                        jk = "P";
+                    DataKesimpulan dk;
+                    if (anakUniv.isAdaFoto()) {
+                        dk = new DataKesimpulan(anakUniv.getNama(), anakUniv.getJenisKelamin(), "TinggiUmur", umur, anakUniv.getTinggi(), umur, anakUniv.getFoto());
                     } else {
-                        jk = "L";
+                        dk = new DataKesimpulan(anakUniv.getNama(), anakUniv.getJenisKelamin(), "TinggiUmur", umur, anakUniv.getTinggi(), umur);
                     }
-                    lihatKesimpulanTinggiUmur(anakUniv.getTinggi(), umur, jk);
+                    Intent intent = new Intent(IdentitasBaruFragment.this.getContext(), Kesimpulan.class);
+                    intent.putExtra("dataKesimpulan", dk);
+                    startActivity(intent);
                 } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
                     Toast.makeText(IdentitasBaruFragment.this.getContext(), "Coming soon !", Toast.LENGTH_SHORT).show();
                 } else if (options[which].equals("Lihat nanti")) {
@@ -379,69 +385,69 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         alert.show();
     }
 
-    private void lihatKesimpulanTinggiUmur(int tinggi, int umur, String jk) {
-        TBUmur tb = new TBUmur(umur, tinggi, jk);
-        tb.TBUmur();
-        View view = View.inflate(getContext(), R.layout.layout_status, null);
-        TextView nm = (TextView) view.findViewById(R.id.txtNama);
-        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
-        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
-        Button done = (Button) view.findViewById(R.id.btnSelesai);
-        nm.setText(anakUniv.getNama());
-        if (!anakUniv.isAdaFoto()) {
-            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
-                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
-            } else {
-                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
-            }
-        } else {
-            byte[] image = anakUniv.getFoto();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-            gambar.setImageBitmap(bitmap);
-        }
-        stat.setText(tb.getKeterangan());
-        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
-                .setView(view);
-        mMaterialDialog.show();
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMaterialDialog.dismiss();
-            }
-        });
-    }
+//    private void lihatKesimpulanTinggiUmur(int tinggi, int umur, String jk) {
+//        TBUmur tb = new TBUmur(umur, tinggi, jk);
+//        tb.TBUmur();
+//        View view = View.inflate(getContext(), R.layout.layout_status, null);
+//        TextView nm = (TextView) view.findViewById(R.id.txtNama);
+//        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
+//        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
+//        Button done = (Button) view.findViewById(R.id.btnSelesai);
+//        nm.setText(anakUniv.getNama());
+//        if (!anakUniv.isAdaFoto()) {
+//            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
+//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
+//            } else {
+//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
+//            }
+//        } else {
+//            byte[] image = anakUniv.getFoto();
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+//            gambar.setImageBitmap(bitmap);
+//        }
+//        stat.setText(tb.getKeterangan());
+//        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
+//                .setView(view);
+//        mMaterialDialog.show();
+//        done.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mMaterialDialog.dismiss();
+//            }
+//        });
+//    }
 
-    private void lihatKesimpulanBBUmur(int berat, int umur, String jk) {
-        BeratUmur bu = new BeratUmur(berat, umur, jk);
-        bu.BBumur();
-        View view = View.inflate(getContext(), R.layout.layout_status, null);
-        TextView nm = (TextView) view.findViewById(R.id.txtNama);
-        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
-        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
-        Button done = (Button) view.findViewById(R.id.btnSelesai);
-        nm.setText(anakUniv.getNama());
-        if (!anakUniv.isAdaFoto()) {
-            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
-                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
-            } else {
-                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
-            }
-        } else {
-            byte[] image = anakUniv.getFoto();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-            gambar.setImageBitmap(bitmap);
-        }
-        stat.setText(bu.getKeterangan());
-        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
-                .setView(view);
-        mMaterialDialog.show();
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMaterialDialog.dismiss();
-            }
-        });
-    }
+//    private void lihatKesimpulanBBUmur(int berat, int umur, String jk) {
+//        BeratUmur bu = new BeratUmur(berat, umur, jk);
+//        bu.BBumur();
+//        View view = View.inflate(getContext(), R.layout.layout_status, null);
+//        TextView nm = (TextView) view.findViewById(R.id.txtNama);
+//        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
+//        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
+//        Button done = (Button) view.findViewById(R.id.btnSelesai);
+//        nm.setText(anakUniv.getNama());
+//        if (!anakUniv.isAdaFoto()) {
+//            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
+//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
+//            } else {
+//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
+//            }
+//        } else {
+//            byte[] image = anakUniv.getFoto();
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+//            gambar.setImageBitmap(bitmap);
+//        }
+//        stat.setText(bu.getKeterangan());
+//        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
+//                .setView(view);
+//        mMaterialDialog.show();
+//        done.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mMaterialDialog.dismiss();
+//            }
+//        });
+//    }
 
     public int convertBulan1(String angka) {
         if (angka.equals("Januari")) {
