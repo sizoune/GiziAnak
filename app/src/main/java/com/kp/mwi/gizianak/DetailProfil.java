@@ -170,7 +170,7 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
             builder.create();
             builder.show();
         } else if (v == status) {
-            final CharSequence[] options = {"Kurva berat badan menurut umur", "Kurva tinggi badan menurut umur", "Kurva berat badan menurut tinggi badan", "Lihat nanti"};
+            final CharSequence[] options = {"Kurva berat badan menurut umur", "Kurva tinggi badan menurut umur", "Kurva berat badan / tinggi badan terhadap umur", "Lihat nanti"};
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("Lihat Status Anak");
             builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -310,8 +310,76 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                         Intent intent = new Intent(getApplicationContext(), Kesimpulan.class);
                         intent.putExtra("dataKesimpulan", dk);
                         startActivity(intent);
-                    } else if (options[which].equals("Kurva berat badan menurut tinggi badan")) {
-                        Toast.makeText(DetailProfil.this, "Coming soon !", Toast.LENGTH_SHORT).show();
+                    } else if (options[which].equals("Kurva berat badan / tinggi badan terhadap umur")) {
+                        LocalDate now = new LocalDate();
+                        String[] sp = da.getTglLahir().split(" ");
+                        int tanggal = Integer.parseInt(sp[0]);
+                        String bulan = sp[1];
+                        int thn = Integer.parseInt(sp[2]);
+                        LocalDate birth = new LocalDate(thn, convertBulan(bulan), tanggal);
+                        Period period = new Period(birth, now, PeriodType.yearMonthDay());
+                        int umur = -1;
+                        int thnhasconv = -1;
+                        if (period.getYears() < 5) {
+                            umur = (period.getYears() * 12) + (period.getMonths());
+                        } else if (period.getYears() == 5) {
+                            if (period.getMonths() == 0) {
+                                umur = (period.getYears() * 12) + (period.getMonths());
+                            } else {
+                                int bulhasconv = -1;
+                                if (period.getMonths() <= 5) {
+                                    if (period.getMonths() < 3) {
+                                        bulhasconv = 0;
+                                    } else {
+                                        bulhasconv = 5;
+                                    }
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    if (period.getMonths() < 8) {
+                                        bulhasconv = 5;
+                                        thnhasconv = period.getYears();
+                                    } else {
+                                        bulhasconv = 0;
+                                        thnhasconv = period.getYears() + 1;
+                                    }
+                                }
+                                umur = (thnhasconv * 12) + bulhasconv;
+                            }
+                        } else {
+                            int bulhasconv = -1;
+                            if (period.getMonths() <= 5) {
+                                if (period.getMonths() < 3) {
+                                    bulhasconv = 0;
+                                } else {
+                                    bulhasconv = 5;
+                                }
+                                thnhasconv = period.getYears();
+                            } else {
+                                if (period.getMonths() < 8) {
+                                    bulhasconv = 5;
+                                    thnhasconv = period.getYears();
+                                } else {
+                                    bulhasconv = 0;
+                                    thnhasconv = period.getYears() + 1;
+                                }
+                            }
+                            umur = (thnhasconv * 12) + bulhasconv;
+                        }
+                        String jk = "";
+                        if (da.getJenisKelamin().equals("Perempuan")) {
+                            jk = "P";
+                        } else {
+                            jk = "L";
+                        }
+                        DataKesimpulan dk;
+                        if (da.isAdaFoto()) {
+                            dk = new DataKesimpulan(da.getNama(), da.getJenisKelamin(), "BeratTinggi", da.getTinggi(), da.getBerat(), umur, da.getFoto());
+                        } else {
+                            dk = new DataKesimpulan(da.getNama(), da.getJenisKelamin(), "BeratTinggi", da.getTinggi(), da.getBerat(), umur);
+                        }
+                        Intent intent = new Intent(getApplicationContext(), Kesimpulan.class);
+                        intent.putExtra("dataKesimpulan", dk);
+                        startActivity(intent);
                     } else if (options[which].equals("Lihat nanti")) {
                         dialog.dismiss();
                     }

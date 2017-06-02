@@ -6,47 +6,78 @@
     android:layout_height="match_parent"
     tools:context="com.kp.mwi.gizianak.Kesimpulan">
 
-    <RelativeLayout
-        android:id="@+id/cover"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/hijauaplikasi">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutbtn">
 
-        <TextView
-            android:id="@+id/txtNama"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:paddingTop="16dp"
-            android:text="Nama"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/gambar_anak"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@+id/txtNama"
-            android:layout_centerHorizontal="true"
-            android:paddingTop="5dp"
-            android:src="@drawable/ic_boy"
-            app:civ_border_color="@color/putih"
-            app:civ_border_width="1dp" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/cover"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/hijauaplikasi">
 
-    <TextView
-        android:id="@+id/txtStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cover"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
-        android:text="Status"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/txtNama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="16dp"
+                    android:text="Nama"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/gambar_anak"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/txtNama"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="@color/putih"
+                    app:civ_border_width="1dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cover"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="16dp"
+                android:text="Status"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnKurva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtStatus"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/bg_button"
+                android:text="Lihat Kurva"
+                android:textAllCaps="false" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_marginTop="10dp"
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@+id/btnKurva" />
+        </RelativeLayout>
+
+    </ScrollView>
 
     <LinearLayout
+        android:id="@+id/layoutbtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

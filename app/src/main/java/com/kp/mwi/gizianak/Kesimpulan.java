@@ -2,6 +2,7 @@ package com.kp.mwi.gizianak;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,19 +10,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.kp.mwi.gizianak.Model.BBTinggi;
 import com.kp.mwi.gizianak.Model.BeratUmur;
 import com.kp.mwi.gizianak.Model.DataKesimpulan;
 import com.kp.mwi.gizianak.Model.TBUmur;
 import com.squareup.picasso.Picasso;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Kesimpulan extends AppCompatActivity implements View.OnClickListener {
     private TextView nama, status;
     private CircleImageView gambar;
-    private Button btnSelesai;
+    private Button btnSelesai, btnKurva;
     private String jk = "";
-
+    private LineChart chart;
+    private DataKesimpulan dk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +50,17 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         status = (TextView) findViewById(R.id.txtStatus);
         gambar = (CircleImageView) findViewById(R.id.gambar_anak);
         btnSelesai = (Button) findViewById(R.id.btnSelesai);
+        btnKurva = (Button) findViewById(R.id.btnKurva);
+        chart = (LineChart) findViewById(R.id.chart);
 
         btnSelesai.setOnClickListener(this);
+        btnKurva.setOnClickListener(this);
+
+        chart.setVisibility(View.GONE);
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
-            DataKesimpulan dk = b.getParcelable("dataKesimpulan");
+            dk = b.getParcelable("dataKesimpulan");
             nama.setText(dk.getNama());
             if (dk.getJk().equals("Perempuan")) {
                 jk = "P";
@@ -65,6 +88,11 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
                 TBUmur tu = new TBUmur(dk.getTitikY(), dk.getUmur(), jk);
                 tu.TBUmur();
                 status.setText(tu.getKeterangan());
+            } else if (dk.getStatus().equals("BeratTinggi")) {
+                BBTinggi bb = new BBTinggi(dk.getTitikY(), dk.getTitikX(), dk.getUmur(), jk);
+                bb.hitungBMI();
+                bb.BBTinggi();
+                status.setText(bb.getKeterangan());
             }
         }
     }
@@ -73,8 +101,386 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v == btnSelesai) {
             this.finish();
+        } else if (v == btnKurva) {
+            if (chart.getVisibility() == View.GONE) {
+                if (dk.getUmur() < 61) {
+                    dibawah5tahun(dk.getTitikX(), dk.getTitikY());
+                }
+                chart.setVisibility(View.VISIBLE);
+                btnKurva.setText("Tutup Kurva");
+            } else {
+                chart.setVisibility(View.GONE);
+                btnKurva.setText("Lihat Kurva");
+            }
         }
     }
 
+    private void dibawah5tahun(float sumbx, float sumby) {
+        if (!dk.getJk().equals("Perempuan") && dk.getStatus().equals("BeratUmur")) {
+            String[] values = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+                    , "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"
+                    , "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36"
+                    , "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48"
+                    , "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"};
 
+            String[] valuesKg = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+                    , "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"
+                    , "25", "26", "27", "28"};
+
+            ArrayList<Entry> garisE = new ArrayList<>();
+            ArrayList<Entry> garisD = new ArrayList<>();
+            ArrayList<Entry> garisC = new ArrayList<>();
+            ArrayList<Entry> garisB = new ArrayList<>();
+            ArrayList<Entry> garisA = new ArrayList<>();
+            ArrayList<Entry> dataUser = new ArrayList<>();
+
+            dataUser.add(new Entry(sumbx, sumby));
+
+            garisE.add(new Entry(0, 2));
+            garisD.add(new Entry(0, Float.parseFloat("2.5")));
+            garisC.add(new Entry(0, Float.parseFloat("3.4")));
+            garisB.add(new Entry(0, Float.parseFloat("4.4")));
+            garisA.add(new Entry(0, Float.parseFloat("5")));
+
+            garisE.add(new Entry(2, Float.parseFloat("3.9")));
+            garisD.add(new Entry(2, Float.parseFloat("4.2")));
+            garisC.add(new Entry(2, Float.parseFloat("5.5")));
+            garisB.add(new Entry(2, Float.parseFloat("7")));
+            garisA.add(new Entry(2, Float.parseFloat("8")));
+
+            garisE.add(new Entry(4, 5));
+            garisD.add(new Entry(4, Float.parseFloat("5.5")));
+            garisC.add(new Entry(4, Float.parseFloat("7")));
+            garisB.add(new Entry(4, Float.parseFloat("8.8")));
+            garisA.add(new Entry(4, Float.parseFloat("9.8")));
+
+            garisE.add(new Entry(6, Float.parseFloat("5.9")));
+            garisD.add(new Entry(6, Float.parseFloat("6.3")));
+            garisC.add(new Entry(6, Float.parseFloat("8")));
+            garisB.add(new Entry(6, Float.parseFloat("9.9")));
+            garisA.add(new Entry(6, Float.parseFloat("11")));
+
+            garisE.add(new Entry(8, Float.parseFloat("6.2")));
+            garisD.add(new Entry(8, Float.parseFloat("6.9")));
+            garisC.add(new Entry(8, Float.parseFloat("8.7")));
+            garisB.add(new Entry(8, Float.parseFloat("10.8")));
+            garisA.add(new Entry(8, Float.parseFloat("11.9")));
+
+            garisE.add(new Entry(10, Float.parseFloat("6.6")));
+            garisD.add(new Entry(10, Float.parseFloat("7.3")));
+            garisC.add(new Entry(10, Float.parseFloat("9.2")));
+            garisB.add(new Entry(10, Float.parseFloat("11.3")));
+            garisA.add(new Entry(10, Float.parseFloat("12.6")));
+
+            garisE.add(new Entry(12, Float.parseFloat("6.9")));
+            garisD.add(new Entry(12, Float.parseFloat("7.8")));
+            garisC.add(new Entry(12, Float.parseFloat("9.6")));
+            garisB.add(new Entry(12, Float.parseFloat("12")));
+            garisA.add(new Entry(12, Float.parseFloat("13.3")));
+
+            garisE.add(new Entry(14, Float.parseFloat("7.2")));
+            garisD.add(new Entry(14, Float.parseFloat("8.1")));
+            garisC.add(new Entry(14, Float.parseFloat("10.1")));
+            garisB.add(new Entry(14, Float.parseFloat("12.5")));
+            garisA.add(new Entry(14, Float.parseFloat("14")));
+
+            garisE.add(new Entry(16, Float.parseFloat("7.5")));
+            garisD.add(new Entry(16, Float.parseFloat("8.4")));
+            garisC.add(new Entry(16, Float.parseFloat("10.5")));
+            garisB.add(new Entry(16, Float.parseFloat("13.1")));
+            garisA.add(new Entry(16, Float.parseFloat("14.6")));
+
+            garisE.add(new Entry(18, Float.parseFloat("7.9")));
+            garisD.add(new Entry(18, Float.parseFloat("8.8")));
+            garisC.add(new Entry(18, Float.parseFloat("11")));
+            garisB.add(new Entry(18, Float.parseFloat("13.7")));
+            garisA.add(new Entry(18, Float.parseFloat("15.2")));
+
+            garisE.add(new Entry(20, Float.parseFloat("8.1")));
+            garisD.add(new Entry(20, Float.parseFloat("9")));
+            garisC.add(new Entry(20, Float.parseFloat("11.2")));
+            garisB.add(new Entry(20, Float.parseFloat("14.2")));
+            garisA.add(new Entry(20, Float.parseFloat("15.9")));
+
+            garisE.add(new Entry(22, Float.parseFloat("8.3")));
+            garisD.add(new Entry(22, Float.parseFloat("9.3")));
+            garisC.add(new Entry(22, Float.parseFloat("11.8")));
+            garisB.add(new Entry(22, Float.parseFloat("14.8")));
+            garisA.add(new Entry(22, Float.parseFloat("16.5")));
+
+            garisE.add(new Entry(24, Float.parseFloat("8.6")));
+            garisD.add(new Entry(24, Float.parseFloat("9.7")));
+            garisC.add(new Entry(24, Float.parseFloat("12.1")));
+            garisB.add(new Entry(24, Float.parseFloat("15.2")));
+            garisA.add(new Entry(24, Float.parseFloat("17")));
+
+            garisE.add(new Entry(26, Float.parseFloat("8.9")));
+            garisD.add(new Entry(26, Float.parseFloat("10")));
+            garisC.add(new Entry(26, Float.parseFloat("12.5")));
+            garisB.add(new Entry(26, Float.parseFloat("15.8")));
+            garisA.add(new Entry(26, Float.parseFloat("17.8")));
+
+            garisE.add(new Entry(28, Float.parseFloat("9.1")));
+            garisD.add(new Entry(28, Float.parseFloat("10.2")));
+            garisC.add(new Entry(28, Float.parseFloat("13")));
+            garisB.add(new Entry(28, Float.parseFloat("16.3")));
+            garisA.add(new Entry(28, Float.parseFloat("18.3")));
+
+            garisE.add(new Entry(30, Float.parseFloat("9.3")));
+            garisD.add(new Entry(30, Float.parseFloat("10.5")));
+            garisC.add(new Entry(30, Float.parseFloat("13.2")));
+            garisB.add(new Entry(30, Float.parseFloat("16.9")));
+            garisA.add(new Entry(30, Float.parseFloat("19")));
+
+            garisE.add(new Entry(32, Float.parseFloat("9.5")));
+            garisD.add(new Entry(32, Float.parseFloat("10.8")));
+            garisC.add(new Entry(32, Float.parseFloat("13.6")));
+            garisB.add(new Entry(32, Float.parseFloat("17.3")));
+            garisA.add(new Entry(32, Float.parseFloat("19.5")));
+
+            garisE.add(new Entry(34, Float.parseFloat("9.8")));
+            garisD.add(new Entry(34, Float.parseFloat("11")));
+            garisC.add(new Entry(34, Float.parseFloat("14")));
+            garisB.add(new Entry(34, Float.parseFloat("17.9")));
+            garisA.add(new Entry(34, Float.parseFloat("20.1")));
+
+            garisE.add(new Entry(36, Float.parseFloat("10")));
+            garisD.add(new Entry(36, Float.parseFloat("11.2")));
+            garisC.add(new Entry(36, Float.parseFloat("14.2")));
+            garisB.add(new Entry(36, Float.parseFloat("18.3")));
+            garisA.add(new Entry(36, Float.parseFloat("20.8")));
+
+            garisE.add(new Entry(38, Float.parseFloat("10.2")));
+            garisD.add(new Entry(38, Float.parseFloat("11.5")));
+            garisC.add(new Entry(38, Float.parseFloat("14.8")));
+            garisB.add(new Entry(38, Float.parseFloat("18.8")));
+            garisA.add(new Entry(38, Float.parseFloat("21.2")));
+
+            garisE.add(new Entry(40, Float.parseFloat("10.5")));
+            garisD.add(new Entry(40, Float.parseFloat("11.8")));
+            garisC.add(new Entry(40, Float.parseFloat("15")));
+            garisB.add(new Entry(40, Float.parseFloat("19.2")));
+            garisA.add(new Entry(40, Float.parseFloat("21.9")));
+
+            garisE.add(new Entry(42, Float.parseFloat("10.7")));
+            garisD.add(new Entry(42, Float.parseFloat("12")));
+            garisC.add(new Entry(42, Float.parseFloat("15.3")));
+            garisB.add(new Entry(42, Float.parseFloat("19.8")));
+            garisA.add(new Entry(42, Float.parseFloat("22.4")));
+
+            garisE.add(new Entry(44, Float.parseFloat("10.9")));
+            garisD.add(new Entry(44, Float.parseFloat("12.2")));
+            garisC.add(new Entry(44, Float.parseFloat("15.7")));
+            garisB.add(new Entry(44, Float.parseFloat("20.2")));
+            garisA.add(new Entry(44, Float.parseFloat("23")));
+
+            garisE.add(new Entry(46, Float.parseFloat("11")));
+            garisD.add(new Entry(46, Float.parseFloat("12.5")));
+            garisC.add(new Entry(46, Float.parseFloat("16")));
+            garisB.add(new Entry(46, Float.parseFloat("20.8")));
+            garisA.add(new Entry(46, Float.parseFloat("23.5")));
+
+            garisE.add(new Entry(48, Float.parseFloat("11.2")));
+            garisD.add(new Entry(48, Float.parseFloat("12.8")));
+            garisC.add(new Entry(48, Float.parseFloat("16.3")));
+            garisB.add(new Entry(48, Float.parseFloat("21.1")));
+            garisA.add(new Entry(48, Float.parseFloat("24.1")));
+
+            garisE.add(new Entry(50, Float.parseFloat("11.4")));
+            garisD.add(new Entry(50, Float.parseFloat("13")));
+            garisC.add(new Entry(50, Float.parseFloat("16.8")));
+            garisB.add(new Entry(50, Float.parseFloat("21.8")));
+            garisA.add(new Entry(50, Float.parseFloat("24.9")));
+
+            garisE.add(new Entry(52, Float.parseFloat("11.6")));
+            garisD.add(new Entry(52, Float.parseFloat("13.1")));
+            garisC.add(new Entry(52, Float.parseFloat("17")));
+            garisB.add(new Entry(52, Float.parseFloat("22.1")));
+            garisA.add(new Entry(52, Float.parseFloat("25.2")));
+
+            garisE.add(new Entry(54, Float.parseFloat("11.8")));
+            garisD.add(new Entry(54, Float.parseFloat("13.4")));
+            garisC.add(new Entry(54, Float.parseFloat("17.3")));
+            garisB.add(new Entry(54, Float.parseFloat("22.6")));
+            garisA.add(new Entry(54, Float.parseFloat("26")));
+
+            garisE.add(new Entry(56, Float.parseFloat("12")));
+            garisD.add(new Entry(56, Float.parseFloat("13.6")));
+            garisC.add(new Entry(56, Float.parseFloat("17.6")));
+            garisB.add(new Entry(56, Float.parseFloat("23.2")));
+            garisA.add(new Entry(56, Float.parseFloat("26.6")));
+
+            garisE.add(new Entry(58, Float.parseFloat("12.2")));
+            garisD.add(new Entry(58, Float.parseFloat("13.9")));
+            garisC.add(new Entry(58, Float.parseFloat("18")));
+            garisB.add(new Entry(58, Float.parseFloat("23.8")));
+            garisA.add(new Entry(58, Float.parseFloat("27.2")));
+
+            garisE.add(new Entry(60, Float.parseFloat("12.4")));
+            garisD.add(new Entry(60, Float.parseFloat("14")));
+            garisC.add(new Entry(60, Float.parseFloat("18.3")));
+            garisB.add(new Entry(60, Float.parseFloat("24.1")));
+            garisA.add(new Entry(60, Float.parseFloat("27.9")));
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
+            LineDataSet siUser = new LineDataSet(dataUser, "Titik Anda");
+            siUser.setColor(Color.MAGENTA);
+            siUser.setCircleColor(Color.MAGENTA);
+
+            LineDataSet datasetE = new LineDataSet(garisE, "-3");
+            datasetE.setDrawCircles(false);
+            datasetE.setColor(Color.BLACK);
+
+            LineDataSet datasetD = new LineDataSet(garisD, "-2");
+            datasetD.setDrawCircles(false);
+            datasetD.setColor(Color.RED);
+
+            LineDataSet datasetC = new LineDataSet(garisC, "0");
+            datasetC.setDrawCircles(false);
+            datasetC.setColor(Color.GREEN);
+
+            LineDataSet datasetB = new LineDataSet(garisB, "2");
+            datasetB.setDrawCircles(false);
+            datasetB.setColor(Color.RED);
+
+            LineDataSet datasetA = new LineDataSet(garisA, "3");
+            datasetA.setDrawCircles(false);
+            datasetA.setColor(Color.BLACK);
+
+
+            datasetE.setValueFormatter(new MyValueFormatter());
+            datasetD.setValueFormatter(new MyValueFormatter());
+            datasetC.setValueFormatter(new MyValueFormatter());
+            datasetB.setValueFormatter(new MyValueFormatter());
+            datasetA.setValueFormatter(new MyValueFormatter());
+
+            dataSets.add(datasetE);
+            dataSets.add(datasetD);
+            dataSets.add(datasetC);
+            dataSets.add(datasetB);
+            dataSets.add(datasetA);
+            dataSets.add(siUser);
+
+            chart.getXAxis().setValueFormatter(new MyXAxisValueFormatter(values));
+            chart.getAxisLeft().setValueFormatter(new MyYAxisValueFormatter(valuesKg));
+            chart.getAxisRight().setValueFormatter(new MyYAxisValueFormatter(valuesKg));
+
+            chart.setData(new LineData(dataSets));
+
+            Description description = new Description();
+            description.setText("Sumber : WHO Child Growth Standards");
+            chart.setDescription(description);
+            chart.invalidate();
+        } else if (dk.getJk().equals("Perempuan") && dk.getStatus().equals("BeratUmur")) {
+
+        }
+
+    }
+
+    public class MyValueFormatter implements IValueFormatter {
+
+        private DecimalFormat mFormat;
+
+        public MyValueFormatter() {
+            mFormat = new DecimalFormat("###,###,##0.0"); // use one decimal
+        }
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            // write your logic here
+            return " "; // e.g. append a dollar-sign
+        }
+    }
+
+    public class MyYAxisValueFormatter implements IAxisValueFormatter {
+        private String[] mValues;
+        private float mValueCount = 0;
+
+        public MyYAxisValueFormatter() {
+        }
+
+        public MyYAxisValueFormatter(String[] values) {
+            if (values != null) {
+                setValues(values);
+            }
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            // "value" represents the position of the label on the axis (x or y)
+            int index = Math.round(value);
+
+            if (index < 0 || index >= mValueCount || index != (int) value)
+                return "";
+
+            return mValues[index] + " Kg";
+        }
+
+        /**
+         * this is only needed if numbers are returned, else return 0
+         */
+
+        public int getDecimalDigits() {
+            return 0;
+        }
+
+        public String[] getValues() {
+            return mValues;
+        }
+
+        public void setValues(String[] values) {
+            if (values == null)
+                values = new String[]{};
+
+            this.mValues = values;
+            this.mValueCount = values.length;
+        }
+    }
+
+    public class MyXAxisValueFormatter implements IAxisValueFormatter {
+
+        private String[] mValues;
+        private int mValueCount = 0;
+
+        public MyXAxisValueFormatter() {
+        }
+
+        public MyXAxisValueFormatter(String[] values) {
+            if (values != null) {
+                setValues(values);
+            }
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            // "value" represents the position of the label on the axis (x or y)
+            int index = Math.round(value);
+
+            if (index < 0 || index >= mValueCount || index != (int) value)
+                return "";
+
+            return mValues[index] + " bulan";
+        }
+
+        /**
+         * this is only needed if numbers are returned, else return 0
+         */
+
+        public int getDecimalDigits() {
+            return 0;
+        }
+
+        public String[] getValues() {
+            return mValues;
+        }
+
+        public void setValues(String[] values) {
+            if (values == null)
+                values = new String[]{};
+
+            this.mValues = values;
+            this.mValueCount = values.length;
+        }
+    }
 }
