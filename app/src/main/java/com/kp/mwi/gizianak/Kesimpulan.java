@@ -571,7 +571,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         } else if (dk.getStatus().equals("TinggiUmur")) {
             //ubah dari 40 - 125
             String[] valuesCm = new String[]{"40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52"
-                    , "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64" , "65", "66", "67", "68"
+                    , "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68"
                     , "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84"
                     , "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"
                     , "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114"
@@ -756,7 +756,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
 
                 garisE1.add(new Entry(27, Float.parseFloat("78")));
                 garisD1.add(new Entry(27, Float.parseFloat("81.5")));
-                garisC1.add(new Entry(27, Float.parseFloat("83.2")));
+                garisC1.add(new Entry(27, Float.parseFloat("87.2")));
                 garisB1.add(new Entry(27, Float.parseFloat("95")));
                 garisA1.add(new Entry(27, Float.parseFloat("98.5")));
 
@@ -798,7 +798,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
 
                 garisE1.add(new Entry(34, Float.parseFloat("82.4")));
                 garisD1.add(new Entry(34, Float.parseFloat("86.2")));
-                garisC1.add(new Entry(34, Float.parseFloat("938")));
+                garisC1.add(new Entry(34, Float.parseFloat("93")));
                 garisB1.add(new Entry(34, Float.parseFloat("101")));
                 garisA1.add(new Entry(34, Float.parseFloat("105")));
 
@@ -957,8 +957,6 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
                 garisC1.add(new Entry(60, Float.parseFloat("109.2")));
                 garisB1.add(new Entry(60, Float.parseFloat("119")));
                 garisA1.add(new Entry(60, Float.parseFloat("123.8")));
-
-
 
 
             } else {
@@ -1338,9 +1336,90 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
                 garisA1.add(new Entry(60, Float.parseFloat("124")));
 
 
-
-
             }
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
+            LineDataSet siUser = new LineDataSet(dataUser, "Titik Anda");
+            siUser.setColor(Color.MAGENTA);
+            siUser.setCircleColor(Color.MAGENTA);
+
+            LineDataSet datasetE = new LineDataSet(garisE, "");
+            datasetE.setDrawCircles(false);
+            datasetE.setColor(Color.RED);
+
+            LineDataSet datasetD = new LineDataSet(garisD, "");
+            datasetD.setDrawCircles(false);
+            datasetD.setColor(Color.YELLOW);
+
+            LineDataSet datasetC = new LineDataSet(garisC, "");
+            datasetC.setDrawCircles(false);
+            datasetC.setColor(Color.GREEN);
+
+            LineDataSet datasetB = new LineDataSet(garisB, "");
+            datasetB.setDrawCircles(false);
+            datasetB.setColor(Color.YELLOW);
+
+            LineDataSet datasetA = new LineDataSet(garisA, "");
+            datasetA.setDrawCircles(false);
+            datasetA.setColor(Color.RED);
+
+            LineDataSet datasetE1 = new LineDataSet(garisE1, "");
+            datasetE1.setDrawCircles(false);
+            datasetE1.setColor(Color.RED);
+
+            LineDataSet datasetD1 = new LineDataSet(garisD1, "");
+            datasetD1.setDrawCircles(false);
+            datasetD1.setColor(Color.YELLOW);
+
+            LineDataSet datasetC1 = new LineDataSet(garisC1, "");
+            datasetC1.setDrawCircles(false);
+            datasetC1.setColor(Color.GREEN);
+
+            LineDataSet datasetB1 = new LineDataSet(garisB1, "");
+            datasetB1.setDrawCircles(false);
+            datasetB1.setColor(Color.YELLOW);
+
+            LineDataSet datasetA1 = new LineDataSet(garisA1, "");
+            datasetA1.setDrawCircles(false);
+            datasetA1.setColor(Color.RED);
+
+            datasetA.setDrawValues(false);
+
+            datasetE.setValueFormatter(new MyValueFormatter());
+            datasetD.setValueFormatter(new MyValueFormatter());
+            datasetC.setValueFormatter(new MyValueFormatter());
+            datasetB.setValueFormatter(new MyValueFormatter());
+            datasetA.setValueFormatter(new MyValueFormatter());
+            datasetE1.setValueFormatter(new MyValueFormatter());
+            datasetD1.setValueFormatter(new MyValueFormatter());
+            datasetC1.setValueFormatter(new MyValueFormatter());
+            datasetB1.setValueFormatter(new MyValueFormatter());
+            datasetA1.setValueFormatter(new MyValueFormatter());
+
+            dataSets.add(datasetE);
+            dataSets.add(datasetD);
+            dataSets.add(datasetC);
+            dataSets.add(datasetB);
+            dataSets.add(datasetA);
+            dataSets.add(datasetE1);
+            dataSets.add(datasetD1);
+            dataSets.add(datasetC1);
+            dataSets.add(datasetB1);
+            dataSets.add(datasetA1);
+            dataSets.add(siUser);
+
+            chart.getXAxis().setValueFormatter(new MyXAxisValueFormatter(values));
+            chart.getAxisLeft().setValueFormatter(new MyCMYAxisValueFormatter(valuesCm));
+            chart.getAxisRight().setValueFormatter(new MyCMYAxisValueFormatter(valuesCm));
+
+            chart.setData(new LineData(dataSets));
+            chart.getLegend().setEnabled(false);
+            Description description = new Description();
+            description.setText("Sumber : WHO Child Growth Standards");
+            chart.setDescription(description);
+            chart.invalidate();
+
         } else if (dk.getStatus().equals("BeratTinggi")) {
 
             String[] valuesBMI = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
@@ -1961,6 +2040,51 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
                 return "";
 
             return mValues[index] + " BMI";
+        }
+
+        /**
+         * this is only needed if numbers are returned, else return 0
+         */
+
+        public int getDecimalDigits() {
+            return 0;
+        }
+
+        public String[] getValues() {
+            return mValues;
+        }
+
+        public void setValues(String[] values) {
+            if (values == null)
+                values = new String[]{};
+
+            this.mValues = values;
+            this.mValueCount = values.length;
+        }
+    }
+
+    public class MyCMYAxisValueFormatter implements IAxisValueFormatter {
+        private String[] mValues;
+        private float mValueCount = 0;
+
+        public MyCMYAxisValueFormatter() {
+        }
+
+        public MyCMYAxisValueFormatter(String[] values) {
+            if (values != null) {
+                setValues(values);
+            }
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            // "value" represents the position of the label on the axis (x or y)
+            int index = Math.round(value);
+
+            if (index < 0 || index >= mValueCount || index != (int) value)
+                return "";
+
+            return mValues[index] + " cm";
         }
 
         /**
