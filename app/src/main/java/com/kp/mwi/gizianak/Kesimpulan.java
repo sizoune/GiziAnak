@@ -595,11 +595,11 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
             if (dk.getJk().equals("Perempuan")) {
 
                 //DATA KURVA BMI TERHADAP UMUR < 5 TAHUN UNTUK PEREMPUAN
-                garisE.add(new Entry(0, Float.parseFloat("11.2")));
-                garisD.add(new Entry(0, Float.parseFloat("12.2")));
-                garisC.add(new Entry(0, Float.parseFloat("13.4")));
-                garisB.add(new Entry(0, Float.parseFloat("14.8")));
-                garisA.add(new Entry(0, Float.parseFloat("16")));
+                garisE.add(new Entry(0, Float.parseFloat("11")));
+                garisD.add(new Entry(0, Float.parseFloat("12")));
+                garisC.add(new Entry(0, Float.parseFloat("13.2")));
+                garisB.add(new Entry(0, Float.parseFloat("14.6")));
+                garisA.add(new Entry(0, Float.parseFloat("15.8")));
 
                 garisE.add(new Entry(2, Float.parseFloat("13.8")));
                 garisD.add(new Entry(2, Float.parseFloat("15")));
