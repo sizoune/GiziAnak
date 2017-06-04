@@ -569,14 +569,777 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
             chart.invalidate();
 
         } else if (dk.getStatus().equals("TinggiUmur")) {
+            //ubah dari 40 - 125
+            String[] valuesCm = new String[]{"40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52"
+                    , "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64" , "65", "66", "67", "68"
+                    , "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84"
+                    , "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"
+                    , "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114"
+                    , "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125"};
+
+            ArrayList<Entry> garisE1 = new ArrayList<>();
+            ArrayList<Entry> garisD1 = new ArrayList<>();
+            ArrayList<Entry> garisC1 = new ArrayList<>();
+            ArrayList<Entry> garisB1 = new ArrayList<>();
+            ArrayList<Entry> garisA1 = new ArrayList<>();
 
             if (dk.getJk().equals("Perempuan")) {
 
                 //DATA KURVA TINGGI TERHADAP UMUR < 5 TAHUN UNTUK PEREMPUAN
+                garisE.add(new Entry(0, Float.parseFloat("43")));
+                garisD.add(new Entry(0, Float.parseFloat("46")));
+                garisC.add(new Entry(0, Float.parseFloat("49")));
+                garisB.add(new Entry(0, Float.parseFloat("53")));
+                garisA.add(new Entry(0, Float.parseFloat("55")));
+
+                garisE.add(new Entry(1, Float.parseFloat("48")));
+                garisD.add(new Entry(1, Float.parseFloat("50")));
+                garisC.add(new Entry(1, Float.parseFloat("53.8")));
+                garisB.add(new Entry(1, Float.parseFloat("58")));
+                garisA.add(new Entry(1, Float.parseFloat("59.5")));
+
+                garisE.add(new Entry(2, Float.parseFloat("51")));
+                garisD.add(new Entry(2, Float.parseFloat("53")));
+                garisC.add(new Entry(2, Float.parseFloat("57")));
+                garisB.add(new Entry(2, Float.parseFloat("61")));
+                garisA.add(new Entry(2, Float.parseFloat("63")));
+
+                garisE.add(new Entry(3, Float.parseFloat("53.2")));
+                garisD.add(new Entry(3, Float.parseFloat("55.8")));
+                garisC.add(new Entry(3, Float.parseFloat("60")));
+                garisB.add(new Entry(3, Float.parseFloat("64")));
+                garisA.add(new Entry(3, Float.parseFloat("66")));
+
+                garisE.add(new Entry(4, Float.parseFloat("55.6")));
+                garisD.add(new Entry(4, Float.parseFloat("58")));
+                garisC.add(new Entry(4, Float.parseFloat("62")));
+                garisB.add(new Entry(4, Float.parseFloat("66.3")));
+                garisA.add(new Entry(4, Float.parseFloat("68.4")));
+
+                garisE.add(new Entry(5, Float.parseFloat("57.2")));
+                garisD.add(new Entry(5, Float.parseFloat("59.6")));
+                garisC.add(new Entry(5, Float.parseFloat("64")));
+                garisB.add(new Entry(5, Float.parseFloat("68.5")));
+                garisA.add(new Entry(5, Float.parseFloat("70.6")));
+
+                garisE.add(new Entry(6, Float.parseFloat("59")));
+                garisD.add(new Entry(6, Float.parseFloat("61")));
+                garisC.add(new Entry(6, Float.parseFloat("66")));
+                garisB.add(new Entry(6, Float.parseFloat("70")));
+                garisA.add(new Entry(6, Float.parseFloat("72.8")));
+
+                garisE.add(new Entry(7, Float.parseFloat("60")));
+                garisD.add(new Entry(7, Float.parseFloat("62.8")));
+                garisC.add(new Entry(7, Float.parseFloat("65.2")));
+                garisB.add(new Entry(7, Float.parseFloat("72")));
+                garisA.add(new Entry(7, Float.parseFloat("74.4")));
+
+                garisE.add(new Entry(8, Float.parseFloat("61.8")));
+                garisD.add(new Entry(8, Float.parseFloat("64")));
+                garisC.add(new Entry(8, Float.parseFloat("69")));
+                garisB.add(new Entry(8, Float.parseFloat("73.6")));
+                garisA.add(new Entry(8, Float.parseFloat("76")));
+
+                garisE.add(new Entry(9, Float.parseFloat("62.9")));
+                garisD.add(new Entry(9, Float.parseFloat("66.2")));
+                garisC.add(new Entry(9, Float.parseFloat("70")));
+                garisB.add(new Entry(9, Float.parseFloat("75")));
+                garisA.add(new Entry(9, Float.parseFloat("77")));
+
+                garisE.add(new Entry(10, Float.parseFloat("64")));
+                garisD.add(new Entry(10, Float.parseFloat("66.4")));
+                garisC.add(new Entry(10, Float.parseFloat("71.8")));
+                garisB.add(new Entry(10, Float.parseFloat("76.5")));
+                garisA.add(new Entry(10, Float.parseFloat("79")));
+
+                garisE.add(new Entry(11, Float.parseFloat("65")));
+                garisD.add(new Entry(11, Float.parseFloat("67.8")));
+                garisC.add(new Entry(11, Float.parseFloat("73")));
+                garisB.add(new Entry(11, Float.parseFloat("78")));
+                garisA.add(new Entry(11, Float.parseFloat("80.3")));
+
+                garisE.add(new Entry(12, Float.parseFloat("65.2")));
+                garisD.add(new Entry(12, Float.parseFloat("68.8")));
+                garisC.add(new Entry(12, Float.parseFloat("74")));
+                garisB.add(new Entry(12, Float.parseFloat("79")));
+                garisA.add(new Entry(12, Float.parseFloat("82")));
+
+                garisE.add(new Entry(13, Float.parseFloat("66")));
+                garisD.add(new Entry(13, Float.parseFloat("70")));
+                garisC.add(new Entry(13, Float.parseFloat("75")));
+                garisB.add(new Entry(13, Float.parseFloat("80.7")));
+                garisA.add(new Entry(13, Float.parseFloat("83")));
+
+                garisE.add(new Entry(14, Float.parseFloat("68")));
+                garisD.add(new Entry(14, Float.parseFloat("71")));
+                garisC.add(new Entry(14, Float.parseFloat("76.2")));
+                garisB.add(new Entry(14, Float.parseFloat("82")));
+                garisA.add(new Entry(14, Float.parseFloat("84.2")));
+
+                garisE.add(new Entry(15, Float.parseFloat("69")));
+                garisD.add(new Entry(15, Float.parseFloat("72")));
+                garisC.add(new Entry(15, Float.parseFloat("77.6")));
+                garisB.add(new Entry(15, Float.parseFloat("83")));
+                garisA.add(new Entry(15, Float.parseFloat("85.8")));
+
+                garisE.add(new Entry(16, Float.parseFloat("70")));
+                garisD.add(new Entry(16, Float.parseFloat("73")));
+                garisC.add(new Entry(16, Float.parseFloat("78.6")));
+                garisB.add(new Entry(16, Float.parseFloat("84")));
+                garisA.add(new Entry(16, Float.parseFloat("87")));
+
+                garisE.add(new Entry(17, Float.parseFloat("71")));
+                garisD.add(new Entry(17, Float.parseFloat("74")));
+                garisC.add(new Entry(17, Float.parseFloat("79.8")));
+                garisB.add(new Entry(17, Float.parseFloat("85.4")));
+                garisA.add(new Entry(17, Float.parseFloat("88")));
+
+                garisE.add(new Entry(18, Float.parseFloat("72")));
+                garisD.add(new Entry(18, Float.parseFloat("75")));
+                garisC.add(new Entry(18, Float.parseFloat("80.8")));
+                garisB.add(new Entry(18, Float.parseFloat("86.8")));
+                garisA.add(new Entry(18, Float.parseFloat("89.4")));
+
+                garisE.add(new Entry(19, Float.parseFloat("73")));
+                garisD.add(new Entry(19, Float.parseFloat("76")));
+                garisC.add(new Entry(19, Float.parseFloat("81.8")));
+                garisB.add(new Entry(19, Float.parseFloat("87.8")));
+                garisA.add(new Entry(19, Float.parseFloat("90.6")));
+
+                garisE.add(new Entry(20, Float.parseFloat("74")));
+                garisD.add(new Entry(20, Float.parseFloat("76.8")));
+                garisC.add(new Entry(20, Float.parseFloat("82.7")));
+                garisB.add(new Entry(20, Float.parseFloat("89")));
+                garisA.add(new Entry(20, Float.parseFloat("92")));
+
+                garisE.add(new Entry(21, Float.parseFloat("74.5")));
+                garisD.add(new Entry(21, Float.parseFloat("77.4")));
+                garisC.add(new Entry(21, Float.parseFloat("83.8")));
+                garisB.add(new Entry(21, Float.parseFloat("90")));
+                garisA.add(new Entry(21, Float.parseFloat("93")));
+
+                garisE.add(new Entry(22, Float.parseFloat("75")));
+                garisD.add(new Entry(22, Float.parseFloat("78.4")));
+                garisC.add(new Entry(22, Float.parseFloat("84.8")));
+                garisB.add(new Entry(22, Float.parseFloat("91")));
+                garisA.add(new Entry(22, Float.parseFloat("94")));
+
+                garisE.add(new Entry(23, Float.parseFloat("76")));
+                garisD.add(new Entry(23, Float.parseFloat("79")));
+                garisC.add(new Entry(23, Float.parseFloat("86.5")));
+                garisB.add(new Entry(23, Float.parseFloat("92")));
+                garisA.add(new Entry(23, Float.parseFloat("95")));
+
+                garisE.add(new Entry(24, Float.parseFloat("77")));
+                garisD.add(new Entry(24, Float.parseFloat("80")));
+                garisC.add(new Entry(24, Float.parseFloat("86")));
+                garisB.add(new Entry(24, Float.parseFloat("93")));
+                garisA.add(new Entry(24, Float.parseFloat("96")));
+
+                garisE1.add(new Entry(24, Float.parseFloat("76")));
+                garisD1.add(new Entry(24, Float.parseFloat("79.4")));
+                garisC1.add(new Entry(24, Float.parseFloat("85.7")));
+                garisB1.add(new Entry(24, Float.parseFloat("92")));
+                garisA1.add(new Entry(24, Float.parseFloat("95.4")));
+
+                garisE1.add(new Entry(25, Float.parseFloat("77")));
+                garisD1.add(new Entry(25, Float.parseFloat("80")));
+                garisC1.add(new Entry(25, Float.parseFloat("85.4")));
+                garisB1.add(new Entry(25, Float.parseFloat("93")));
+                garisA1.add(new Entry(25, Float.parseFloat("96.6")));
+
+                garisE1.add(new Entry(26, Float.parseFloat("77.2")));
+                garisD1.add(new Entry(26, Float.parseFloat("81")));
+                garisC1.add(new Entry(26, Float.parseFloat("87.4")));
+                garisB1.add(new Entry(26, Float.parseFloat("94")));
+                garisA1.add(new Entry(26, Float.parseFloat("97.7")));
+
+                garisE1.add(new Entry(27, Float.parseFloat("78")));
+                garisD1.add(new Entry(27, Float.parseFloat("81.5")));
+                garisC1.add(new Entry(27, Float.parseFloat("83.2")));
+                garisB1.add(new Entry(27, Float.parseFloat("95")));
+                garisA1.add(new Entry(27, Float.parseFloat("98.5")));
+
+                garisE1.add(new Entry(28, Float.parseFloat("79")));
+                garisD1.add(new Entry(28, Float.parseFloat("82")));
+                garisC1.add(new Entry(28, Float.parseFloat("89")));
+                garisB1.add(new Entry(28, Float.parseFloat("96")));
+                garisA1.add(new Entry(28, Float.parseFloat("99.4")));
+
+                garisE1.add(new Entry(29, Float.parseFloat("79.5")));
+                garisD1.add(new Entry(29, Float.parseFloat("83")));
+                garisC1.add(new Entry(29, Float.parseFloat("90")));
+                garisB1.add(new Entry(29, Float.parseFloat("97")));
+                garisA1.add(new Entry(29, Float.parseFloat("100")));
+
+                garisE1.add(new Entry(30, Float.parseFloat("80")));
+                garisD1.add(new Entry(30, Float.parseFloat("84")));
+                garisC1.add(new Entry(30, Float.parseFloat("91")));
+                garisB1.add(new Entry(30, Float.parseFloat("98")));
+                garisA1.add(new Entry(30, Float.parseFloat("101")));
+
+                garisE1.add(new Entry(31, Float.parseFloat("81")));
+                garisD1.add(new Entry(31, Float.parseFloat("84.4")));
+                garisC1.add(new Entry(31, Float.parseFloat("91.2")));
+                garisB1.add(new Entry(31, Float.parseFloat("99")));
+                garisA1.add(new Entry(31, Float.parseFloat("102")));
+
+                garisE1.add(new Entry(32, Float.parseFloat("81.2")));
+                garisD1.add(new Entry(32, Float.parseFloat("85")));
+                garisC1.add(new Entry(32, Float.parseFloat("92")));
+                garisB1.add(new Entry(32, Float.parseFloat("99.6")));
+                garisA1.add(new Entry(32, Float.parseFloat("103")));
+
+                garisE1.add(new Entry(33, Float.parseFloat("82")));
+                garisD1.add(new Entry(33, Float.parseFloat("85.7")));
+                garisC1.add(new Entry(33, Float.parseFloat("93")));
+                garisB1.add(new Entry(33, Float.parseFloat("100")));
+                garisA1.add(new Entry(33, Float.parseFloat("104")));
+
+                garisE1.add(new Entry(34, Float.parseFloat("82.4")));
+                garisD1.add(new Entry(34, Float.parseFloat("86.2")));
+                garisC1.add(new Entry(34, Float.parseFloat("938")));
+                garisB1.add(new Entry(34, Float.parseFloat("101")));
+                garisA1.add(new Entry(34, Float.parseFloat("105")));
+
+                garisE1.add(new Entry(35, Float.parseFloat("83")));
+                garisD1.add(new Entry(35, Float.parseFloat("86.8")));
+                garisC1.add(new Entry(35, Float.parseFloat("94.2")));
+                garisB1.add(new Entry(35, Float.parseFloat("102")));
+                garisA1.add(new Entry(35, Float.parseFloat("105.5")));
+
+                garisE1.add(new Entry(36, Float.parseFloat("83.6")));
+                garisD1.add(new Entry(36, Float.parseFloat("87.5")));
+                garisC1.add(new Entry(36, Float.parseFloat("95")));
+                garisB1.add(new Entry(36, Float.parseFloat("102.5")));
+                garisA1.add(new Entry(36, Float.parseFloat("106.4")));
+
+                garisE1.add(new Entry(37, Float.parseFloat("84")));
+                garisD1.add(new Entry(37, Float.parseFloat("88")));
+                garisC1.add(new Entry(37, Float.parseFloat("95.8")));
+                garisB1.add(new Entry(37, Float.parseFloat("103.2")));
+                garisA1.add(new Entry(37, Float.parseFloat("107")));
+
+                garisE1.add(new Entry(38, Float.parseFloat("84.6")));
+                garisD1.add(new Entry(38, Float.parseFloat("88.8")));
+                garisC1.add(new Entry(38, Float.parseFloat("96.4")));
+                garisB1.add(new Entry(38, Float.parseFloat("104")));
+                garisA1.add(new Entry(38, Float.parseFloat("108")));
+
+                garisE1.add(new Entry(39, Float.parseFloat("85")));
+                garisD1.add(new Entry(39, Float.parseFloat("89")));
+                garisC1.add(new Entry(39, Float.parseFloat("97")));
+                garisB1.add(new Entry(39, Float.parseFloat("105")));
+                garisA1.add(new Entry(39, Float.parseFloat("109")));
+
+                garisE1.add(new Entry(40, Float.parseFloat("86")));
+                garisD1.add(new Entry(40, Float.parseFloat("90")));
+                garisC1.add(new Entry(40, Float.parseFloat("97.8")));
+                garisB1.add(new Entry(40, Float.parseFloat("105.8")));
+                garisA1.add(new Entry(40, Float.parseFloat("110")));
+
+                garisE1.add(new Entry(41, Float.parseFloat("86.2")));
+                garisD1.add(new Entry(41, Float.parseFloat("90.3")));
+                garisC1.add(new Entry(41, Float.parseFloat("98.4")));
+                garisB1.add(new Entry(41, Float.parseFloat("106.4")));
+                garisA1.add(new Entry(41, Float.parseFloat("110.4")));
+
+                garisE1.add(new Entry(42, Float.parseFloat("86.8")));
+                garisD1.add(new Entry(42, Float.parseFloat("91")));
+                garisC1.add(new Entry(42, Float.parseFloat("99")));
+                garisB1.add(new Entry(42, Float.parseFloat("107")));
+                garisA1.add(new Entry(42, Float.parseFloat("111")));
+
+                garisE1.add(new Entry(43, Float.parseFloat("87.4")));
+                garisD1.add(new Entry(43, Float.parseFloat("91.4")));
+                garisC1.add(new Entry(43, Float.parseFloat("99.8")));
+                garisB1.add(new Entry(43, Float.parseFloat("108")));
+                garisA1.add(new Entry(43, Float.parseFloat("112")));
+
+                garisE1.add(new Entry(44, Float.parseFloat("88")));
+                garisD1.add(new Entry(44, Float.parseFloat("92")));
+                garisC1.add(new Entry(44, Float.parseFloat("100.2")));
+                garisB1.add(new Entry(44, Float.parseFloat("108.4")));
+                garisA1.add(new Entry(44, Float.parseFloat("113")));
+
+                garisE1.add(new Entry(45, Float.parseFloat("88.2")));
+                garisD1.add(new Entry(45, Float.parseFloat("92.4")));
+                garisC1.add(new Entry(45, Float.parseFloat("101")));
+                garisB1.add(new Entry(45, Float.parseFloat("109")));
+                garisA1.add(new Entry(45, Float.parseFloat("113.4")));
+
+                garisE1.add(new Entry(46, Float.parseFloat("89")));
+                garisD1.add(new Entry(46, Float.parseFloat("93")));
+                garisC1.add(new Entry(46, Float.parseFloat("101.5")));
+                garisB1.add(new Entry(46, Float.parseFloat("110")));
+                garisA1.add(new Entry(46, Float.parseFloat("114")));
+
+                garisE1.add(new Entry(47, Float.parseFloat("89.2")));
+                garisD1.add(new Entry(47, Float.parseFloat("93.5")));
+                garisC1.add(new Entry(47, Float.parseFloat("102")));
+                garisB1.add(new Entry(47, Float.parseFloat("110.6")));
+                garisA1.add(new Entry(47, Float.parseFloat("115")));
+
+                garisE1.add(new Entry(48, Float.parseFloat("90")));
+                garisD1.add(new Entry(48, Float.parseFloat("94")));
+                garisC1.add(new Entry(48, Float.parseFloat("102.8")));
+                garisB1.add(new Entry(48, Float.parseFloat("111.3")));
+                garisA1.add(new Entry(48, Float.parseFloat("115.8")));
+
+                garisE1.add(new Entry(49, Float.parseFloat("90.2")));
+                garisD1.add(new Entry(49, Float.parseFloat("94.6")));
+                garisC1.add(new Entry(49, Float.parseFloat("103")));
+                garisB1.add(new Entry(49, Float.parseFloat("112")));
+                garisA1.add(new Entry(49, Float.parseFloat("116.2")));
+
+                garisE1.add(new Entry(50, Float.parseFloat("90.8")));
+                garisD1.add(new Entry(50, Float.parseFloat("95")));
+                garisC1.add(new Entry(50, Float.parseFloat("104")));
+                garisB1.add(new Entry(50, Float.parseFloat("112.8")));
+                garisA1.add(new Entry(50, Float.parseFloat("117")));
+
+                garisE1.add(new Entry(51, Float.parseFloat("91")));
+                garisD1.add(new Entry(51, Float.parseFloat("95.6")));
+                garisC1.add(new Entry(51, Float.parseFloat("104.6")));
+                garisB1.add(new Entry(51, Float.parseFloat("113.2")));
+                garisA1.add(new Entry(51, Float.parseFloat("117.8")));
+
+                garisE1.add(new Entry(52, Float.parseFloat("91.6")));
+                garisD1.add(new Entry(52, Float.parseFloat("96.2")));
+                garisC1.add(new Entry(52, Float.parseFloat("105")));
+                garisB1.add(new Entry(52, Float.parseFloat("114")));
+                garisA1.add(new Entry(52, Float.parseFloat("118.4")));
+
+                garisE1.add(new Entry(53, Float.parseFloat("92")));
+                garisD1.add(new Entry(53, Float.parseFloat("96.6")));
+                garisC1.add(new Entry(53, Float.parseFloat("105.6")));
+                garisB1.add(new Entry(53, Float.parseFloat("114.6")));
+                garisA1.add(new Entry(53, Float.parseFloat("119")));
+
+                garisE1.add(new Entry(54, Float.parseFloat("92.4")));
+                garisD1.add(new Entry(54, Float.parseFloat("97")));
+                garisC1.add(new Entry(54, Float.parseFloat("106.1")));
+                garisB1.add(new Entry(54, Float.parseFloat("115.2")));
+                garisA1.add(new Entry(54, Float.parseFloat("119.8")));
+
+                garisE1.add(new Entry(55, Float.parseFloat("93")));
+                garisD1.add(new Entry(55, Float.parseFloat("97.6")));
+                garisC1.add(new Entry(55, Float.parseFloat("106.8")));
+                garisB1.add(new Entry(55, Float.parseFloat("116")));
+                garisA1.add(new Entry(55, Float.parseFloat("120.4")));
+
+                garisE1.add(new Entry(56, Float.parseFloat("93.4")));
+                garisD1.add(new Entry(56, Float.parseFloat("98")));
+                garisC1.add(new Entry(56, Float.parseFloat("107.2")));
+                garisB1.add(new Entry(56, Float.parseFloat("116.4")));
+                garisA1.add(new Entry(56, Float.parseFloat("121")));
+
+                garisE1.add(new Entry(57, Float.parseFloat("93.8")));
+                garisD1.add(new Entry(57, Float.parseFloat("98.6")));
+                garisC1.add(new Entry(57, Float.parseFloat("107.9")));
+                garisB1.add(new Entry(57, Float.parseFloat("117")));
+                garisA1.add(new Entry(57, Float.parseFloat("121.8")));
+
+                garisE1.add(new Entry(58, Float.parseFloat("94")));
+                garisD1.add(new Entry(58, Float.parseFloat("99")));
+                garisC1.add(new Entry(58, Float.parseFloat("108.2")));
+                garisB1.add(new Entry(58, Float.parseFloat("117.9")));
+                garisA1.add(new Entry(58, Float.parseFloat("122.5")));
+
+                garisE1.add(new Entry(59, Float.parseFloat("94.8")));
+                garisD1.add(new Entry(59, Float.parseFloat("99.5")));
+                garisC1.add(new Entry(59, Float.parseFloat("109")));
+                garisB1.add(new Entry(59, Float.parseFloat("118.2")));
+                garisA1.add(new Entry(59, Float.parseFloat("123")));
+
+                garisE1.add(new Entry(60, Float.parseFloat("95")));
+                garisD1.add(new Entry(60, Float.parseFloat("100")));
+                garisC1.add(new Entry(60, Float.parseFloat("109.2")));
+                garisB1.add(new Entry(60, Float.parseFloat("119")));
+                garisA1.add(new Entry(60, Float.parseFloat("123.8")));
+
+
+
 
             } else {
 
-                //DATA KURVA TINGGI TERHADAP UMUR < 5 TAHUN UNTUK PEREMPUAN
+                //DATA KURVA TINGGI TERHADAP UMUR < 5 TAHUN UNTUK lki
+
+                garisE.add(new Entry(0, Float.parseFloat("44")));
+                garisD.add(new Entry(0, Float.parseFloat("46.2")));
+                garisC.add(new Entry(0, Float.parseFloat("50")));
+                garisB.add(new Entry(0, Float.parseFloat("54")));
+                garisA.add(new Entry(0, Float.parseFloat("55.2")));
+
+                garisE.add(new Entry(1, Float.parseFloat("49")));
+                garisD.add(new Entry(1, Float.parseFloat("51")));
+                garisC.add(new Entry(1, Float.parseFloat("55")));
+                garisB.add(new Entry(1, Float.parseFloat("59")));
+                garisA.add(new Entry(1, Float.parseFloat("60")));
+
+                garisE.add(new Entry(2, Float.parseFloat("53")));
+                garisD.add(new Entry(2, Float.parseFloat("55")));
+                garisC.add(new Entry(2, Float.parseFloat("58.4")));
+                garisB.add(new Entry(2, Float.parseFloat("62.4")));
+                garisA.add(new Entry(2, Float.parseFloat("64.8")));
+
+                garisE.add(new Entry(3, Float.parseFloat("55")));
+                garisD.add(new Entry(3, Float.parseFloat("57")));
+                garisC.add(new Entry(3, Float.parseFloat("61")));
+                garisB.add(new Entry(3, Float.parseFloat("66")));
+                garisA.add(new Entry(3, Float.parseFloat("68")));
+
+                garisE.add(new Entry(4, Float.parseFloat("58")));
+                garisD.add(new Entry(4, Float.parseFloat("60")));
+                garisC.add(new Entry(4, Float.parseFloat("64")));
+                garisB.add(new Entry(4, Float.parseFloat("68")));
+                garisA.add(new Entry(4, Float.parseFloat("70")));
+
+                garisE.add(new Entry(5, Float.parseFloat("59.8")));
+                garisD.add(new Entry(5, Float.parseFloat("62")));
+                garisC.add(new Entry(5, Float.parseFloat("66")));
+                garisB.add(new Entry(5, Float.parseFloat("70")));
+                garisA.add(new Entry(5, Float.parseFloat("72")));
+
+                garisE.add(new Entry(6, Float.parseFloat("61")));
+                garisD.add(new Entry(6, Float.parseFloat("63")));
+                garisC.add(new Entry(6, Float.parseFloat("67.8")));
+                garisB.add(new Entry(6, Float.parseFloat("72")));
+                garisA.add(new Entry(6, Float.parseFloat("74")));
+
+                garisE.add(new Entry(7, Float.parseFloat("63")));
+                garisD.add(new Entry(7, Float.parseFloat("65")));
+                garisC.add(new Entry(7, Float.parseFloat("69")));
+                garisB.add(new Entry(7, Float.parseFloat("73.6")));
+                garisA.add(new Entry(7, Float.parseFloat("76")));
+
+                garisE.add(new Entry(8, Float.parseFloat("64")));
+                garisD.add(new Entry(8, Float.parseFloat("66")));
+                garisC.add(new Entry(8, Float.parseFloat("70.4")));
+                garisB.add(new Entry(8, Float.parseFloat("75")));
+                garisA.add(new Entry(8, Float.parseFloat("77")));
+
+                garisE.add(new Entry(9, Float.parseFloat("65")));
+                garisD.add(new Entry(9, Float.parseFloat("67.5")));
+                garisC.add(new Entry(9, Float.parseFloat("72")));
+                garisB.add(new Entry(9, Float.parseFloat("76.4")));
+                garisA.add(new Entry(9, Float.parseFloat("79")));
+
+                garisE.add(new Entry(10, Float.parseFloat("66")));
+                garisD.add(new Entry(10, Float.parseFloat("69")));
+                garisC.add(new Entry(10, Float.parseFloat("73.4")));
+                garisB.add(new Entry(10, Float.parseFloat("78")));
+                garisA.add(new Entry(10, Float.parseFloat("80")));
+
+                garisE.add(new Entry(11, Float.parseFloat("68")));
+                garisD.add(new Entry(11, Float.parseFloat("70")));
+                garisC.add(new Entry(11, Float.parseFloat("74.8")));
+                garisB.add(new Entry(11, Float.parseFloat("79")));
+                garisA.add(new Entry(11, Float.parseFloat("82")));
+
+                garisE.add(new Entry(12, Float.parseFloat("69")));
+                garisD.add(new Entry(12, Float.parseFloat("71")));
+                garisC.add(new Entry(12, Float.parseFloat("76")));
+                garisB.add(new Entry(12, Float.parseFloat("80.2")));
+                garisA.add(new Entry(12, Float.parseFloat("83")));
+
+                garisE.add(new Entry(13, Float.parseFloat("69.8")));
+                garisD.add(new Entry(13, Float.parseFloat("72")));
+                garisC.add(new Entry(13, Float.parseFloat("77")));
+                garisB.add(new Entry(13, Float.parseFloat("82")));
+                garisA.add(new Entry(13, Float.parseFloat("84")));
+
+                garisE.add(new Entry(14, Float.parseFloat("70.8")));
+                garisD.add(new Entry(14, Float.parseFloat("73")));
+                garisC.add(new Entry(14, Float.parseFloat("78")));
+                garisB.add(new Entry(14, Float.parseFloat("83")));
+                garisA.add(new Entry(14, Float.parseFloat("85.6")));
+
+                garisE.add(new Entry(15, Float.parseFloat("71.6")));
+                garisD.add(new Entry(15, Float.parseFloat("74")));
+                garisC.add(new Entry(15, Float.parseFloat("79")));
+                garisB.add(new Entry(15, Float.parseFloat("84")));
+                garisA.add(new Entry(15, Float.parseFloat("87")));
+
+                garisE.add(new Entry(16, Float.parseFloat("72.5")));
+                garisD.add(new Entry(16, Float.parseFloat("75")));
+                garisC.add(new Entry(16, Float.parseFloat("80")));
+                garisB.add(new Entry(16, Float.parseFloat("85.3")));
+                garisA.add(new Entry(16, Float.parseFloat("88")));
+
+                garisE.add(new Entry(17, Float.parseFloat("73")));
+                garisD.add(new Entry(17, Float.parseFloat("76")));
+                garisC.add(new Entry(17, Float.parseFloat("81")));
+                garisB.add(new Entry(17, Float.parseFloat("86.5")));
+                garisA.add(new Entry(17, Float.parseFloat("89")));
+
+                garisE.add(new Entry(18, Float.parseFloat("74")));
+                garisD.add(new Entry(18, Float.parseFloat("77")));
+                garisC.add(new Entry(18, Float.parseFloat("82")));
+                garisB.add(new Entry(18, Float.parseFloat("88")));
+                garisA.add(new Entry(18, Float.parseFloat("90.3")));
+
+                garisE.add(new Entry(19, Float.parseFloat("75")));
+                garisD.add(new Entry(19, Float.parseFloat("78")));
+                garisC.add(new Entry(19, Float.parseFloat("83")));
+                garisB.add(new Entry(19, Float.parseFloat("89")));
+                garisA.add(new Entry(19, Float.parseFloat("91.8")));
+
+                garisE.add(new Entry(20, Float.parseFloat("76")));
+                garisD.add(new Entry(20, Float.parseFloat("78.9")));
+                garisC.add(new Entry(20, Float.parseFloat("84")));
+                garisB.add(new Entry(20, Float.parseFloat("90")));
+                garisA.add(new Entry(20, Float.parseFloat("92.4")));
+
+                garisE.add(new Entry(21, Float.parseFloat("76.3")));
+                garisD.add(new Entry(21, Float.parseFloat("79.2")));
+                garisC.add(new Entry(21, Float.parseFloat("85")));
+                garisB.add(new Entry(21, Float.parseFloat("91")));
+                garisA.add(new Entry(21, Float.parseFloat("94")));
+
+                garisE.add(new Entry(22, Float.parseFloat("77")));
+                garisD.add(new Entry(22, Float.parseFloat("80")));
+                garisC.add(new Entry(22, Float.parseFloat("86")));
+                garisB.add(new Entry(22, Float.parseFloat("92")));
+                garisA.add(new Entry(22, Float.parseFloat("95")));
+
+                garisE.add(new Entry(23, Float.parseFloat("78")));
+                garisD.add(new Entry(23, Float.parseFloat("81")));
+                garisC.add(new Entry(23, Float.parseFloat("87")));
+                garisB.add(new Entry(23, Float.parseFloat("93")));
+                garisA.add(new Entry(23, Float.parseFloat("96")));
+
+                garisE.add(new Entry(24, Float.parseFloat("78.3")));
+                garisD.add(new Entry(24, Float.parseFloat("81.6")));
+                garisC.add(new Entry(24, Float.parseFloat("87.7")));
+                garisB.add(new Entry(24, Float.parseFloat("94")));
+                garisA.add(new Entry(24, Float.parseFloat("97")));
+
+                garisE1.add(new Entry(24, Float.parseFloat("78")));
+                garisD1.add(new Entry(24, Float.parseFloat("81")));
+                garisC1.add(new Entry(24, Float.parseFloat("87")));
+                garisB1.add(new Entry(24, Float.parseFloat("93.4")));
+                garisA1.add(new Entry(24, Float.parseFloat("96.2")));
+
+                garisE1.add(new Entry(25, Float.parseFloat("78.8")));
+                garisD1.add(new Entry(25, Float.parseFloat("82")));
+                garisC1.add(new Entry(25, Float.parseFloat("88")));
+                garisB1.add(new Entry(25, Float.parseFloat("94")));
+                garisA1.add(new Entry(25, Float.parseFloat("97")));
+
+                garisE1.add(new Entry(26, Float.parseFloat("79")));
+                garisD1.add(new Entry(26, Float.parseFloat("82.5")));
+                garisC1.add(new Entry(26, Float.parseFloat("88.8")));
+                garisB1.add(new Entry(26, Float.parseFloat("95")));
+                garisA1.add(new Entry(26, Float.parseFloat("98")));
+
+                garisE1.add(new Entry(27, Float.parseFloat("80")));
+                garisD1.add(new Entry(27, Float.parseFloat("83")));
+                garisC1.add(new Entry(27, Float.parseFloat("89.6")));
+                garisB1.add(new Entry(27, Float.parseFloat("96")));
+                garisA1.add(new Entry(27, Float.parseFloat("99")));
+
+                garisE1.add(new Entry(28, Float.parseFloat("80.5")));
+                garisD1.add(new Entry(28, Float.parseFloat("84")));
+                garisC1.add(new Entry(28, Float.parseFloat("90.4")));
+                garisB1.add(new Entry(28, Float.parseFloat("97")));
+                garisA1.add(new Entry(28, Float.parseFloat("100")));
+
+                garisE1.add(new Entry(29, Float.parseFloat("81")));
+                garisD1.add(new Entry(29, Float.parseFloat("84.4")));
+                garisC1.add(new Entry(29, Float.parseFloat("91")));
+                garisB1.add(new Entry(29, Float.parseFloat("98")));
+                garisA1.add(new Entry(29, Float.parseFloat("101")));
+
+                garisE1.add(new Entry(30, Float.parseFloat("81.6")));
+                garisD1.add(new Entry(30, Float.parseFloat("85")));
+                garisC1.add(new Entry(30, Float.parseFloat("92")));
+                garisB1.add(new Entry(30, Float.parseFloat("98.8")));
+                garisA1.add(new Entry(30, Float.parseFloat("102")));
+
+                garisE1.add(new Entry(31, Float.parseFloat("82")));
+                garisD1.add(new Entry(31, Float.parseFloat("86")));
+                garisC1.add(new Entry(31, Float.parseFloat("92.5")));
+                garisB1.add(new Entry(31, Float.parseFloat("99.8")));
+                garisA1.add(new Entry(31, Float.parseFloat("103")));
+
+                garisE1.add(new Entry(32, Float.parseFloat("83")));
+                garisD1.add(new Entry(32, Float.parseFloat("86.4")));
+                garisC1.add(new Entry(32, Float.parseFloat("93.3")));
+                garisB1.add(new Entry(32, Float.parseFloat("100.3")));
+                garisA1.add(new Entry(32, Float.parseFloat("104")));
+
+                garisE1.add(new Entry(33, Float.parseFloat("83.2")));
+                garisD1.add(new Entry(33, Float.parseFloat("87")));
+                garisC1.add(new Entry(33, Float.parseFloat("94")));
+                garisB1.add(new Entry(33, Float.parseFloat("101.2")));
+                garisA1.add(new Entry(33, Float.parseFloat("105")));
+
+                garisE1.add(new Entry(34, Float.parseFloat("84")));
+                garisD1.add(new Entry(34, Float.parseFloat("87.6")));
+                garisC1.add(new Entry(34, Float.parseFloat("95")));
+                garisB1.add(new Entry(34, Float.parseFloat("102")));
+                garisA1.add(new Entry(34, Float.parseFloat("105.8")));
+
+                garisE1.add(new Entry(35, Float.parseFloat("84.4")));
+                garisD1.add(new Entry(35, Float.parseFloat("88")));
+                garisC1.add(new Entry(35, Float.parseFloat("95.3")));
+                garisB1.add(new Entry(35, Float.parseFloat("103")));
+                garisA1.add(new Entry(35, Float.parseFloat("106")));
+
+                garisE1.add(new Entry(36, Float.parseFloat("85")));
+                garisD1.add(new Entry(36, Float.parseFloat("88.8")));
+                garisC1.add(new Entry(36, Float.parseFloat("96")));
+                garisB1.add(new Entry(36, Float.parseFloat("103.5")));
+                garisA1.add(new Entry(36, Float.parseFloat("107")));
+
+                garisE1.add(new Entry(37, Float.parseFloat("85.2")));
+                garisD1.add(new Entry(37, Float.parseFloat("89")));
+                garisC1.add(new Entry(37, Float.parseFloat("96.8")));
+                garisB1.add(new Entry(37, Float.parseFloat("104")));
+                garisA1.add(new Entry(37, Float.parseFloat("108")));
+
+                garisE1.add(new Entry(38, Float.parseFloat("86")));
+                garisD1.add(new Entry(38, Float.parseFloat("90")));
+                garisC1.add(new Entry(38, Float.parseFloat("97.2")));
+                garisB1.add(new Entry(38, Float.parseFloat("105")));
+                garisA1.add(new Entry(38, Float.parseFloat("109")));
+
+                garisE1.add(new Entry(39, Float.parseFloat("86.3")));
+                garisD1.add(new Entry(39, Float.parseFloat("90.2")));
+                garisC1.add(new Entry(39, Float.parseFloat("98")));
+                garisB1.add(new Entry(39, Float.parseFloat("106")));
+                garisA1.add(new Entry(39, Float.parseFloat("109.8")));
+
+                garisE1.add(new Entry(40, Float.parseFloat("87")));
+                garisD1.add(new Entry(40, Float.parseFloat("91")));
+                garisC1.add(new Entry(40, Float.parseFloat("98.8")));
+                garisB1.add(new Entry(40, Float.parseFloat("106.3")));
+                garisA1.add(new Entry(40, Float.parseFloat("110")));
+
+                garisE1.add(new Entry(41, Float.parseFloat("87.3")));
+                garisD1.add(new Entry(41, Float.parseFloat("91.3")));
+                garisC1.add(new Entry(41, Float.parseFloat("99.2")));
+                garisB1.add(new Entry(41, Float.parseFloat("107")));
+                garisA1.add(new Entry(41, Float.parseFloat("111")));
+
+                garisE1.add(new Entry(42, Float.parseFloat("88")));
+                garisD1.add(new Entry(42, Float.parseFloat("92")));
+                garisC1.add(new Entry(42, Float.parseFloat("100")));
+                garisB1.add(new Entry(42, Float.parseFloat("108")));
+                garisA1.add(new Entry(42, Float.parseFloat("112")));
+
+                garisE1.add(new Entry(43, Float.parseFloat("88.4")));
+                garisD1.add(new Entry(43, Float.parseFloat("92.4")));
+                garisC1.add(new Entry(43, Float.parseFloat("100.3")));
+                garisB1.add(new Entry(43, Float.parseFloat("108.6")));
+                garisA1.add(new Entry(43, Float.parseFloat("112.4")));
+
+                garisE1.add(new Entry(44, Float.parseFloat("89")));
+                garisD1.add(new Entry(44, Float.parseFloat("93")));
+                garisC1.add(new Entry(44, Float.parseFloat("101")));
+                garisB1.add(new Entry(44, Float.parseFloat("109")));
+                garisA1.add(new Entry(44, Float.parseFloat("113")));
+
+                garisE1.add(new Entry(45, Float.parseFloat("89.2")));
+                garisD1.add(new Entry(45, Float.parseFloat("93.3")));
+                garisC1.add(new Entry(45, Float.parseFloat("101.6")));
+                garisB1.add(new Entry(45, Float.parseFloat("110")));
+                garisA1.add(new Entry(45, Float.parseFloat("114")));
+
+                garisE1.add(new Entry(46, Float.parseFloat("90")));
+                garisD1.add(new Entry(46, Float.parseFloat("94")));
+                garisC1.add(new Entry(46, Float.parseFloat("102")));
+                garisB1.add(new Entry(46, Float.parseFloat("110.3")));
+                garisA1.add(new Entry(46, Float.parseFloat("114.6")));
+
+                garisE1.add(new Entry(47, Float.parseFloat("90.1")));
+                garisD1.add(new Entry(47, Float.parseFloat("94.5")));
+                garisC1.add(new Entry(47, Float.parseFloat("102.9")));
+                garisB1.add(new Entry(47, Float.parseFloat("111")));
+                garisA1.add(new Entry(47, Float.parseFloat("115")));
+
+                garisE1.add(new Entry(48, Float.parseFloat("90.8")));
+                garisD1.add(new Entry(48, Float.parseFloat("95")));
+                garisC1.add(new Entry(48, Float.parseFloat("103.2")));
+                garisB1.add(new Entry(48, Float.parseFloat("112")));
+                garisA1.add(new Entry(48, Float.parseFloat("116")));
+
+                garisE1.add(new Entry(49, Float.parseFloat("91")));
+                garisD1.add(new Entry(49, Float.parseFloat("95.4")));
+                garisC1.add(new Entry(49, Float.parseFloat("103.9")));
+                garisB1.add(new Entry(49, Float.parseFloat("112.3")));
+                garisA1.add(new Entry(49, Float.parseFloat("116.6")));
+
+                garisE1.add(new Entry(50, Float.parseFloat("91.6")));
+                garisD1.add(new Entry(50, Float.parseFloat("96")));
+                garisC1.add(new Entry(50, Float.parseFloat("104.3")));
+                garisB1.add(new Entry(50, Float.parseFloat("113")));
+                garisA1.add(new Entry(50, Float.parseFloat("117")));
+
+                garisE1.add(new Entry(51, Float.parseFloat("92")));
+                garisD1.add(new Entry(51, Float.parseFloat("96.4")));
+                garisC1.add(new Entry(51, Float.parseFloat("105")));
+                garisB1.add(new Entry(51, Float.parseFloat("113.8")));
+                garisA1.add(new Entry(51, Float.parseFloat("118")));
+
+                garisE1.add(new Entry(52, Float.parseFloat("92.5")));
+                garisD1.add(new Entry(52, Float.parseFloat("97")));
+                garisC1.add(new Entry(52, Float.parseFloat("105.4")));
+                garisB1.add(new Entry(52, Float.parseFloat("114")));
+                garisA1.add(new Entry(52, Float.parseFloat("118.5")));
+
+                garisE1.add(new Entry(53, Float.parseFloat("93")));
+                garisD1.add(new Entry(53, Float.parseFloat("97.3")));
+                garisC1.add(new Entry(53, Float.parseFloat("106")));
+                garisB1.add(new Entry(53, Float.parseFloat("115")));
+                garisA1.add(new Entry(53, Float.parseFloat("119")));
+
+                garisE1.add(new Entry(54, Float.parseFloat("93.2")));
+                garisD1.add(new Entry(54, Float.parseFloat("98")));
+                garisC1.add(new Entry(54, Float.parseFloat("106.8")));
+                garisB1.add(new Entry(54, Float.parseFloat("115.4")));
+                garisA1.add(new Entry(54, Float.parseFloat("120")));
+
+                garisE1.add(new Entry(55, Float.parseFloat("94")));
+                garisD1.add(new Entry(55, Float.parseFloat("98.2")));
+                garisC1.add(new Entry(55, Float.parseFloat("107")));
+                garisB1.add(new Entry(55, Float.parseFloat("115.8")));
+                garisA1.add(new Entry(55, Float.parseFloat("120.5")));
+
+                garisE1.add(new Entry(56, Float.parseFloat("94.2")));
+                garisD1.add(new Entry(56, Float.parseFloat("99")));
+                garisC1.add(new Entry(56, Float.parseFloat("107.8")));
+                garisB1.add(new Entry(56, Float.parseFloat("116")));
+                garisA1.add(new Entry(56, Float.parseFloat("121")));
+
+                garisE1.add(new Entry(57, Float.parseFloat("94.8")));
+                garisD1.add(new Entry(57, Float.parseFloat("99.2")));
+                garisC1.add(new Entry(57, Float.parseFloat("108.2")));
+                garisB1.add(new Entry(57, Float.parseFloat("117.1")));
+                garisA1.add(new Entry(57, Float.parseFloat("122")));
+
+                garisE1.add(new Entry(58, Float.parseFloat("95")));
+                garisD1.add(new Entry(58, Float.parseFloat("100")));
+                garisC1.add(new Entry(58, Float.parseFloat("109")));
+                garisB1.add(new Entry(58, Float.parseFloat("118")));
+                garisA1.add(new Entry(58, Float.parseFloat("122.8")));
+
+                garisE1.add(new Entry(59, Float.parseFloat("95.4")));
+                garisD1.add(new Entry(59, Float.parseFloat("100.2")));
+                garisC1.add(new Entry(59, Float.parseFloat("109.2")));
+                garisB1.add(new Entry(59, Float.parseFloat("118.4")));
+                garisA1.add(new Entry(59, Float.parseFloat("123")));
+
+                garisE1.add(new Entry(60, Float.parseFloat("96")));
+                garisD1.add(new Entry(60, Float.parseFloat("100.8")));
+                garisC1.add(new Entry(60, Float.parseFloat("110")));
+                garisB1.add(new Entry(60, Float.parseFloat("119")));
+                garisA1.add(new Entry(60, Float.parseFloat("124")));
+
+
+
+
             }
         } else if (dk.getStatus().equals("BeratTinggi")) {
 
