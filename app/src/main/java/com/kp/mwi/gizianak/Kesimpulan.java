@@ -1,14 +1,22 @@
 package com.kp.mwi.gizianak;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +38,11 @@ import com.kp.mwi.gizianak.Model.DataKesimpulan;
 import com.kp.mwi.gizianak.Model.TBUmur;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,11 +54,17 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
     private LineChart chart;
     private DataKesimpulan dk;
     private double bmi;
+    private View rootView;
+    private ImageView bagikan;
+    private static File file;
+    private ScrollView scrollLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kesimpulan);
+
+        scrollLayout = (ScrollView) findViewById(R.id.scroller);
 
         nama = (TextView) findViewById(R.id.txtNama);
         status = (TextView) findViewById(R.id.txtStatus);
@@ -55,9 +72,11 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         btnSelesai = (Button) findViewById(R.id.btnSelesai);
         btnKurva = (Button) findViewById(R.id.btnKurva);
         chart = (LineChart) findViewById(R.id.chart);
+        bagikan = (ImageView) findViewById(R.id.shareit);
 
         btnSelesai.setOnClickListener(this);
         btnKurva.setOnClickListener(this);
+        bagikan.setOnClickListener(this);
 
         chart.setVisibility(View.GONE);
         chart.setNoDataText("Maaf kurva anda belum tersedia untuk saat ini !");
@@ -118,6 +137,60 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
                 chart.setVisibility(View.GONE);
                 btnKurva.setText("Lihat Kurva");
             }
+        } else if (v == bagikan) {
+            rootView = v.getRootView();
+            RelativeLayout panjang = (RelativeLayout) scrollLayout.findViewById(R.id.relLong);
+            store(loadBitmapFromView(scrollLayout, panjang.getWidth(), panjang.getHeight()), UUID.randomUUID().toString() + ".jpg");
+//            store(getScreenShot(rootView), UUID.randomUUID().toString() + ".jpg");
+            shareImage(file);
+        }
+    }
+
+    public static Bitmap loadBitmapFromView(View v, int width, int height) {
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
+        v.draw(c);
+        return b;
+    }
+
+    public static Bitmap getScreenShot(View view) {
+        View screenView = view.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    public static void store(Bitmap bm, String fileName) {
+        final String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ScreenshotGiziAnak";
+        File dir = new File(dirPath);
+        if (!dir.exists())
+            dir.mkdirs();
+        file = new File(dirPath, fileName);
+        try {
+            FileOutputStream fOut = new FileOutputStream(file);
+            bm.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void shareImage(File file) {
+        Uri uri = Uri.fromFile(file);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("image/*");
+
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        try {
+            startActivity(Intent.createChooser(intent, "Share Screenshot"));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "Tidak ada tujuan aplikasi !", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -566,6 +639,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
             chart.setData(new LineData(dataSets));
 
             Description description = new Description();
+            chart.getLegend().setEnabled(false);
             description.setText("Sumber : WHO Child Growth Standards");
             chart.setDescription(description);
             chart.invalidate();
@@ -635,7 +709,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
 
                 garisE.add(new Entry(7, Float.parseFloat("60")));
                 garisD.add(new Entry(7, Float.parseFloat("62.8")));
-                garisC.add(new Entry(7, Float.parseFloat("65.2")));
+                garisC.add(new Entry(7, Float.parseFloat("66.2")));
                 garisB.add(new Entry(7, Float.parseFloat("72")));
                 garisA.add(new Entry(7, Float.parseFloat("74.4")));
 

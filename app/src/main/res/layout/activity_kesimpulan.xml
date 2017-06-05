@@ -2,16 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kp.mwi.gizianak.Kesimpulan">
 
     <ScrollView
+        android:id="@+id/scroller"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/layoutbtn">
 
         <RelativeLayout
+            android:background="@android:color/white"
+            android:id="@+id/relLong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -20,6 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:background="@color/hijauaplikasi">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/shareit"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_share" />
 
                 <TextView
                     android:id="@+id/txtNama"
@@ -67,11 +79,11 @@
                 android:textAllCaps="false" />
 
             <com.github.mikephil.charting.charts.LineChart
-                android:layout_marginTop="10dp"
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:layout_below="@+id/btnKurva" />
+                android:layout_below="@+id/btnKurva"
+                android:layout_marginTop="10dp" />
         </RelativeLayout>
 
     </ScrollView>
