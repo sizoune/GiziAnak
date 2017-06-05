@@ -148,6 +148,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    //take ss in whole screen
     public static Bitmap loadBitmapFromView(View v, int width, int height) {
         Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(b);
@@ -156,6 +157,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         return b;
     }
 
+    //take ss in screen yang keliatan sekarang
     public static Bitmap getScreenShot(View view) {
         View screenView = view.getRootView();
         screenView.setDrawingCacheEnabled(true);
