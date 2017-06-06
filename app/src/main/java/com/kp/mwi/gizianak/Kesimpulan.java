@@ -129,6 +129,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         if (v == btnSelesai) {
             this.finish();
         } else if (v == btnKurva) {
+            //chart.setBackgroundColor(Color.WHITE);
             if (chart.getVisibility() == View.GONE) {
                 if (dk.getUmur() < 61) {
                     dibawah5tahun(dk.getTitikX(), dk.getTitikY());

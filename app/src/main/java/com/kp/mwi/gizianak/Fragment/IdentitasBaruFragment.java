@@ -447,69 +447,6 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         alert.show();
     }
 
-//    private void lihatKesimpulanTinggiUmur(int tinggi, int umur, String jk) {
-//        TBUmur tb = new TBUmur(umur, tinggi, jk);
-//        tb.TBUmur();
-//        View view = View.inflate(getContext(), R.layout.layout_status, null);
-//        TextView nm = (TextView) view.findViewById(R.id.txtNama);
-//        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
-//        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
-//        Button done = (Button) view.findViewById(R.id.btnSelesai);
-//        nm.setText(anakUniv.getNama());
-//        if (!anakUniv.isAdaFoto()) {
-//            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
-//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
-//            } else {
-//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
-//            }
-//        } else {
-//            byte[] image = anakUniv.getFoto();
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-//            gambar.setImageBitmap(bitmap);
-//        }
-//        stat.setText(tb.getKeterangan());
-//        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
-//                .setView(view);
-//        mMaterialDialog.show();
-//        done.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mMaterialDialog.dismiss();
-//            }
-//        });
-//    }
-
-//    private void lihatKesimpulanBBUmur(int berat, int umur, String jk) {
-//        BeratUmur bu = new BeratUmur(berat, umur, jk);
-//        bu.BBumur();
-//        View view = View.inflate(getContext(), R.layout.layout_status, null);
-//        TextView nm = (TextView) view.findViewById(R.id.txtNama);
-//        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
-//        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
-//        Button done = (Button) view.findViewById(R.id.btnSelesai);
-//        nm.setText(anakUniv.getNama());
-//        if (!anakUniv.isAdaFoto()) {
-//            if (anakUniv.getJenisKelamin().equals("Perempuan")) {
-//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.girl).fit().into(gambar);
-//            } else {
-//                Picasso.with(IdentitasBaruFragment.this.getContext()).load(R.drawable.boybig).fit().into(gambar);
-//            }
-//        } else {
-//            byte[] image = anakUniv.getFoto();
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-//            gambar.setImageBitmap(bitmap);
-//        }
-//        stat.setText(bu.getKeterangan());
-//        mMaterialDialog = new MaterialDialog(IdentitasBaruFragment.this.getContext())
-//                .setView(view);
-//        mMaterialDialog.show();
-//        done.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mMaterialDialog.dismiss();
-//            }
-//        });
-//    }
 
     public int convertBulan1(String angka) {
         if (angka.equals("Januari")) {
@@ -735,6 +672,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
             }
         }
         adaFoto = true;
+
         Picasso.with(IdentitasBaruFragment.this.getContext()).load(data.getData()).fit().into(preview);
         preview.setVisibility(View.VISIBLE);
     }

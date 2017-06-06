@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_marginTop="2dp"
     android:orientation="vertical"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="3dp">
+    app:cardCornerRadius="1dp"
+    app:cardElevation="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_list">
+        android:background="@drawable/border1">
 
         <LinearLayout
             android:layout_width="match_parent"
