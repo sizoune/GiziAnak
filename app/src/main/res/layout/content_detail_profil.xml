@@ -11,122 +11,148 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/gambar_anak"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_boy"
-            app:civ_border_color="@color/putih"
-            app:civ_border_width="1dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#78dd99">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Identitas Diri"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/gambar_anak"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_boy"
+                app:civ_border_color="@color/putih"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/txtNama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gambar_anak"
+                android:layout_centerHorizontal="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingTop="5dp"
+                android:text="Nama"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            app:cardCornerRadius="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            app:cardCornerRadius="0dp"
             app:cardElevation="2dp">
 
             <RelativeLayout
+                android:paddingTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_list">
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="25dp">
 
                 <LinearLayout
+                    android:id="@+id/layGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txtNama"
+                    <ImageView
+                        android:id="@+id/picGender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="nama"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp" />
+                        android:src="@drawable/ic_gender_symbols" />
 
                     <TextView
                         android:id="@+id/txtJenisKelamin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:text="jenis kelamin"
+                        android:text="Gender"
                         android:textColor="@android:color/black"
                         android:textSize="18sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layLahir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layGender"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar" />
 
                     <TextView
                         android:id="@+id/txtUsia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
                         android:text="Usia"
                         android:textColor="@android:color/black"
                         android:textSize="18sp" />
+                </LinearLayout>
 
-                    <LinearLayout
+                <LinearLayout
+                    android:id="@+id/layBerat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layLahir"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_weight" />
+
+                    <TextView
+                        android:id="@+id/txtBerat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
+                        android:text="Berat"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Berat : "
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
+                <LinearLayout
+                    android:id="@+id/layTinggi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layBerat"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp">
 
-                        <TextView
-                            android:id="@+id/txtBerat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="5 Kg"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_height" />
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/txtTinggi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tinggi : "
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/txtTinggi"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="121 cm"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </LinearLayout>
+                        android:text="tinggi"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
                 </LinearLayout>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -163,6 +189,7 @@
             android:id="@+id/btnStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/bg_button"
             android:text="Lihat Status" />
