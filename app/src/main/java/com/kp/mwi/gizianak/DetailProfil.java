@@ -193,16 +193,16 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                                 umur = (period.getYears() * 12) + (period.getMonths());
                             } else {
                                 int bulhasconv = -1;
-                                if (period.getMonths() <= 5) {
-                                    if (period.getMonths() < 3) {
+                                if (period.getMonths() <= 6) {
+                                    if (period.getMonths() < 4) {
                                         bulhasconv = 0;
                                     } else {
-                                        bulhasconv = 5;
+                                        bulhasconv = 6;
                                     }
                                     thnhasconv = period.getYears();
                                 } else {
-                                    if (period.getMonths() < 8) {
-                                        bulhasconv = 5;
+                                    if (period.getMonths() < 9) {
+                                        bulhasconv = 6;
                                         thnhasconv = period.getYears();
                                     } else {
                                         bulhasconv = 0;
@@ -213,16 +213,16 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                             }
                         } else {
                             int bulhasconv = -1;
-                            if (period.getMonths() <= 5) {
-                                if (period.getMonths() < 3) {
+                            if (period.getMonths() <= 6) {
+                                if (period.getMonths() < 4) {
                                     bulhasconv = 0;
                                 } else {
-                                    bulhasconv = 5;
+                                    bulhasconv = 6;
                                 }
                                 thnhasconv = period.getYears();
                             } else {
-                                if (period.getMonths() < 8) {
-                                    bulhasconv = 5;
+                                if (period.getMonths() < 9) {
+                                    bulhasconv = 6;
                                     thnhasconv = period.getYears();
                                 } else {
                                     bulhasconv = 0;
@@ -257,16 +257,16 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                                 umur = (period.getYears() * 12) + (period.getMonths());
                             } else {
                                 int bulhasconv = -1;
-                                if (period.getMonths() <= 5) {
-                                    if (period.getMonths() < 3) {
+                                if (period.getMonths() <= 6) {
+                                    if (period.getMonths() < 4) {
                                         bulhasconv = 0;
                                     } else {
-                                        bulhasconv = 5;
+                                        bulhasconv = 6;
                                     }
                                     thnhasconv = period.getYears();
                                 } else {
-                                    if (period.getMonths() < 8) {
-                                        bulhasconv = 5;
+                                    if (period.getMonths() < 9) {
+                                        bulhasconv = 6;
                                         thnhasconv = period.getYears();
                                     } else {
                                         bulhasconv = 0;
@@ -277,16 +277,16 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                             }
                         } else {
                             int bulhasconv = -1;
-                            if (period.getMonths() <= 5) {
-                                if (period.getMonths() < 3) {
+                            if (period.getMonths() <= 6) {
+                                if (period.getMonths() < 4) {
                                     bulhasconv = 0;
                                 } else {
-                                    bulhasconv = 5;
+                                    bulhasconv = 6;
                                 }
                                 thnhasconv = period.getYears();
                             } else {
-                                if (period.getMonths() < 8) {
-                                    bulhasconv = 5;
+                                if (period.getMonths() < 9) {
+                                    bulhasconv = 6;
                                     thnhasconv = period.getYears();
                                 } else {
                                     bulhasconv = 0;
@@ -327,16 +327,16 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                                 umur = (period.getYears() * 12) + (period.getMonths());
                             } else {
                                 int bulhasconv = -1;
-                                if (period.getMonths() <= 5) {
-                                    if (period.getMonths() < 3) {
+                                if (period.getMonths() <= 6) {
+                                    if (period.getMonths() < 4) {
                                         bulhasconv = 0;
                                     } else {
-                                        bulhasconv = 5;
+                                        bulhasconv = 6;
                                     }
                                     thnhasconv = period.getYears();
                                 } else {
-                                    if (period.getMonths() < 8) {
-                                        bulhasconv = 5;
+                                    if (period.getMonths() < 9) {
+                                        bulhasconv = 6;
                                         thnhasconv = period.getYears();
                                     } else {
                                         bulhasconv = 0;
@@ -347,16 +347,16 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
                             }
                         } else {
                             int bulhasconv = -1;
-                            if (period.getMonths() <= 5) {
-                                if (period.getMonths() < 3) {
+                            if (period.getMonths() <= 6) {
+                                if (period.getMonths() < 4) {
                                     bulhasconv = 0;
                                 } else {
-                                    bulhasconv = 5;
+                                    bulhasconv = 6;
                                 }
                                 thnhasconv = period.getYears();
                             } else {
-                                if (period.getMonths() < 8) {
-                                    bulhasconv = 5;
+                                if (period.getMonths() < 9) {
+                                    bulhasconv = 6;
                                     thnhasconv = period.getYears();
                                 } else {
                                     bulhasconv = 0;
@@ -390,67 +390,4 @@ public class DetailProfil extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void lihatKesimpulanTinggiUmur(int tinggi, int umur, String jk) {
-        TBUmur tb = new TBUmur(umur, tinggi, jk);
-        tb.TBUmur();
-        View view = View.inflate(getApplicationContext(), R.layout.layout_status, null);
-        TextView nm = (TextView) view.findViewById(R.id.txtNama);
-        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
-        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
-        Button done = (Button) view.findViewById(R.id.btnSelesai);
-        nm.setText(da.getNama());
-        if (!da.isAdaFoto()) {
-            if (da.getJenisKelamin().equals("Perempuan")) {
-                Picasso.with(getApplicationContext()).load(R.drawable.girl).fit().into(gambar);
-            } else {
-                Picasso.with(getApplicationContext()).load(R.drawable.boybig).fit().into(gambar);
-            }
-        } else {
-            byte[] image = da.getFoto();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-            gambar.setImageBitmap(bitmap);
-        }
-        stat.setText(tb.getKeterangan() + tb.getKeterangan() + tb.getKeterangan());
-        mMaterialDialog = new MaterialDialog(DetailProfil.this)
-                .setView(view);
-        mMaterialDialog.show();
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMaterialDialog.dismiss();
-            }
-        });
-    }
-
-    private void lihatKesimpulanBBUmur(int berat, int umur, String jk) {
-        BeratUmur bu = new BeratUmur(berat, umur, jk);
-        bu.BBumur();
-        View view = View.inflate(getApplicationContext(), R.layout.layout_status, null);
-        TextView nm = (TextView) view.findViewById(R.id.txtNama);
-        CircleImageView gambar = (CircleImageView) view.findViewById(R.id.gambar_anak);
-        TextView stat = (TextView) view.findViewById(R.id.txtStatus);
-        Button done = (Button) view.findViewById(R.id.btnSelesai);
-        nm.setText(da.getNama());
-        if (!da.isAdaFoto()) {
-            if (da.getJenisKelamin().equals("Perempuan")) {
-                Picasso.with(getApplicationContext()).load(R.drawable.girl).fit().into(gambar);
-            } else {
-                Picasso.with(getApplicationContext()).load(R.drawable.boybig).fit().into(gambar);
-            }
-        } else {
-            byte[] image = da.getFoto();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-            gambar.setImageBitmap(bitmap);
-        }
-        stat.setText(bu.getKeterangan());
-        mMaterialDialog = new MaterialDialog(DetailProfil.this)
-                .setView(view);
-        mMaterialDialog.show();
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMaterialDialog.dismiss();
-            }
-        });
-    }
 }

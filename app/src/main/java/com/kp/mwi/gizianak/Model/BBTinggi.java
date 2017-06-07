@@ -2708,7 +2708,7 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 216) {
+        } else if (umur > 216) {
             keterangan = "Mohon maaf untuk saat ini , aplikasi ini hanya bisa digunakan untuk anak umur 0 - 18 tahun";
         }
 

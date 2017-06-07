@@ -60,6 +60,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
     private ImageView bagikan;
     private static File file;
     private ScrollView scrollLayout;
+    private TextView sumber, judul;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,11 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         btnKurva = (Button) findViewById(R.id.btnKurva);
         chart = (LineChart) findViewById(R.id.chart);
         bagikan = (ImageView) findViewById(R.id.shareit);
+        sumber = (TextView) findViewById(R.id.txtSumber);
+        judul = (TextView) findViewById(R.id.txtSumber1);
+
+        sumber.setVisibility(View.GONE);
+        judul.setVisibility(View.GONE);
 
         btnSelesai.setOnClickListener(this);
         btnKurva.setOnClickListener(this);
@@ -86,7 +92,7 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
         Bundle b = getIntent().getExtras();
         if (b != null) {
             dk = b.getParcelable("dataKesimpulan");
-            //Toast.makeText(this, Integer.toString(dk.getTitikY()), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, Integer.toString(dk.getUmur()), Toast.LENGTH_SHORT).show();
             nama.setText(dk.getNama());
             if (dk.getJk().equals("Perempuan")) {
                 jk = "P";
@@ -121,6 +127,11 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
                 bmi = bb.getBmi();
                 status.setText(bb.getKeterangan());
             }
+            if (dk.getUmur() > 216) {
+                btnKurva.setVisibility(View.GONE);
+            } else {
+                btnKurva.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -133,10 +144,14 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
             if (chart.getVisibility() == View.GONE) {
                 if (dk.getUmur() < 61) {
                     dibawah5tahun(dk.getTitikX(), dk.getTitikY());
+                } else {
+                    diatas5tahun(dk.getTitikX(), dk.getTitikY());
                 }
                 chart.setVisibility(View.VISIBLE);
                 btnKurva.setText("Tutup Kurva");
             } else {
+                sumber.setVisibility(View.GONE);
+                judul.setVisibility(View.GONE);
                 chart.setVisibility(View.GONE);
                 btnKurva.setText("Lihat Kurva");
             }
@@ -203,6 +218,330 @@ public class Kesimpulan extends AppCompatActivity implements View.OnClickListene
             Toast.makeText(getApplicationContext(), "Tidak ada tujuan aplikasi !", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void diatas5tahun(float sumbx, float sumby) {
+        String[] valuesX = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+                , "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"
+                , "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36"
+                , "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48"
+                , "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"
+                , "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72"
+                , "73", "74", "75", "76", "77", "78", "79", "70", "71", "72", "73", "74"
+                , "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86"
+                , "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98"
+                , "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110"
+                , "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122"
+                , "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134"
+                , "135", "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146"
+                , "147", "148", "149", "150", "151", "152", "153", "154", "155", "156", "157", "158"
+                , "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170"
+                , "170", "171", "172", "173", "174", "175", "176", "177", "178", "179", "180"
+                , "181", "182", "183", "184", "185", "186", "187", "188", "189", "190", "191", "192"
+                , "193", "194", "195", "196", "197", "198", "199", "200", "201", "202", "203", "204"
+                , "205", "206", "207", "208", "209", "210", "211", "212", "213", "214", "215", "216"};
+
+        ArrayList<Entry> garisG = new ArrayList<>();
+        ArrayList<Entry> garisF = new ArrayList<>();
+        ArrayList<Entry> garisE = new ArrayList<>();
+        ArrayList<Entry> garisD = new ArrayList<>();
+        ArrayList<Entry> garisC = new ArrayList<>();
+        ArrayList<Entry> garisB = new ArrayList<>();
+        ArrayList<Entry> garisA = new ArrayList<>();
+        ArrayList<Entry> dataUser = new ArrayList<>();
+
+        dataUser.add(new Entry(sumbx, sumby));
+
+        if (dk.getStatus().equals("BeratUmur")) {
+            String[] valuesKg = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+                    , "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"
+                    , "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36"
+                    , "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48"
+                    , "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60"
+                    , "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72"
+                    , "73", "74", "75", "76", "77", "78", "79", "70", "71", "72", "73", "74"
+                    , "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86"
+                    , "87", "88", "89", "90", "91", "92", "93", "94", "95", "96"};
+
+            garisG.add(new Entry(66, 16));
+            garisF.add(new Entry(66, 17));
+            garisE.add(new Entry(66, 18));
+            garisD.add(new Entry(66, 20));
+            garisC.add(new Entry(66, 22));
+            garisB.add(new Entry(66, 24));
+            garisA.add(new Entry(66, 25));
+
+            garisG.add(new Entry(72, 17));
+            garisF.add(new Entry(72, 18));
+            garisE.add(new Entry(72, 19));
+            garisD.add(new Entry(72, 21));
+            garisC.add(new Entry(72, 23));
+            garisB.add(new Entry(72, 25));
+            garisA.add(new Entry(72, 27));
+
+            garisG.add(new Entry(78, 18));
+            garisF.add(new Entry(78, 19));
+            garisE.add(new Entry(78, 20));
+            garisD.add(new Entry(78, 22));
+            garisC.add(new Entry(78, 24));
+            garisB.add(new Entry(78, 27));
+            garisA.add(new Entry(78, 29));
+
+            garisG.add(new Entry(84, 19));
+            garisF.add(new Entry(84, 20));
+            garisE.add(new Entry(84, 21));
+            garisD.add(new Entry(84, 23));
+            garisC.add(new Entry(84, 26));
+            garisB.add(new Entry(84, 29));
+            garisA.add(new Entry(84, 31));
+
+            garisG.add(new Entry(90, 20));
+            garisF.add(new Entry(90, 21));
+            garisE.add(new Entry(90, 22));
+            garisD.add(new Entry(90, 24));
+            garisC.add(new Entry(90, 27));
+            garisB.add(new Entry(90, 32));
+            garisA.add(new Entry(90, 33));
+
+            garisG.add(new Entry(96, 21));
+            garisF.add(new Entry(96, 22));
+            garisE.add(new Entry(96, 23));
+            garisD.add(new Entry(96, 25));
+            garisC.add(new Entry(96, 29));
+            garisB.add(new Entry(96, 33));
+            garisA.add(new Entry(96, 35));
+
+            garisG.add(new Entry(102, 22));
+            garisF.add(new Entry(102, 23));
+            garisE.add(new Entry(102, 25));
+            garisD.add(new Entry(102, 27));
+            garisC.add(new Entry(102, 30));
+            garisB.add(new Entry(102, 34));
+            garisA.add(new Entry(102, 37));
+
+            garisG.add(new Entry(108, 23));
+            garisF.add(new Entry(108, 24));
+            garisE.add(new Entry(108, 26));
+            garisD.add(new Entry(108, 29));
+            garisC.add(new Entry(108, 32));
+            garisB.add(new Entry(108, 37));
+            garisA.add(new Entry(108, 40));
+
+            garisG.add(new Entry(114, 24));
+            garisF.add(new Entry(114, 25));
+            garisE.add(new Entry(114, 27));
+            garisD.add(new Entry(114, 30));
+            garisC.add(new Entry(114, 34));
+            garisB.add(new Entry(114, 39));
+            garisA.add(new Entry(114, 42));
+
+            garisG.add(new Entry(120, 25));
+            garisF.add(new Entry(120, 26));
+            garisE.add(new Entry(120, 29));
+            garisD.add(new Entry(120, 32));
+            garisC.add(new Entry(120, 37));
+            garisB.add(new Entry(120, 42));
+            garisA.add(new Entry(120, 46));
+
+            garisG.add(new Entry(126, 26));
+            garisF.add(new Entry(126, 27));
+            garisE.add(new Entry(126, 30));
+            garisD.add(new Entry(126, 34));
+            garisC.add(new Entry(126, 39));
+            garisB.add(new Entry(126, 44));
+            garisA.add(new Entry(126, 49));
+
+            garisG.add(new Entry(132, 27));
+            garisF.add(new Entry(132, 29));
+            garisE.add(new Entry(132, 32));
+            garisD.add(new Entry(132, 36));
+            garisC.add(new Entry(132, 41));
+            garisB.add(new Entry(132, 48));
+            garisA.add(new Entry(132, 52));
+
+            garisG.add(new Entry(138, 29));
+            garisF.add(new Entry(138, 30));
+            garisE.add(new Entry(138, 34));
+            garisD.add(new Entry(138, 38));
+            garisC.add(new Entry(138, 44));
+            garisB.add(new Entry(138, 51));
+            garisA.add(new Entry(138, 55));
+
+            garisG.add(new Entry(144, 30));
+            garisF.add(new Entry(144, 32));
+            garisE.add(new Entry(144, 36));
+            garisD.add(new Entry(144, 40));
+            garisC.add(new Entry(144, 46));
+            garisB.add(new Entry(144, 54));
+            garisA.add(new Entry(144, 59));
+
+            garisG.add(new Entry(150, 32));
+            garisF.add(new Entry(150, 34));
+            garisE.add(new Entry(150, 38));
+            garisD.add(new Entry(150, 43));
+            garisC.add(new Entry(150, 49));
+            garisB.add(new Entry(150, 57));
+            garisA.add(new Entry(150, 62));
+
+            garisG.add(new Entry(156, 34));
+            garisF.add(new Entry(156, 36));
+            garisE.add(new Entry(156, 40));
+            garisD.add(new Entry(156, 45));
+            garisC.add(new Entry(156, 52));
+            garisB.add(new Entry(156, 60));
+            garisA.add(new Entry(156, 65));
+
+            garisG.add(new Entry(162, 36));
+            garisF.add(new Entry(162, 38));
+            garisE.add(new Entry(162, 42));
+            garisD.add(new Entry(162, 48));
+            garisC.add(new Entry(162, 55));
+            garisB.add(new Entry(162, 63));
+            garisA.add(new Entry(162, 69));
+
+            garisG.add(new Entry(168, 38));
+            garisF.add(new Entry(168, 40));
+            garisE.add(new Entry(168, 45));
+            garisD.add(new Entry(168, 51));
+            garisC.add(new Entry(168, 59));
+            garisB.add(new Entry(168, 67));
+            garisA.add(new Entry(168, 73));
+
+            garisG.add(new Entry(174, 40));
+            garisF.add(new Entry(174, 43));
+            garisE.add(new Entry(174, 48));
+            garisD.add(new Entry(174, 54));
+            garisC.add(new Entry(174, 61));
+            garisB.add(new Entry(174, 70));
+            garisA.add(new Entry(174, 75));
+
+            garisG.add(new Entry(180, 43));
+            garisF.add(new Entry(180, 45));
+            garisE.add(new Entry(180, 50));
+            garisD.add(new Entry(180, 56));
+            garisC.add(new Entry(180, 64));
+            garisB.add(new Entry(180, 73));
+            garisA.add(new Entry(180, 79));
+
+            garisG.add(new Entry(186, 45));
+            garisF.add(new Entry(186, 47));
+            garisE.add(new Entry(186, 52));
+            garisD.add(new Entry(186, 58));
+            garisC.add(new Entry(186, 66));
+            garisB.add(new Entry(186, 75));
+            garisA.add(new Entry(186, 81));
+
+            garisG.add(new Entry(192, 47));
+            garisF.add(new Entry(192, 50));
+            garisE.add(new Entry(192, 55));
+            garisD.add(new Entry(192, 61));
+            garisC.add(new Entry(192, 69));
+            garisB.add(new Entry(192, 78));
+            garisA.add(new Entry(192, 84));
+
+            garisG.add(new Entry(198, 49));
+            garisF.add(new Entry(198, 52));
+            garisE.add(new Entry(198, 56));
+            garisD.add(new Entry(198, 63));
+            garisC.add(new Entry(198, 71));
+            garisB.add(new Entry(198, 80));
+            garisA.add(new Entry(198, 86));
+
+            garisG.add(new Entry(204, 51));
+            garisF.add(new Entry(204, 53));
+            garisE.add(new Entry(204, 58));
+            garisD.add(new Entry(204, 65));
+            garisC.add(new Entry(204, 73));
+            garisB.add(new Entry(204, 82));
+            garisA.add(new Entry(204, 89));
+
+            garisG.add(new Entry(210, 52));
+            garisF.add(new Entry(210, 55));
+            garisE.add(new Entry(210, 60));
+            garisD.add(new Entry(210, 66));
+            garisC.add(new Entry(210, 74));
+            garisB.add(new Entry(210, 84));
+            garisA.add(new Entry(210, 90));
+
+            garisG.add(new Entry(216, 53));
+            garisF.add(new Entry(216, 56));
+            garisE.add(new Entry(216, 61));
+            garisD.add(new Entry(216, 67));
+            garisC.add(new Entry(216, 75));
+            garisB.add(new Entry(216, 85));
+            garisA.add(new Entry(216, 92));
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
+            LineDataSet siUser = new LineDataSet(dataUser, "Titik Anda");
+            siUser.setColor(Color.MAGENTA);
+            siUser.setCircleColor(Color.MAGENTA);
+
+            LineDataSet datasetG = new LineDataSet(garisG, "");
+            datasetG.setDrawCircles(false);
+            datasetG.setColor(Color.RED);
+
+            LineDataSet datasetF = new LineDataSet(garisF, "");
+            datasetF.setDrawCircles(false);
+            datasetF.setColor(Color.YELLOW);
+
+            LineDataSet datasetE = new LineDataSet(garisE, "");
+            datasetE.setDrawCircles(false);
+            datasetE.setColor(Color.GREEN);
+
+            LineDataSet datasetD = new LineDataSet(garisD, "");
+            datasetD.setDrawCircles(false);
+            datasetD.setColor(Color.BLACK);
+
+            LineDataSet datasetC = new LineDataSet(garisC, "");
+            datasetC.setDrawCircles(false);
+            datasetC.setColor(Color.GREEN);
+
+            LineDataSet datasetB = new LineDataSet(garisB, "");
+            datasetB.setDrawCircles(false);
+            datasetB.setColor(Color.YELLOW);
+
+            LineDataSet datasetA = new LineDataSet(garisA, "");
+            datasetA.setDrawCircles(false);
+            datasetA.setColor(Color.RED);
+
+            datasetG.setValueFormatter(new MyValueFormatter());
+            datasetF.setValueFormatter(new MyValueFormatter());
+            datasetE.setValueFormatter(new MyValueFormatter());
+            datasetD.setValueFormatter(new MyValueFormatter());
+            datasetC.setValueFormatter(new MyValueFormatter());
+            datasetB.setValueFormatter(new MyValueFormatter());
+            datasetA.setValueFormatter(new MyValueFormatter());
+
+            dataSets.add(datasetG);
+            dataSets.add(datasetF);
+            dataSets.add(datasetE);
+            dataSets.add(datasetD);
+            dataSets.add(datasetC);
+            dataSets.add(datasetB);
+            dataSets.add(datasetA);
+            dataSets.add(siUser);
+
+            chart.getXAxis().setValueFormatter(new MyXAxisValueFormatter(valuesX));
+            chart.getAxisLeft().setValueFormatter(new MyYAxisValueFormatter(valuesKg));
+            chart.getAxisRight().setValueFormatter(new MyYAxisValueFormatter(valuesKg));
+
+            chart.setData(new LineData(dataSets));
+
+            Description description = new Description();
+            chart.getLegend().setEnabled(false);
+            description.setText("");
+            chart.setDescription(description);
+            chart.invalidate();
+
+            judul.setVisibility(View.VISIBLE);
+            sumber.setText("Developed by the National Center for Health Statistics in collaboration with" +
+                    " the National Center for Chronic Disease Prevention and Health Promotion (2000)");
+            sumber.setVisibility(View.VISIBLE);
+        }
+
+
+    }
+
 
     private void dibawah5tahun(float sumbx, float sumby) {
         String[] values = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"

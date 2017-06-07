@@ -73,6 +73,7 @@ public class IdentitasLamaFragment extends Fragment {
             list.setLayoutManager(gridLayoutManager);
             adapter.notifyDataSetChanged();
         }
+        swipe.setColorSchemeColors(getResources().getColor(R.color.hijauaplikasi));
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

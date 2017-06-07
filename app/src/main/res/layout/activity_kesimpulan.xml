@@ -79,6 +79,7 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/bg_button"
                 android:text="Lihat Kurva"
+                android:textColor="@color/hijauaplikasi"
                 android:textAllCaps="false" />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -87,6 +88,29 @@
                 android:layout_height="400dp"
                 android:layout_below="@+id/btnKurva"
                 android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/txtSumber1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/chart"
+                android:text="Sumber:"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/txtSumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSumber1"
+                android:text="Sumber"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
         </RelativeLayout>
 
     </ScrollView>

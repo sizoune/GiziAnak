@@ -263,16 +263,16 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                             umur = (period.getYears() * 12) + (period.getMonths());
                         } else {
                             int bulhasconv = -1;
-                            if (period.getMonths() <= 5) {
-                                if (period.getMonths() < 3) {
+                            if (period.getMonths() <= 6) {
+                                if (period.getMonths() < 4) {
                                     bulhasconv = 0;
                                 } else {
-                                    bulhasconv = 5;
+                                    bulhasconv = 6;
                                 }
                                 thnhasconv = period.getYears();
                             } else {
-                                if (period.getMonths() < 8) {
-                                    bulhasconv = 5;
+                                if (period.getMonths() < 9) {
+                                    bulhasconv = 6;
                                     thnhasconv = period.getYears();
                                 } else {
                                     bulhasconv = 0;
@@ -283,16 +283,16 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         }
                     } else {
                         int bulhasconv = -1;
-                        if (period.getMonths() <= 5) {
-                            if (period.getMonths() < 3) {
+                        if (period.getMonths() <= 6) {
+                            if (period.getMonths() < 4) {
                                 bulhasconv = 0;
                             } else {
-                                bulhasconv = 5;
+                                bulhasconv = 6;
                             }
                             thnhasconv = period.getYears();
                         } else {
-                            if (period.getMonths() < 8) {
-                                bulhasconv = 5;
+                            if (period.getMonths() < 9) {
+                                bulhasconv = 6;
                                 thnhasconv = period.getYears();
                             } else {
                                 bulhasconv = 0;
@@ -327,16 +327,16 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                             umur = (period.getYears() * 12) + (period.getMonths());
                         } else {
                             int bulhasconv = -1;
-                            if (period.getMonths() <= 5) {
-                                if (period.getMonths() < 3) {
+                            if (period.getMonths() <= 6) {
+                                if (period.getMonths() < 4) {
                                     bulhasconv = 0;
                                 } else {
-                                    bulhasconv = 5;
+                                    bulhasconv = 6;
                                 }
                                 thnhasconv = period.getYears();
                             } else {
-                                if (period.getMonths() < 8) {
-                                    bulhasconv = 5;
+                                if (period.getMonths() < 9) {
+                                    bulhasconv = 6;
                                     thnhasconv = period.getYears();
                                 } else {
                                     bulhasconv = 0;
@@ -347,16 +347,16 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         }
                     } else {
                         int bulhasconv = -1;
-                        if (period.getMonths() <= 5) {
-                            if (period.getMonths() < 3) {
+                        if (period.getMonths() <= 6) {
+                            if (period.getMonths() < 4) {
                                 bulhasconv = 0;
                             } else {
-                                bulhasconv = 5;
+                                bulhasconv = 6;
                             }
                             thnhasconv = period.getYears();
                         } else {
-                            if (period.getMonths() < 8) {
-                                bulhasconv = 5;
+                            if (period.getMonths() < 9) {
+                                bulhasconv = 6;
                                 thnhasconv = period.getYears();
                             } else {
                                 bulhasconv = 0;
@@ -391,16 +391,16 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                             umur = (period.getYears() * 12) + (period.getMonths());
                         } else {
                             int bulhasconv = -1;
-                            if (period.getMonths() <= 5) {
-                                if (period.getMonths() < 3) {
+                            if (period.getMonths() <= 6) {
+                                if (period.getMonths() < 4) {
                                     bulhasconv = 0;
                                 } else {
-                                    bulhasconv = 5;
+                                    bulhasconv = 6;
                                 }
                                 thnhasconv = period.getYears();
                             } else {
-                                if (period.getMonths() < 8) {
-                                    bulhasconv = 5;
+                                if (period.getMonths() < 9) {
+                                    bulhasconv = 6;
                                     thnhasconv = period.getYears();
                                 } else {
                                     bulhasconv = 0;
@@ -411,16 +411,16 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                         }
                     } else {
                         int bulhasconv = -1;
-                        if (period.getMonths() <= 5) {
-                            if (period.getMonths() < 3) {
+                        if (period.getMonths() <= 6) {
+                            if (period.getMonths() < 4) {
                                 bulhasconv = 0;
                             } else {
-                                bulhasconv = 5;
+                                bulhasconv = 6;
                             }
                             thnhasconv = period.getYears();
                         } else {
-                            if (period.getMonths() < 8) {
-                                bulhasconv = 5;
+                            if (period.getMonths() < 9) {
+                                bulhasconv = 6;
                                 thnhasconv = period.getYears();
                             } else {
                                 bulhasconv = 0;

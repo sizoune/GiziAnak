@@ -49,7 +49,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_button"
                     android:text="Refresh Data"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/hijauaplikasi" />
             </LinearLayout>
 
         </RelativeLayout>
