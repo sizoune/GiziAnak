@@ -188,7 +188,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bulatkan berat badan anak anda"/>
+                android:text="Bulatkan berat badan anak anda"
+                android:textSize="10sp" />
 
             <LinearLayout
                 android:id="@+id/linear3"

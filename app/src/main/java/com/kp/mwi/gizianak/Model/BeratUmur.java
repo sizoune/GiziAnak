@@ -1841,7 +1841,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 65) {
+        } else if (umur == 66) {
             ideal = 20;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -1879,7 +1879,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 77) {
+        } else if (umur == 78) {
             ideal = 22;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -1917,7 +1917,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 89) {
+        } else if (umur == 90) {
             ideal = 24;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -1955,7 +1955,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 101) {
+        } else if (umur == 102) {
             ideal = 27;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -1993,7 +1993,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 113) {
+        } else if (umur == 114) {
             ideal = 30;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2031,7 +2031,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 125) {
+        } else if (umur == 126) {
             ideal = 34;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2069,7 +2069,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 137) {
+        } else if (umur == 138) {
             ideal = 38;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2107,7 +2107,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 149) {
+        } else if (umur == 150) {
             ideal = 43;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2145,7 +2145,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 161) {
+        } else if (umur == 162) {
             ideal = 48;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2183,7 +2183,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 173) {
+        } else if (umur == 174) {
             ideal = 54;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2221,7 +2221,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 185) {
+        } else if (umur == 186) {
             ideal = 59;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2259,7 +2259,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 197) {
+        } else if (umur == 198) {
             ideal = 63;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2297,7 +2297,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 209) {
+        } else if (umur == 210) {
             ideal = 66;
             persentase = (berat / ideal) * 100;
             if (persentase <= 70) {
@@ -2335,7 +2335,7 @@ public class BeratUmur {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur > 216) {
+        } else if (umur == 216) {
             keterangan = "Mohon maaf untuk saat ini , aplikasi ini hanya bisa digunakan untuk anak umur 0 - 18 tahun";
         }
     }

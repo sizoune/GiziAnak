@@ -1,11 +1,14 @@
 package com.kp.mwi.gizianak.Model;
 
+import android.content.Intent;
+import android.util.Log;
+
 /**
  * Created by mwi on 6/2/17.
  */
 
 public class BBTinggi {
-    private double berat, tinggi, umur, idealberat, idealtinggi, bmi, temp1, temp2;
+    private double berat, tinggi, umur, idealberat, idealtinggi, bmi, umurideal, persentase;
     private String gizi, keterangan, kelamin;
 
     public BBTinggi(double berat, double tinggi, double umur, String kelamin) {
@@ -20,10 +23,12 @@ public class BBTinggi {
         tinggi = tinggi / 100;
         bmi = berat / (tinggi * tinggi);
         bmi = Math.round(bmi);
+        Log.e("bmi", Double.toString(bmi));
     }
 
 
     public void BBTinggi() {
+
         /*UNTUK TITIK A 0-5 Tahun LAKI-LAKI*/
         if ((bmi >= 16) && (umur == 0) && (kelamin.equals("L"))) {
             gizi = "Obesitas";
@@ -1547,644 +1552,38 @@ public class BBTinggi {
 
 
         /*BERAT TERDAHAP UMUR 5 - 18 TAHUN*/
-        else if (umur == 61) {
-            idealberat = 18;
-            idealtinggi = 109;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 72) {
-            idealberat = 21;
-            idealtinggi = 116;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 84) {
-            idealberat = 23;
-            idealtinggi = 122;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 96) {
-            idealberat = 25;
-            idealtinggi = 128;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 108) {
-            idealberat = 29;
-            idealtinggi = 134;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 120) {
-            idealberat = 32;
-            idealtinggi = 139;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 132) {
-            idealberat = 36;
-            idealtinggi = 143;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 144) {
-            idealberat = 40;
-            idealtinggi = 149;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 156) {
-            idealberat = 46;
-            idealtinggi = 156;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 168) {
-            idealberat = 51;
-            idealtinggi = 164;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 180) {
-            idealberat = 56;
-            idealtinggi = 170;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 192) {
-            idealberat = 61;
-            idealtinggi = 174;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 216) {
-            idealberat = 67;
-            idealtinggi = 176;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 204) {
-            idealberat = 64;
-            idealtinggi = 175;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
-                gizi = "Gizi Buruk";
-                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
-                gizi = "Gizi Kurang";
-                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
-                gizi = "Gizi Baik";
-                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
-                gizi = "Gizi Lebih";
-                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
-                gizi = "Obesitas";
-                keterangan = "Anak Anda termasuk dalam OBESITAS "
-                        + "\n" + "\n"
-                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
-                        + "\n" + "\n"
-                        + "Segera konsultasikan dengan dokter anda";
-            }
-        } else if (umur == 65) {
+        else if ((tinggi == 112) && (umur >= 66)) {
             idealberat = 20;
-            idealtinggi = 112;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 66;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2192,42 +1591,233 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 77) {
+        } else if ((tinggi == 113) && (umur >= 66)) {
+            idealberat = 20;
+            umurideal = 66;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 114) && (umur >= 66)) {
+            idealberat = 21;
+            umurideal = 72;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 115) && (umur >= 66)) {
+            idealberat = 21;
+            umurideal = 72;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 116) && (umur >= 66)) {
+            idealberat = 21;
+            umurideal = 72;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 117) && (umur >= 66)) {
+            idealberat = 21;
+            umurideal = 72;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 118) && (umur >= 66)) {
             idealberat = 22;
-            idealtinggi = 118;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 78;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2235,42 +1825,233 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 89) {
+        } else if ((tinggi == 119) && (umur >= 66)) {
+            idealberat = 22;
+            umurideal = 78;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 120) && (umur >= 66)) {
+            idealberat = 22;
+            umurideal = 78;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 121) && (umur >= 66)) {
+            idealberat = 23;
+            umurideal = 84;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 122) && (umur >= 66)) {
+            idealberat = 23;
+            umurideal = 84;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 123) && (umur >= 66)) {
+            idealberat = 23;
+            umurideal = 84;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 124) && (umur >= 66)) {
             idealberat = 24;
-            idealtinggi = 125;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 90;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2278,42 +2059,233 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 101) {
+        } else if ((tinggi == 125) && (umur >= 66)) {
+            idealberat = 24;
+            umurideal = 90;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 126) && (umur >= 66)) {
+            idealberat = 24;
+            umurideal = 90;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 127) && (umur >= 66)) {
+            idealberat = 25;
+            umurideal = 96;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 128) && (umur >= 66)) {
+            idealberat = 25;
+            umurideal = 96;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 129) && (umur >= 66)) {
+            idealberat = 25;
+            umurideal = 96;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 130) && (umur >= 66)) {
             idealberat = 27;
-            idealtinggi = 130;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 102;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2321,42 +2293,233 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 113) {
+        } else if ((tinggi == 131) && (umur >= 66)) {
+            idealberat = 27;
+            umurideal = 102;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 132) && (umur >= 66)) {
+            idealberat = 27;
+            umurideal = 102;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 133) && (umur >= 66)) {
+            idealberat = 29;
+            umurideal = 108;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 134) && (umur >= 66)) {
+            idealberat = 29;
+            umurideal = 108;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 135) && (umur >= 66)) {
+            idealberat = 29;
+            umurideal = 108;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 136) && (umur >= 66)) {
             idealberat = 30;
-            idealtinggi = 136;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 114;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2364,42 +2527,194 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 125) {
+        } else if ((tinggi == 137) && (umur >= 66)) {
+            idealberat = 30;
+            umurideal = 114;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 138) && (umur >= 66)) {
+            idealberat = 30;
+            umurideal = 114;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 139) && (umur >= 66)) {
+            idealberat = 32;
+            umurideal = 120;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 140) && (umur >= 66)) {
+            idealberat = 32;
+            umurideal = 120;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 141) && (umur >= 66)) {
             idealberat = 34;
-            idealtinggi = 141;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 126;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2407,42 +2722,194 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 137) {
+        } else if ((tinggi == 142) && (umur >= 66)) {
+            idealberat = 34;
+            umurideal = 126;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 143) && (umur >= 66)) {
+            idealberat = 36;
+            umurideal = 132;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 144) && (umur >= 66)) {
+            idealberat = 36;
+            umurideal = 132;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 145) && (umur >= 66)) {
+            idealberat = 36;
+            umurideal = 132;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 146) && (umur >= 66)) {
             idealberat = 38;
-            idealtinggi = 146;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 138;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2450,42 +2917,233 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 149) {
+        } else if ((tinggi == 147) && (umur >= 66)) {
+            idealberat = 38;
+            umurideal = 138;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 148) && (umur >= 66)) {
+            idealberat = 38;
+            umurideal = 138;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 149) && (umur >= 66)) {
+            idealberat = 40;
+            umurideal = 144;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 150) && (umur >= 66)) {
+            idealberat = 40;
+            umurideal = 144;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 151) && (umur >= 66)) {
+            idealberat = 40;
+            umurideal = 144;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 152) && (umur >= 66)) {
             idealberat = 43;
-            idealtinggi = 152;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 150;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2493,42 +3151,273 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 161) {
+        } else if ((tinggi == 153) && (umur >= 66)) {
+            idealberat = 43;
+            umurideal = 150;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 154) && (umur >= 66)) {
+            idealberat = 43;
+            umurideal = 150;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 155) && (umur >= 66)) {
+            Log.e("masuk sini", "masuk");
+            idealberat = 45;
+            umurideal = 156;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 156) && (umur >= 66)) {
+            idealberat = 45;
+            umurideal = 156;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 157) && (umur >= 66)) {
+            idealberat = 45;
+            umurideal = 156;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 158) && (umur >= 66)) {
+            idealberat = 45;
+            umurideal = 156;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 159) && (umur >= 66)) {
             idealberat = 48;
-            idealtinggi = 160;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 162;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2536,42 +3425,311 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 173) {
+        } else if ((tinggi == 160) && (umur >= 66)) {
+            idealberat = 48;
+            umurideal = 162;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 161) && (umur >= 66)) {
+            idealberat = 48;
+            umurideal = 162;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 162) && (umur >= 66)) {
+            idealberat = 48;
+            umurideal = 162;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 163) && (umur >= 66)) {
+            idealberat = 51;
+            umurideal = 168;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 164) && (umur >= 66)) {
+            idealberat = 51;
+            umurideal = 168;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 165) && (umur >= 66)) {
+            idealberat = 51;
+            umurideal = 168;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 166) && (umur >= 66)) {
+            idealberat = 51;
+            umurideal = 168;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 167) && (umur >= 66)) {
             idealberat = 54;
-            idealtinggi = 167;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 174;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2579,42 +3737,194 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 185) {
+        } else if ((tinggi == 168) && (umur >= 66)) {
+            idealberat = 54;
+            umurideal = 174;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 169) && (umur >= 66)) {
+            idealberat = 56;
+            umurideal = 180;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 170) && (umur >= 66)) {
+            idealberat = 56;
+            umurideal = 180;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 171) && (umur >= 66)) {
+            idealberat = 56;
+            umurideal = 180;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 172) && (umur >= 66)) {
             idealberat = 59;
-            idealtinggi = 172;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 186;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2622,42 +3932,38 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 197) {
-            idealberat = 63;
-            idealtinggi = 175;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+        } else if ((tinggi == 173) && (umur >= 66)) {
+            idealberat = 61;
+            umurideal = 192;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2665,42 +3971,116 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur == 209) {
+        } else if ((tinggi == 174) && (umur >= 66)) {
+            idealberat = 64;
+            umurideal = 198;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 175) && (umur >= 66)) {
+            idealberat = 65;
+            umurideal = 204;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi == 176) && (umur >= 66)) {
             idealberat = 66;
-            idealtinggi = 176;
-            idealtinggi = idealtinggi / 100;
-            tinggi = tinggi / 100;
-            temp1 = berat / (tinggi * tinggi);
-            temp2 = idealberat / (idealtinggi * idealtinggi);
-            bmi = (temp1 / temp2) * 100;
-            if (bmi <= 70) {
+            umurideal = 210;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
                 gizi = "Gizi Buruk";
                 keterangan = "Anak Anda termasuk dalam GIZI BURUK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 70) && (bmi <= 90)) {
+            } else if ((persentase > 70) && (persentase <= 90)) {
                 gizi = "Gizi Kurang";
                 keterangan = "Anak Anda termasuk dalam GIZI KURANG "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if ((bmi > 90) && (bmi <= 110)) {
+            } else if ((persentase > 90) && (persentase <= 110)) {
                 gizi = "Gizi Baik";
                 keterangan = "Anak Anda termasuk dalam GIZI BAIK "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                 ;
-            } else if ((bmi > 110) && (bmi <= 120)) {
+            } else if ((persentase > 110) && (persentase <= 120)) {
                 gizi = "Gizi Lebih";
                 keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
                         + "\n" + "\n"
                         + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
-            } else if (bmi > 120) {
+            } else if (persentase > 120) {
                 gizi = "Obesitas";
                 keterangan = "Anak Anda termasuk dalam OBESITAS "
                         + "\n" + "\n"
@@ -2708,11 +4088,72 @@ public class BBTinggi {
                         + "\n" + "\n"
                         + "Segera konsultasikan dengan dokter anda";
             }
-        } else if (umur > 216) {
-            keterangan = "Mohon maaf untuk saat ini , aplikasi ini hanya bisa digunakan untuk anak umur 0 - 18 tahun";
+        } else if ((tinggi == 177) && (umur >= 66)) {
+            idealberat = 70;
+            umurideal = 234;
+            persentase = (berat / idealberat) * 100;
+            if (persentase <= 70) {
+                gizi = "Gizi Buruk";
+                keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 70) && (persentase <= 90)) {
+                gizi = "Gizi Kurang";
+                keterangan = "Anak Anda termasuk dalam GIZI KURANG "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if ((persentase > 90) && (persentase <= 110)) {
+                gizi = "Gizi Baik";
+                keterangan = "Anak Anda termasuk dalam GIZI BAIK "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                ;
+            } else if ((persentase > 110) && (persentase <= 120)) {
+                gizi = "Gizi Lebih";
+                keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            } else if (persentase > 120) {
+                gizi = "Obesitas";
+                keterangan = "Anak Anda termasuk dalam OBESITAS "
+                        + "\n" + "\n"
+                        + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                        + "\n" + "\n"
+                        + "Segera konsultasikan dengan dokter anda";
+            }
+        } else if ((tinggi < 112) && (umur >= 66)) {
+            gizi = "Gizi Buruk";
+            keterangan = "Anak Anda termasuk dalam GIZI BURUK "
+                    + "\n" + "\n"
+                    + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                    + "\n" + "\n"
+                    + "Segera konsultasikan dengan dokter anda";
+        } else if ((tinggi > 177) && (umur >= 66)) {
+            gizi = "Gizi Lebih";
+            keterangan = "Anak Anda termasuk dalam GIZI LEBIH "
+                    + "\n" + "\n"
+                    + "Silahkan menggunakan kurva berat badan terhadap panjang/tinggi atau IMT terhadap umur untuk menentukan status gizinya."
+                    + "\n" + "\n"
+                    + "Segera konsultasikan dengan dokter anda";
         }
 
+
     }
+
+    public double getUmurideal() {
+        return umurideal;
+    }
+
+    public void setUmurideal(double umurideal) {
+        this.umurideal = umurideal;
+    }
+
 
     public double getBerat() {
         return berat;
@@ -2786,19 +4227,12 @@ public class BBTinggi {
         this.idealtinggi = idealtinggi;
     }
 
-    public double getTemp1() {
-        return temp1;
+    public double getPersentase() {
+        return persentase;
     }
 
-    public void setTemp1(double temp1) {
-        this.temp1 = temp1;
+    public void setPersentase(double persentase) {
+        this.persentase = persentase;
     }
 
-    public double getTemp2() {
-        return temp2;
-    }
-
-    public void setTemp2(double temp2) {
-        this.temp2 = temp2;
-    }
 }
