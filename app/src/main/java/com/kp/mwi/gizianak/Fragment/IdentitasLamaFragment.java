@@ -181,5 +181,30 @@ public class IdentitasLamaFragment extends Fragment {
         }
     }
 
-
+    public void onNewData() {
+        dataAnak = new ArrayList<DataAnak>();
+        List<DataAnak> datas = DataAnak.listAll(DataAnak.class);
+        if (datas.size() <= 0) {
+            kosong.setVisibility(View.VISIBLE);
+            list.setVisibility(View.GONE);
+        } else {
+            kosong.setVisibility(View.GONE);
+            list.setVisibility(View.VISIBLE);
+            for (DataAnak anak : datas) {
+                dataAnak.add(anak);
+            }
+            adapter = new AdapterIdentitasLama(IdentitasLamaFragment.this.getContext(), dataAnak);
+            list.setAdapter(adapter);
+            list.setLayoutManager(gridLayoutManager);
+            adapter.notifyDataSetChanged();
+            adapter.SetOnItemClickListener(new AdapterIdentitasLama.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(IdentitasLamaFragment.this.getActivity(), DetailProfil.class);
+                    intent.putExtra("data", dataAnak.get(position));
+                    startActivity(intent);
+                }
+            });
+        }
+    }
 }

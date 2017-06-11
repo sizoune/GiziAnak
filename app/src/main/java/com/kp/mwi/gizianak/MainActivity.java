@@ -8,15 +8,18 @@ import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.kp.mwi.gizianak.Fragment.IdentitasBaruFragment;
 import com.kp.mwi.gizianak.Fragment.IdentitasLamaFragment;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+
+public class MainActivity extends AppCompatActivity implements IdentitasBaruFragment.newData {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 2;
-
+    private HashMap<Integer, Fragment> refFragmentMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onNewData() {
+        MyAdapter adapter = ((MyAdapter) viewPager.getAdapter());
+        IdentitasLamaFragment lama = (IdentitasLamaFragment) adapter.getFragment(1);
+        lama.onNewData();
+    }
+
 
     class MyAdapter extends FragmentStatePagerAdapter {
 
@@ -55,9 +65,13 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new IdentitasBaruFragment();
+                    Fragment baru = new IdentitasBaruFragment();
+                    refFragmentMap.put(position, baru);
+                    return baru;
                 case 1:
-                    return new IdentitasLamaFragment();
+                    Fragment lama = new IdentitasLamaFragment();
+                    refFragmentMap.put(position, lama);
+                    return lama;
 
             }
             return null;
@@ -84,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
                     return "Identitas Lama";
             }
             return null;
+        }
+
+        public void destroyItem(View container, int position, Object object) {
+            super.destroyItem(container, position, object);
+            refFragmentMap.remove(position);
+        }
+
+        public Fragment getFragment(int key) {
+            return refFragmentMap.get(key);
         }
 
         public int getItemPosition(Object object) {

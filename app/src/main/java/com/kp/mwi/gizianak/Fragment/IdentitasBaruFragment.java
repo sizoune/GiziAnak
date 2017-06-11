@@ -70,7 +70,7 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     private String userChoosenTask;
     private MaterialDialog mMaterialDialog;
     private DataAnak anakUniv;
-
+    newData mCallback;
 
     public IdentitasBaruFragment() {
         // Required empty public constructor
@@ -111,6 +111,22 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
         return v;
     }
 
+    public interface newData {
+        public void onNewData();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mCallback = (newData) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement newData");
+        }
+    }
+
     @Override
     public void onClick(View v) {
         if (v == lahir) {
@@ -146,12 +162,14 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                                 DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height, gambar);
                                 anakUniv = da;
                                 da.save();
+                                mCallback.onNewData();
                                 cekStatus();
                                 clearAll();
                             } else {
                                 DataAnak da = new DataAnak(namas, jk, lahir.getText().toString(), weight, height);
                                 anakUniv = da;
                                 da.save();
+                                mCallback.onNewData();
                                 cekStatus();
                                 clearAll();
                             }
@@ -209,12 +227,14 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                                     DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height, gambar);
                                     anakUniv = da;
                                     da.save();
+                                    mCallback.onNewData();
                                     cekStatus();
                                     clearAll();
                                 } else {
                                     DataAnak da = new DataAnak(namas, jk, tglLahir, weight, height);
                                     anakUniv = da;
                                     da.save();
+                                    mCallback.onNewData();
                                     cekStatus();
                                     clearAll();
                                 }
