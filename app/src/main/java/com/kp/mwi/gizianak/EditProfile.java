@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -23,6 +24,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.kp.mwi.gizianak.Model.DataAnak;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
@@ -271,17 +278,19 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 if (options[which].equals("Batal")) {
                     dialog.dismiss();
                 } else if (options[which].equals("Ambil Foto")) {
-                    userChoosenTask = "Ambil Foto";
-                    result = Utility.checkPermission(getApplicationContext());
-                    if (result) {
-                        cameraIntent();
-                    }
+//                    userChoosenTask = "Ambil Foto";
+//                    result = Utility.checkPermission(getApplicationContext());
+//                    if (result) {
+//                        cameraIntent();
+//                    }
+                    cameraIntent();
                 } else if (options[which].equals("Pilih dari Galeri")) {
-                    userChoosenTask = "Pilih dari Galeri";
-                    result = Utility.checkPermission(getApplicationContext());
-                    if (result) {
-                        galleryIntent();
-                    }
+//                    userChoosenTask = "Pilih dari Galeri";
+//                    result = Utility.checkPermission(getApplicationContext());
+//                    if (result) {
+//                        galleryIntent();
+//                    }
+                    galleryIntent();
                 }
             }
         });
@@ -290,8 +299,28 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     private void cameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Dexter.withActivity(this)
+                    .withPermission(android.Manifest.permission.CAMERA)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(intent, REQUEST_CAMERA);
+                        }
+
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            Toast.makeText(getApplicationContext(), "Ijin untuk membaca memori tidak diberikan !", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {/* ... */}
+                    }).check();
+        } else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_CAMERA);
+        }
     }
 
     @Override
@@ -330,10 +359,32 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     private void galleryIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Dexter.withActivity(this)
+                    .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            Intent intent = new Intent();
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);//
+                            startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+                        }
+
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            Toast.makeText(getApplicationContext(), "Ijin untuk membaca memori tidak diberikan !", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {/* ... */}
+                    }).check();
+        } else {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);//
+            startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+        }
     }
 
     @SuppressWarnings("deprecation")

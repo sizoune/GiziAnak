@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -26,6 +27,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.kp.mwi.gizianak.Kesimpulan;
 import com.kp.mwi.gizianak.MainActivity;
 import com.kp.mwi.gizianak.Model.BeratUmur;
@@ -52,6 +59,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.jar.Manifest;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fr.ganfra.materialspinner.MaterialSpinner;
@@ -614,17 +622,19 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
                 if (options[which].equals("Batal")) {
                     dialog.dismiss();
                 } else if (options[which].equals("Ambil Foto")) {
-                    userChoosenTask = "Ambil Foto";
-                    result = Utility.checkPermission(IdentitasBaruFragment.this.getContext());
-                    if (result) {
-                        cameraIntent();
-                    }
+//                    userChoosenTask = "Ambil Foto";
+//                    result = Utility.checkPermission(IdentitasBaruFragment.this.getContext());
+//                    if (result) {
+//                        cameraIntent();
+//                    }
+                    cameraIntent();
                 } else if (options[which].equals("Pilih dari Galeri")) {
-                    userChoosenTask = "Pilih dari Galeri";
-                    result = Utility.checkPermission(IdentitasBaruFragment.this.getContext());
-                    if (result) {
-                        galleryIntent();
-                    }
+//                    userChoosenTask = "Pilih dari Galeri";
+//                    result = Utility.checkPermission(IdentitasBaruFragment.this.getContext());
+//                    if (result) {
+//                        galleryIntent();
+//                    }
+                    galleryIntent();
                 }
             }
         });
@@ -633,8 +643,29 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     }
 
     private void cameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Dexter.withActivity(this.getActivity())
+                    .withPermission(android.Manifest.permission.CAMERA)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(intent, REQUEST_CAMERA);
+                        }
+
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            Toast.makeText(getContext(), "Ijin untuk membaca memori tidak diberikan !", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {/* ... */}
+                    }).check();
+        } else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_CAMERA);
+        }
+
     }
 
     @Override
@@ -674,10 +705,32 @@ public class IdentitasBaruFragment extends Fragment implements View.OnClickListe
     }
 
     private void galleryIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Dexter.withActivity(this.getActivity())
+                    .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            Intent intent = new Intent();
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);//
+                            startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+                        }
+
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            Toast.makeText(getContext(), "Ijin untuk membaca memori tidak diberikan !", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {/* ... */}
+                    }).check();
+        } else {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);//
+            startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+        }
     }
 
     @SuppressWarnings("deprecation")
